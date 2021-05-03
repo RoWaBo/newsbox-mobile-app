@@ -1,0 +1,5 @@
+Istedet for font europe brug inter font:
+https://fonts.google.com/specimen/Inter?query=inter
+
+	* vælg medium/semi bold for bold weights
+
