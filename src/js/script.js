@@ -9,7 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const srcDOM = parser.parseFromString(strxml, "application/xml");
             return xml2json(srcDOM)
         })
-        .then(jsonResult => console.log(jsonResult))
+        .then(jsonResult => {
+        const news = jsonResult.rss.channel.item[0]
+        
+        let newsStr = JSON.stringify(news)
+
+        localStorage.setItem("news", newsStr)
+        let local = localStorage.getItem("news")
+        console.log(JSON.parse(local));
+        })
 
     function xml2json(srcDOM) {
         let children = [...srcDOM.children];
@@ -40,6 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return jsonResult;
     }
+
+    
 })
 
 
