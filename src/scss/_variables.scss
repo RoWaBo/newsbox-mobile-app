@@ -14,9 +14,12 @@ $cFossil: #c8d1d3;
 $cSand: #b9b0a2;
 
 // FONT COLORS
-$cFontDark: #1b1c20;
+$cFontDark: #324755;
 $cFontMedium: #6e8ca0;
 $cFontLight: #FFF;
+
+// BACKGROUND COLORS
+$cBackground: #FFF;
 
 
 // ======================
@@ -31,11 +34,13 @@ $cFontLight: #FFF;
 // FONT FAMILY 
 $fMain: 'Inter', sans-serif;
 $fSecond: 'Antonio', sans-serif;
+
 // FONT WEIGHTS
 $fWeightBold: 600; 
 $fWeightRegular: 500; 
 $fWeightLight: 400; 
 
+// FONT MIXINS
 @mixin headingBig {
     font-family: $fMain;
     font-weight: $fWeightBold;
@@ -84,6 +89,31 @@ $fWeightLight: 400;
     font-size: 12px;
     color: $cFontDark;    
 }
+@mixin btnLabel {
+    font-family: $fSecond;
+    font-weight: $fWeightLight;
+    font-size: 14px;
+    color: $cFontDark;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;    
+}
+
+// OTHER MIXINSS
+@mixin borderBottom {
+    border-bottom: solid 2px $cFossil;
+}
+@mixin iconDefault {
+    font-size: 1.3rem;
+    color: $cFontDark;    
+}
+@mixin sectionContainer {
+    width: 100%;
+    padding: 1.2rem 1rem;
+    background-color: $cBackground;
+    @include borderBottom;
+}
+
+
 
 
 
