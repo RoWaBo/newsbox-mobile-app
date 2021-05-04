@@ -1,0 +1,93 @@
+// ====================
+// ==== C O L O R S ===
+// ====================
+
+// PRIMARY COLORS
+$cSage: #87bcbf;
+$cRust: #d97d54;
+$cDrab: #324755;
+$cDanger: #d95454;
+
+// SECONDARY COLORS
+$cIce: #f0f3f4;
+$cFossil: #c8d1d3;
+$cSand: #b9b0a2;
+
+// FONT COLORS
+$cFontDark: #1b1c20;
+$cFontMedium: #6e8ca0;
+$cFontLight: #FFF;
+
+
+// ======================
+// ===== F O N T S ======
+// ======================
+
+// Inter
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
+// Antonio
+@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100;200&family=Inter:wght@200;300;400;500&display=swap');
+
+// FONT FAMILY 
+$fMain: 'Inter', sans-serif;
+$fSecond: 'Antonio', sans-serif;
+// FONT WEIGHTS
+$fWeightBold: 600; 
+$fWeightRegular: 500; 
+$fWeightLight: 400; 
+
+@mixin headingBig {
+    font-family: $fMain;
+    font-weight: $fWeightBold;
+    font-size: 30px;
+    color: $cFontDark;    
+}
+@mixin headingMedium {
+    font-family: $fMain;
+    font-weight: $fWeightBold;
+    font-size: 24px;
+    color: $cFontDark;    
+}
+@mixin headingSmall {
+    font-family: $fMain;
+    font-weight: $fWeightBold;
+    font-size: 18px;
+    color: $cFontDark;    
+}
+@mixin headingSub {
+    font-family: $fMain;
+    font-weight: $fWeightRegular;
+    font-size: 18px;
+    color: $cFontMedium;    
+}
+@mixin cardTitle {
+    font-family: $fMain;
+    font-weight: $fWeightBold;
+    font-size: 15px;
+    color: $cFontDark;    
+}
+@mixin cardCopy {
+    font-family: $fMain;
+    font-weight: $fWeightLight;
+    font-size: 15px;
+    color: $cFontMedium;    
+}
+@mixin bodyCopy {
+    font-family: $fMain;
+    font-weight: $fWeightLight;
+    font-size: 14px;
+    color: $cFontMedium;    
+}
+@mixin timestamp {
+    font-family: $fMain;
+    font-weight: $fWeightLight;
+    font-size: 12px;
+    color: $cFontDark;    
+}
+
+
+
+
+
+
+
