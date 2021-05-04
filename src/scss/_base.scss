@@ -15,9 +15,17 @@ img{
 a{
     text-decoration: none;
     color: black;
+    outline: none;
   }
 ul{
     list-style: none;
+}
+
+// WRAPPER
+.wrapper {
+    margin: 0 auto;
+    max-width: 414px;
+    box-shadow: 1px 1px 6px 1px $cFossil;   
 }
 
 /* ==== FONT CLASSES ==== */
@@ -45,3 +53,7 @@ ul{
 .timestamp {
     @include timestamp
 }
+.btn-label {
+    @include btnLabel
+}
+
