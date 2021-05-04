@@ -1,0 +1,24 @@
+
+.top-header {
+    width: 100%;
+}
+
+.navigation-menu {
+    width: 100%;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    background-color: $cBackground;
+    @include borderBottom;
+    
+    &__link {
+        @include headingSmall;
+        
+        &_center {
+            margin: 0 auto;
+        }
+    }
+    &__icon {
+        @include iconDefault
+    }
+}
