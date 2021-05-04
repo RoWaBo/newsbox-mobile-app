@@ -1,0 +1,28 @@
+
+.searchbox {
+    width: 100%;
+    background-color: $cIce;
+    border-radius: 5px;
+    padding: .6rem 1rem;
+    display: flex;
+    align-items: center;
+    &:focus-within {
+        border: 2px solid $cSage;
+    }
+
+    &__input {
+        @include cardCopy;
+        border:none;
+        background-color: $cIce;
+        outline: none;
+        width: 100%;
+        &::placeholder {
+            @include cardCopy;    
+        }
+    }
+
+    &__icon {
+        color: $cFossil;
+        font-size: 1.2rem;
+    }
+}
