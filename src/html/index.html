@@ -1,21 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
     <script defer src="/js/app.js"></script>
-    <title>Gulp Template</title>
+    <title>Newsbox App</title>
 </head>
+
 <body>
-   <h1 class="heading-big">Primary Heading 30pt Bold</h1>
-   <h2 class="heading-medium">Secondary Heading 24pt Bold</h2> 
-   <h3 class="heading-small">Section Header 18pt Bold</h3> 
-   <p class="heading-sub">Sub Title 18pt Regular</p> 
-   <p class="card-title">Card Title 15pt Bold</p> 
-   <p class="card-copy">Card Copy Small 15pt Light</p> 
-   <p class="body-copy">Body Copy Small 14pt Light</p> 
-   <p class="timestamp">Message Time Stamp 12pt Light</p> 
+    <div class="wrapper">
+        <header class="top-header">
+            <nav class="navigation-menu">
+                <a href="./archive/" class="navigation-menu__link"><i class="fas fa-inbox navigation-menu__icon"></i></a>
+                <a href="#" class="navigation-menu__link">Newsbox</a>
+                <a href="./settings/" class="navigation-menu__link"><i class="fas fa-cog navigation-menu__icon"></i></a>
+            </nav>
+        </header>
+        <!-- SEARCHBOX -->
+        <div class="section-container">
+            <div class="searchbox">
+                <input type="text" class="searchbox__input" placeholder="Search news">
+                <i class="fas fa-search searchbox__icon"></i>
+            </div>
+        </div>
+
+    </div><!-- wrapper end -->
 </body>
+
 </html>
