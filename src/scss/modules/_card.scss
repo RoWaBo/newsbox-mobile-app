@@ -36,8 +36,13 @@
     }
     &__img-container {
         flex: 1;
+        min-width: 73.3px;
+        min-height: 73.3px;
         border-radius: 50%;
         overflow: hidden;
+        background-image: url('../img/placeholder-img.png');
+        background-repeat: none;
+        background-position: center;
     }
     &__img {
         object-fit: cover;
