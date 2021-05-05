@@ -31,10 +31,11 @@
     bottom: .25rem;
     background-color: white;
     transition: 0.4s;
+    box-shadow: -1px 5px 10px 2px rgba(0, 0, 0, 0.294);
 }
 
 .switch__check:checked + .switch__slider {
-    background-color: #2196f3;
+    background-color: $cSage;
 }
 
 .switch__check:checked + .switch__slider::before {
