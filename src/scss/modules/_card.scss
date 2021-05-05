@@ -29,16 +29,7 @@
 }
 
 .card-content {
-    position: relative;
-    width: 100%;
-    height: 100%;
-
-    &_save-color {
-        background-color: $cSage;    
-    }
-    &_delete-color {
-        background-color: $cDanger;    
-    }
+    
     &__btn {
         position: absolute;
         right: 0;
@@ -50,7 +41,8 @@
         
         &-icon {
             @include iconDefault;
-            color: $cFontLight;    
+            color: $cFontLight;
+            pointer-events: none;    
         }
     }
     &__link {
