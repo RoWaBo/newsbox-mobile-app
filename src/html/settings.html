@@ -20,19 +20,59 @@
             </nav>
         </header>
         <!-- SETTINGS -->
-        <div class="settings">
-            <h1 class="settings__heading"><span>Manage</span><br>Categories</h1>
-            <hr class="settings__line">
-            <div class="category-container">
-                <div class="category-content">
+        <div class="settings-container">
+            <h1 class="settings-container__heading"><span>Manage</span><br>Categories</h1>
+            <hr class="settings-container__line">
+            <!-- CATEGORIES -->
+            <ul class="category-container">
+                <!-- europe -->
+                <li class="category-content">
                     <h2 class="category-content__title">europe</h2>
-                    <label for="toggle" class="category-content__switch switch">
-                        <input type="checkbox" name="toggle" class="switch__check" id="toggle"> 
+                    <label for="toggleEurope" class="category-content__switch switch">
+                        <input type="checkbox" name="toggleEurope" class="switch__check" id="toggleEurope"> 
                         <span class="switch__slider switch__slider_round"></span>
                     </label>
-                </div>
-            </div>
-        </div>
+                </li>
+                <!-- health -->
+                <li class="category-content">
+                    <h2 class="category-content__title">health</h2>
+                    <label for="toggleHealth" class="category-content__switch switch">
+                        <input type="checkbox" name="toggleHealth" class="switch__check" id="toggleHealth"> 
+                        <span class="switch__slider switch__slider_round"></span>
+                    </label>
+                </li>
+                <!-- sport -->
+                <li class="category-content">
+                    <h2 class="category-content__title">sport</h2>
+                    <label for="toggleSport" class="category-content__switch switch">
+                        <input type="checkbox" name="toggleSport" class="switch__check" id="toggleSport"> 
+                        <span class="switch__slider switch__slider_round"></span>
+                    </label>
+                </li>
+                <!-- business -->
+                <li class="category-content">
+                    <h2 class="category-content__title">business</h2>
+                    <label for="toggleBusiness" class="category-content__switch switch">
+                        <input type="checkbox" name="toggleBusiness" class="switch__check" id="toggleBusiness"> 
+                        <span class="switch__slider switch__slider_round"></span>
+                    </label>
+                </li>
+                <!-- technology -->
+                <li class="category-content">
+                    <h2 class="category-content__title">technology</h2>
+                    <label for="toggleTechnology" class="category-content__switch switch">
+                        <input type="checkbox" name="toggleTechnology" class="switch__check" id="toggleTechnology"> 
+                        <span class="switch__slider switch__slider_round"></span>
+                    </label>
+                </li>
+            </ul> <!-- category-container end -->
+            <!-- TOGGLE DARK MODE BUTTON -->
+            <button class="toggle-theme-button">
+                toggle dark mode
+            </button>
+            <!-- VERSION MESSAGE -->
+            <p class="version-message">Version 1</p>
+        </div> <!-- settings-container end -->
     </div> <!-- wrapper end -->
 </body>
 
