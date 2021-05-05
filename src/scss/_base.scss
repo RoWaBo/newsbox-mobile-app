@@ -25,5 +25,6 @@ ul{
 .wrapper {
     margin: 0 auto;
     max-width: 414px;
-    box-shadow: 1px 1px 6px 1px $cFossil;   
+    box-shadow: 1px 1px 6px 1px $cFossil;
+    overflow: hidden;   
 }

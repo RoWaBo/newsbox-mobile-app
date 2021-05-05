@@ -29,10 +29,34 @@
 }
 
 .card-content {
+    position: relative;
+    
+    &_save-btn::after {
+        content: "\f01c";
+        font-family: "Font Awesome\ 5 Free";
+        font-weight: 900;
+        font-size: 1.3rem;
+        color: $cFontLight;
+
+        width: 25%;
+        height: 100%;
+        background-color: $cSage;
+
+        display: grid;
+        place-content: center;
+
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
     &__link {
         @include cardDefault;
         display: flex;
-        align-items: center;    
+        align-items: center;
+        position: relative;
+        z-index: 1;
+        right: 120px;
+        background-color: $cBackground;    
     }
     &__img-container {
         flex: 1;
