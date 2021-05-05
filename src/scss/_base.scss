@@ -5,7 +5,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    line-height: 1.7;
+    line-height: 1.5;
 }
 img{
     width:100%;
@@ -23,37 +23,7 @@ ul{
 
 // WRAPPER
 .wrapper {
-    margin: 0 auto;
+    margin: 3% auto;
     max-width: 414px;
     box-shadow: 1px 1px 6px 1px $cFossil;   
 }
-
-/* ==== FONT CLASSES ==== */
-.heading-big {
-    @include headingBig
-}
-.heading-medium {
-    @include headingMedium
-}
-.heading-small {
-    @include headingSmall
-}
-.heading-sub {
-    @include headingSub
-}
-.card-title {
-    @include cardTitle
-}
-.card-copy {
-    @include cardCopy
-}
-.body-copy {
-    @include bodyCopy
-}
-.timestamp {
-    @include timestamp
-}
-.btn-label {
-    @include btnLabel
-}
-

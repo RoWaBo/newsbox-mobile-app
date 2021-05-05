@@ -1,3 +1,28 @@
-.section-container {
-    @include sectionContainer;
+/* ==== FONT CLASSES ==== */
+.heading-big {
+    @include headingBig
+}
+.heading-medium {
+    @include headingMedium
+}
+.heading-small {
+    @include headingSmall
+}
+.heading-sub {
+    @include headingSub
+}
+.card-title {
+    @include cardTitle
+}
+.card-copy {
+    @include cardCopy
+}
+.body-copy {
+    @include bodyCopy
+}
+.timestamp {
+    @include timestamp
+}
+.btn-label {
+    @include btnLabel
 }

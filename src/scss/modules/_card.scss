@@ -1,0 +1,55 @@
+
+.card-header {
+    @include cardDefault;
+    display: flex;
+    align-items: center;
+
+    &__circle {
+        box-shadow: 1px 1px 10px $cFossil;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: grid;    
+    }
+    &__logo {
+        color: $cRust;
+        font-size: 1.2rem;
+        place-self: center;
+    }
+    &__title {
+        @include cardTitle;
+        text-transform: uppercase;
+        margin-left: 1rem;
+    
+    }
+    &__icon {
+        @include iconDefault;
+        margin-left: auto;
+    }
+}
+
+.card-content {
+    &__link {
+        @include cardDefault;
+        display: flex;
+        align-items: center;    
+    }
+    &__img-container {
+        flex: 1;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+    &__img {
+        object-fit: cover;
+    }
+    &__text-container {
+        flex: 4;
+        margin-left: 1rem;    
+    }
+    &__heading {
+        @include cardTitle;
+    }
+    &__description {
+        @include bodyCopy;
+    }
+}
