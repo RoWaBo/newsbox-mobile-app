@@ -51,15 +51,15 @@
     font-family: $fMain;
     font-weight: $fWeightLight;
     font-size: 12px;
-    color: $cFontDark;    
+    color: $cFontMedium;    
 }
 @mixin btnLabel {
     font-family: $fSecond;
     font-weight: $fWeightLight;
-    font-size: 14px;
+    font-size: 17px;
     color: $cFontDark;
     text-transform: uppercase;
-    letter-spacing: 0.1em;    
+    letter-spacing: 0.15em;    
 }
 
 
@@ -77,7 +77,7 @@
 }
 @mixin cardDefault {
     width: 100%;
-    padding: 1.2rem 1rem;
+    padding: 1.2rem $spaceS;
     background-color: $cBackground;
     @include borderBottom;   
 }
