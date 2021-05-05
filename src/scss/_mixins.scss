@@ -23,6 +23,12 @@
     font-size: 18px;
     color: $cFontMedium;    
 }
+@mixin settingsSubHeading {
+    font-family: $fMain;
+    font-weight: $fWeightRegular;
+    font-size: 20px;
+    color: lighten($cFontDark, 15);      
+}
 @mixin cardTitle {
     font-family: $fMain;
     font-weight: $fWeightBold;
