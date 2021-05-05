@@ -1,0 +1,24 @@
+
+.settings {
+    background-color: lighten($cFossil, 11);
+    padding: 2rem 1rem;
+
+    &__heading {
+        text-align: center;
+        line-height: 1;
+        @include settingsSubHeading;
+
+        & span {
+            @include headingBig;
+            letter-spacing: .03em;
+            color: darken($cSage, 5);   
+        }
+    }
+    &__line {
+        color: $cBackground;
+        opacity: .3;
+        width: 33px;
+        border-style: solid;
+        margin: 1.5rem auto;
+    }
+}
