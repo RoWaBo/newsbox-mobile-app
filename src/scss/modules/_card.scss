@@ -19,7 +19,7 @@
     &__title {
         @include cardTitle;
         text-transform: uppercase;
-        margin-left: 1rem;
+        margin-left: $spaceS;
     
     }
     &__icon {
@@ -49,7 +49,7 @@
     }
     &__text-container {
         flex: 4;
-        margin-left: 1rem;    
+        margin-left: $spaceS;    
     }
     &__heading {
         @include cardTitle;
