@@ -29,30 +29,11 @@
 }
 
 .card-content {
-    
-    &__btn {
-        position: absolute;
-        right: 0;
-        width: 30%;
-        height: 100%;
-        display: grid;
-        place-content: center;
-        cursor: pointer;
-        
-        &-icon {
-            @include iconDefault;
-            color: $cFontLight;
-            pointer-events: none;    
-        }
-    }
     &__link {
         @include cardDefault;
         display: flex;
         align-items: center;
-        position: relative;
-        z-index: 1;
-        right: 124px;
-        background-color: $cBackground;    
+        background-color: $cBackground;  
     }
     &__img-container {
         flex: 1;
@@ -63,13 +44,15 @@
         background-image: url('../img/placeholder-img.png');
         background-repeat: none;
         background-position: center;
+        pointer-events: none;
     }
     &__img {
         object-fit: cover;
     }
     &__text-container {
         flex: 4;
-        margin-left: $spaceS;    
+        margin-left: $spaceS;
+        pointer-events: none;    
     }
     &__heading {
         @include cardTitle;
