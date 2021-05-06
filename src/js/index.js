@@ -1,11 +1,98 @@
 
-const cardContent = document.querySelector('.card-content');
+const card = document.querySelector('.card');
 
-if (cardContent) {
+if (card) {
 
-    createSwipeBtn()
+    function getNYTArticles(category, distElmnt) {
+        category = category.toLowerCase()
+        fetchNews(`https://rss.nytimes.com/services/xml/rss/nyt/${category}.xml`)
+            .then(response => addArticlesToHTML(response, distElmnt))
+    }
+
+    function addArticlesToHTML(newsArticles, distElmnt) {
+        newsArticles.slice(0, 5).forEach(article => {
+            console.log(article);
+            
+            const cardContent = document.createElement('div')
+            cardContent.classList.add('card-content')
+
+            const description = article["media:description"] ? article["media:description"] : article.description 
+
+            // const tag = article.category ? article.category[0] : article.title 
+
+            // fetchRelatedImg(tag).then(articleImg => {
+            //     cardContent.innerHTML = `
+            //     <a href="${article.link}" class="card-content__link">
+            //         <div class="card-content__img-container">
+            //             <img src="${articleImg}" alt="" class="card-content__img">
+            //         </div>
+            //         <div class="card-content__text-container">
+            //             <h2 class="card-content__heading">${article.title}</h2>
+            //             <p class="card-content__description">${article["media:description"]}</p>
+            //         </div>
+            //     </a>
+            //     `
+            //     distElmnt.append(cardContent);
+            // })
+
+            cardContent.innerHTML = `
+                <a href="${article.link}" class="card-content__link">
+                    <div class="card-content__img-container">
+                        <img src="https://source.unsplash.com/random/70x70" alt="" class="card-content__img">
+                    </div>
+                    <div class="card-content__text-container">
+                        <h2 class="card-content__heading">${article.title}</h2>
+                        <p class="card-content__description">${description}</p>
+                    </div>
+                </a>
+                `
+            distElmnt.append(cardContent);
+        })
+        createSaveBtn(distElmnt)
+        // Takes one argument: The elements class name that you want to make swipable
+        addSwipability('card-content__link')
+    }
+
+
+    function fetchRelatedImg(tag) {
+        const id = 'client_id=' + 'FuPL1hfzN0nfjZIYYlZI7EkZXcTXTH6JIHY7aBMVg_8'
+        let searchText = 'query=' + tag
+
+        return fetch(`https://api.unsplash.com/search/photos?per_page=1&${searchText}&${id}`)
+            .then(response => response.json())
+            .then(data => {
+                const img = data.results[0].urls.thumb
+                return img
+            })
+    }
+
+
 
     document.addEventListener('click', e => {
+        // ARROW BTNS
+        if (e.target.classList.contains("toggleContent")) {
+
+            const arrowBtn = e.target
+            const cardTitle = e.target.previousElementSibling.innerText
+            const cardSection = e.target.parentElement.parentElement
+            const newsArticles = cardSection.querySelectorAll('.card-content')
+
+            if (arrowBtn.style.transform === '') {
+                if (cardSection.children.length == 1) {
+                    getNYTArticles(cardTitle, cardSection)
+                }
+                else {
+                    newsArticles.forEach(article => article.style.display = "block")
+                }
+                arrowBtn.style.transform = "rotate(90deg)"
+            } else {
+                arrowBtn.style.transform = ''
+                newsArticles.forEach(article => article.style.display = "none")
+            }
+
+        }
+
+        // SWIPE BTNS
         if (e.target.classList.contains("swipe-btn")) {
             const parent = e.target.parentElement
 
@@ -19,75 +106,5 @@ if (cardContent) {
 
     })
 
-    // Takes one argument: The elements class name that you want to make swipable
-    addSwipability('card-content__link')
-
-    function addSwipability(className) {
-        let startX;
-        let currentX;
-        let movedX;
-        let swipeElmnt;
-        let viewportWidth;
-
-        // TOUCH FUNCTIONS
-        function touchStart(e) {
-            swipeElmnt = e.target
-            viewportWidth = window.innerWidth
-            startX = e.touches[0].clientX
-
-            // let swipeElmntPositionX = Number(swipeElmnt.style.right.replace('px', ''))            
-            // if (swipeElmntPositionX != 0) {
-            //     swipeElmnt.classList.add('animate')
-            //     swipeElmnt.style.right = swipeElmntPositionX  
-            // } 
-        }
-        function touchMove(e) {
-            currentX = e.touches[0].clientX
-            movedX = startX - currentX
-
-            if (swipeElmnt.classList.contains('animate')) {
-                swipeElmnt.classList.remove('animate')
-            }
-            if (movedX < - viewportWidth * 0.3) {
-                swipeElmnt.classList.add('animate')
-                movedX = 0        
-            }
-            
-            swipeElmnt.style.right = movedX + "px"
-        }
-        function touchEnd(e) {
-            swipeElmnt.classList.add('animate')
-
-            if (movedX > viewportWidth * 0.05) {
-                swipeElmnt.style.right = viewportWidth * 0.3 + "px"
-            }
-            else {
-                swipeElmnt.style.right = 0
-            }
-        }
-        // EVENTLISTENERS
-        document.addEventListener('touchstart', e => {
-            if (e.target.classList.contains(className)) touchStart(e)
-        })
-        document.addEventListener('touchmove', e => {
-            if (e.target.classList.contains(className)) touchMove(e)
-        })
-        document.addEventListener('touchend', e => {
-            if (e.target.classList.contains(className)) touchEnd(e)
-        })
-        document.addEventListener('click', e => {
-            if (!e.target.classList.contains(className)) {
-                const swipeElmnts = document.querySelectorAll(`.${className}`);
-
-                swipeElmnts.forEach(swipeElmnt => {
-                    if (!swipeElmnt.classList.contains('animate')) {
-                        swipeElmnt.classList.add('animate')
-                    }
-
-                    swipeElmnt.style.right = 0                    
-                })
-            }
-        })
-    }
 }
 
