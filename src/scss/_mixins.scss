@@ -73,7 +73,8 @@
 @mixin iconDefault {
     font-size: 1.3rem;
     color: $cFontDark;
-    cursor: pointer;    
+    cursor: pointer;
+    transition: 200ms;    
 }
 @mixin cardDefault {
     width: 100%;
