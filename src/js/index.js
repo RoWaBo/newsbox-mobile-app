@@ -26,12 +26,15 @@ if (cardContent) {
         let startX;
         let currentX;
         let movedX;
+        let swipeElmnt;
+        let viewportWidth;
 
         // TOUCH FUNCTIONS
         function touchStart(e) {
+            swipeElmnt = e.target
+            viewportWidth = window.innerWidth
             startX = e.touches[0].clientX
 
-            // let swipeElmnt = e.target
             // let swipeElmntPositionX = Number(swipeElmnt.style.right.replace('px', ''))            
             // if (swipeElmntPositionX != 0) {
             //     swipeElmnt.classList.add('animate')
@@ -39,9 +42,6 @@ if (cardContent) {
             // } 
         }
         function touchMove(e) {
-            let swipeElmnt = e.target
-            let viewportWidth = window.innerWidth
-
             currentX = e.touches[0].clientX
             movedX = startX - currentX
 
@@ -56,9 +56,6 @@ if (cardContent) {
             swipeElmnt.style.right = movedX + "px"
         }
         function touchEnd(e) {
-            let swipeElmnt = e.target
-            let viewportWidth = window.innerWidth
-
             swipeElmnt.classList.add('animate')
 
             if (movedX > viewportWidth * 0.05) {
