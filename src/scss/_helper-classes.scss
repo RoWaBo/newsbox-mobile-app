@@ -26,3 +26,9 @@
 .btn-label {
     @include btnLabel
 }
+
+/* ==== ANIMATION CLASSES ==== */
+
+.animate {
+    transition: 200ms;
+}
