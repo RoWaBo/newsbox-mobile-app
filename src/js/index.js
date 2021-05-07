@@ -1,7 +1,6 @@
-
-const card = document.querySelector('.card');
-
-if (card) {
+// Only run if on the index.html page
+if (window.location.pathname === "/") {
+    const card = document.querySelector('.card');
 
     function getNYTArticles(category, distElmnt) {
         category = category.toLowerCase()
@@ -10,9 +9,8 @@ if (card) {
     }
 
     function addArticlesToHTML(newsArticles, distElmnt) {
-        newsArticles.slice(0, 5).forEach(article => {
-            console.log(article);
-            
+
+        newsArticles.slice(0, 5).forEach(article => {            
             const cardContent = document.createElement('div')
             cardContent.classList.add('card-content')
 
@@ -73,13 +71,13 @@ if (card) {
         if (e.target.classList.contains("toggleContent")) {
 
             const arrowBtn = e.target
-            const cardTitle = e.target.previousElementSibling.innerText
+            const category = e.target.previousElementSibling.innerText
             const cardSection = e.target.parentElement.parentElement
             const newsArticles = cardSection.querySelectorAll('.card-content')
 
             if (arrowBtn.style.transform === '') {
                 if (cardSection.children.length == 1) {
-                    getNYTArticles(cardTitle, cardSection)
+                    getNYTArticles(category, cardSection)
                 }
                 else {
                     newsArticles.forEach(article => article.style.display = "block")
@@ -92,17 +90,7 @@ if (card) {
 
         }
 
-        // SWIPE BTNS
-        if (e.target.classList.contains("swipe-btn")) {
-            const parent = e.target.parentElement
 
-            if (parent.classList.contains('create-save-btn')) {
-                console.log('save news item');
-            }
-            else if (parent.classList.contains('create-delete-btn')) {
-                console.log('delete news item');
-            }
-        }
 
     })
 
