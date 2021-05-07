@@ -1,4 +1,7 @@
 function fetchNews(url) {
+    // RESET IMAGE ARRAY
+    imgUrls = [];
+
     return fetch(url)
         .then(response => response.text())
         .then(result => {
@@ -8,10 +11,20 @@ function fetchNews(url) {
             return xml2json(srcDOM)
         })
         .then(jsonResult => {
-            return jsonResult.rss.channel.item
+            const articles = jsonResult.rss.channel.item
+            let articlesWithImg = []
+
+            articles.forEach((article, index) => {
+                article["media:content"] = imgUrls[index]
+                articlesWithImg.push(article)
+            })
+            
+            return articlesWithImg
         })      
 }
 
+// All ARTICLE IMAGE ARRAY
+let imgUrls = [];
 
 function xml2json(srcDOM) {
     let children = [...srcDOM.children];
@@ -23,7 +36,7 @@ function xml2json(srcDOM) {
 
     // initializing object to be returned. 
     let jsonResult = {};
-
+     
     for (let child of children) {
 
         // checking is child has siblings of same name. 
@@ -39,6 +52,9 @@ function xml2json(srcDOM) {
         } else {
             jsonResult[child.nodeName] = xml2json(child);
         }
+        // MY CHANGES TO THE ORIGINAL CODE
+        if (child.nodeName === 'media:content') imgUrls.push(child.getAttribute('url'))
     }
+
     return jsonResult;
 }
