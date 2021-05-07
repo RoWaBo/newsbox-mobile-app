@@ -18,10 +18,20 @@ function createSaveBtn(distElmnt) {
 
         btnParent.prepend(btn)
     })
+
+    distElmnt.addEventListener('click', e => {
+        const cardContent = e.target.nextElementSibling
+        const category = distElmnt.children[0].innerText
+
+        if (e.target.classList.contains("swipe-btn")) {
+        console.log('save news item');
+        saveArticleToLS(category, cardContent) 
+        }
+    })
 }
 
-function createDeleteBtn(className) {
-    const btnParents = document.querySelectorAll(className);
+function createDeleteBtn(distElmnt) {
+    const btnParents = distElmnt.querySelectorAll('.card-content');
 
     btnParents.forEach(btnParent => {
         // CREATE BUTTON DIV
@@ -39,6 +49,14 @@ function createDeleteBtn(className) {
 
         btnParent.prepend(btn)
     })
+
+    distElmnt.addEventListener('click', e => {
+        const cardContent = e.target.nextElementSibling
+
+        if (e.target.classList.contains("swipe-btn")) {
+            console.log('delete news item');
+        }
+    })
 }
 
 // ==== ENABLE SWIPABILITY ON ELEMENT ====
@@ -48,18 +66,21 @@ function addSwipability(className) {
     let movedX;
     let swipeElmnt;
     let viewportWidth;
+    let swipeElmntX;
+    let swipeLockX;
 
     // TOUCH FUNCTIONS
     function touchStart(e) {
         swipeElmnt = e.target
-        viewportWidth = window.innerWidth
+        viewportWidth = e.srcElement.clientWidth
         startX = e.touches[0].clientX
+        swipeElmntX = Number(swipeElmnt.style.right.replace('px', ''))
+        swipeLockX = viewportWidth * 0.3
 
-        // let swipeElmntPositionX = Number(swipeElmnt.style.right.replace('px', ''))            
-        // if (swipeElmntPositionX != 0) {
-        //     swipeElmnt.classList.add('animate')
-        //     swipeElmnt.style.right = swipeElmntPositionX  
-        // } 
+        // If swiper is in locked position then begin swipe from that position
+        if (Math.round(swipeElmntX) === Math.round(swipeLockX)) {
+            startX = startX + swipeElmntX
+        }
     }
     function touchMove(e) {
         currentX = e.touches[0].clientX
@@ -78,8 +99,8 @@ function addSwipability(className) {
     function touchEnd(e) {
         swipeElmnt.classList.add('animate')
 
-        if (movedX > viewportWidth * 0.05) {
-            swipeElmnt.style.right = viewportWidth * 0.3 + "px"
+        if (movedX > viewportWidth * 0.1) {
+            swipeElmnt.style.right = swipeLockX + "px"
         }
         else {
             swipeElmnt.style.right = 0
@@ -103,7 +124,6 @@ function addSwipability(className) {
                 if (!swipeElmnt.classList.contains('animate')) {
                     swipeElmnt.classList.add('animate')
                 }
-
                 swipeElmnt.style.right = 0
             })
         }
