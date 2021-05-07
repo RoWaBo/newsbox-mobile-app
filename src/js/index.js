@@ -10,33 +10,17 @@ if (window.location.pathname === "/") {
 
     function addArticlesToHTML(newsArticles, distElmnt) {
 
-        newsArticles.slice(0, 5).forEach(article => {            
+        newsArticles.slice(0, 5).forEach(article => {
+                        
             const cardContent = document.createElement('div')
             cardContent.classList.add('card-content')
 
             const description = article["media:description"] ? article["media:description"] : article.description 
 
-            // const tag = article.category ? article.category[0] : article.title 
-
-            // fetchRelatedImg(tag).then(articleImg => {
-            //     cardContent.innerHTML = `
-            //     <a href="${article.link}" class="card-content__link">
-            //         <div class="card-content__img-container">
-            //             <img src="${articleImg}" alt="" class="card-content__img">
-            //         </div>
-            //         <div class="card-content__text-container">
-            //             <h2 class="card-content__heading">${article.title}</h2>
-            //             <p class="card-content__description">${article["media:description"]}</p>
-            //         </div>
-            //     </a>
-            //     `
-            //     distElmnt.append(cardContent);
-            // })
-
             cardContent.innerHTML = `
                 <a href="${article.link}" class="card-content__link">
                     <div class="card-content__img-container">
-                        <img src="https://source.unsplash.com/random/70x70" alt="" class="card-content__img">
+                        <img src="${article["media:content"]}" alt="" class="card-content__img">
                     </div>
                     <div class="card-content__text-container">
                         <h2 class="card-content__heading">${article.title}</h2>
@@ -50,21 +34,6 @@ if (window.location.pathname === "/") {
         // Takes one argument: The elements class name that you want to make swipable
         addSwipability('card-content__link')
     }
-
-
-    function fetchRelatedImg(tag) {
-        const id = 'client_id=' + 'FuPL1hfzN0nfjZIYYlZI7EkZXcTXTH6JIHY7aBMVg_8'
-        let searchText = 'query=' + tag
-
-        return fetch(`https://api.unsplash.com/search/photos?per_page=1&${searchText}&${id}`)
-            .then(response => response.json())
-            .then(data => {
-                const img = data.results[0].urls.thumb
-                return img
-            })
-    }
-
-
 
     document.addEventListener('click', e => {
         // ARROW BTNS
