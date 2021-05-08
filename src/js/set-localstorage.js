@@ -4,11 +4,11 @@ let savedArticles = localSavedArticles ? localSavedArticles : []
 function saveArticleToLS(category, cardContent) {
     console.log('saveArticleToLS'); 
     
-    const linkUrl = cardContent.toString()
+    const linkUrl = cardContent.querySelector('.card-content__link').getAttribute('href')
     const imgSrc = cardContent.querySelector('.card-content__img').getAttribute('src')
     const heading = cardContent.querySelector('.card-content__heading').innerText
     const desc = cardContent.querySelector('.card-content__description').innerText
-    category = category.toLowerCase()
+    category = category.innerText.toLowerCase()
 
     const article = {
         link: linkUrl,

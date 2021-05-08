@@ -20,12 +20,11 @@ function createSaveBtn(distElmnt) {
     })
 
     distElmnt.addEventListener('click', e => {
-        const cardContent = e.target.nextElementSibling
-        const category = distElmnt.children[0].innerText
-
         if (e.target.classList.contains("swipe-btn")) {
-        console.log('save news item');
-        saveArticleToLS(category, cardContent) 
+            const cardContent = e.target.closest('.card-content')
+            const category = distElmnt.querySelector('.card-header__title')    
+            console.log('save news item');
+            saveArticleToLS(category, cardContent) 
         }
     })
 }
@@ -51,9 +50,9 @@ function createDeleteBtn(distElmnt) {
     })
 
     distElmnt.addEventListener('click', e => {
-        const cardContent = e.target.nextElementSibling
-
         if (e.target.classList.contains("swipe-btn")) {
+            const cardContent = e.target.closest('.card-content')
+            const category = distElmnt.querySelector('.card-header__title')   
             console.log('delete news item');
         }
     })
