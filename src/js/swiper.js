@@ -19,15 +19,28 @@ function createSaveBtn(distElmnt) {
         btnParent.prepend(btn)
     })
 
-    distElmnt.addEventListener('click', e => {
-        if (e.target.classList.contains("swipe-btn")) {
+    const swipeBtns = distElmnt.querySelectorAll('.swipe-btn')
+    swipeBtns.forEach(swipeBtn => {
+        swipeBtn.addEventListener('click', e => {
             const cardContent = e.target.closest('.card-content')
             const category = distElmnt.querySelector('.card-header__title')    
             console.log('save news item');
 
-            saveArticleToLS(category, cardContent) 
-        }
+            // saveArticleToLS(category, cardContent)
+            articleLS.save(category, cardContent) 
+        })
     })
+
+    // distElmnt.addEventListener('click', e => {
+    //     if (e.target.classList.contains("swipe-btn")) {
+    //         const cardContent = e.target.closest('.card-content')
+    //         const category = distElmnt.querySelector('.card-header__title')    
+    //         console.log('save news item');
+
+    //         // saveArticleToLS(category, cardContent)
+    //         articleLS.save(category, cardContent) 
+    //     }
+    // })
 }
 
 function createDeleteBtn(distElmnt) {
