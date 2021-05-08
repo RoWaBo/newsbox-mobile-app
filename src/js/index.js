@@ -38,30 +38,26 @@ if (window.location.pathname === "/") {
     document.addEventListener('click', e => {
         // ARROW BTNS
         if (e.target.classList.contains("toggleContent")) {
-
-            const arrowBtn = e.target
-            const category = e.target.previousElementSibling.innerText
-            const cardSection = e.target.parentElement.parentElement
+            
+            const cardSection = e.target.closest('.card')
+            const arrowIcon = e.target.children[0]
+            const category = cardSection.querySelector('.card-header__title').innerText
             const newsArticles = cardSection.querySelectorAll('.card-content')
 
-            if (arrowBtn.style.transform === '') {
+            if (arrowIcon.style.transform === '') {
                 if (cardSection.children.length == 1) {
                     getNYTArticles(category, cardSection)
                 }
                 else {
                     newsArticles.forEach(article => article.style.display = "block")
                 }
-                arrowBtn.style.transform = "rotate(90deg)"
+                arrowIcon.style.transform = "rotate(90deg)"
             } else {
-                arrowBtn.style.transform = ''
+                arrowIcon.style.transform = ''
                 newsArticles.forEach(article => article.style.display = "none")
             }
 
         }
-
-
-
     })
-
 }
 

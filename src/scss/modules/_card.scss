@@ -1,6 +1,6 @@
 
 .card-header {
-    @include cardDefault;
+    @include cardHeader;
     display: flex;
     align-items: center;
 
@@ -9,6 +9,7 @@
         width: 35px;
         height: 35px;
         border-radius: 50%;
+        margin-left: $spaceS;
         display: grid;    
     }
     &__logo {
@@ -22,9 +23,16 @@
         margin-left: $spaceS;
     
     }
+    &__icon-container {
+        width: 70%;
+        padding: $spaceM $spaceS;
+        display: grid;
+        justify-content: end;
+        margin-left: auto;
+    }
     &__icon {
         @include iconDefault;
-        margin-left: auto;
+        pointer-events: none;
     }
 }
 
