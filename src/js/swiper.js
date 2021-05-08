@@ -24,6 +24,7 @@ function createSaveBtn(distElmnt) {
             const cardContent = e.target.closest('.card-content')
             const category = distElmnt.querySelector('.card-header__title')    
             console.log('save news item');
+
             saveArticleToLS(category, cardContent) 
         }
     })
@@ -67,43 +68,43 @@ function addSwipability(className) {
     let viewportWidth;
     let swipeElmntX;
     let swipeLockX;
+    let saveIcon;
+    let deadZoneX; 
 
     // TOUCH FUNCTIONS
     function touchStart(e) {
         swipeElmnt = e.target
         viewportWidth = e.srcElement.clientWidth
         startX = e.touches[0].clientX
-        swipeElmntX = Number(swipeElmnt.style.right.replace('px', ''))
+        swipeElmntX = pixelStringToNumber()
         swipeLockX = viewportWidth * 0.3
+        deadZoneX = viewportWidth * 0.05
 
         // If swiper is in locked position then begin swipe from that position
-        if (Math.round(swipeElmntX) === Math.round(swipeLockX)) {
-            startX = startX + swipeElmntX
-        }
+        if (Math.round(swipeElmntX) === Math.round(swipeLockX)) startX = startX + swipeElmntX
     }
     function touchMove(e) {
+        swipeElmntX = pixelStringToNumber()
         currentX = e.touches[0].clientX
         movedX = startX - currentX
 
-        if (swipeElmnt.classList.contains('animate')) {
-            swipeElmnt.classList.remove('animate')
-        }
-        if (movedX < - viewportWidth * 0.3) {
-            swipeElmnt.classList.add('animate')
-            movedX = 0
-        }
+        saveIcon = e.target.previousElementSibling.children[0]        
+        saveIcon.style.transform = `scale(${ 0.4 + (swipeElmntX / 200)})`
 
-        swipeElmnt.style.right = movedX + "px"
+        if (swipeElmnt.classList.contains('animate')) swipeElmnt.classList.remove('animate')
+
+        if (movedX > deadZoneX) swipeElmnt.style.right = movedX + "px"
+        if (swipeElmntX != 0 && movedX >= 0) swipeElmnt.style.right = movedX + "px" 
     }
     function touchEnd(e) {
         swipeElmnt.classList.add('animate')
 
-        if (movedX > viewportWidth * 0.1) {
-            swipeElmnt.style.right = swipeLockX + "px"
-        }
-        else {
-            swipeElmnt.style.right = 0
-        }
+        saveIcon.style.transform = `scale(1.3)`
+
+        movedX > viewportWidth * 0.1 ? swipeElmnt.style.right = swipeLockX + "px" : swipeElmnt.style.right = 0
+    }
+    function pixelStringToNumber() {
+        return Number(swipeElmnt.style.right.replace('px', ''))    
     }
     // EVENTLISTENERS
     document.addEventListener('touchstart', e => {
