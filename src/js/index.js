@@ -34,5 +34,24 @@ if (window.location.pathname === "/") {
             }
         })        
     })();
+
+    (function addCardToHTML() {
+        const wrapper = document.querySelector('.wrapper')
+        const deletedCategories = categoriesLS.get()
+        const Allcategories = categoryOrder.get()
+
+        if (deletedCategories.length === 0) {
+            Allcategories.forEach(category => {
+                console.log(category);
+                const cardSection = document.createElement('section')
+
+            })
+            
+            
+        }
+        else {
+
+        }
+    })()
 }
 
