@@ -9,52 +9,13 @@ if (window.location.pathname === "/") {
         if (previousPage.includes("settings")) wrapper.classList.add('slide-in-left')
     })();
 
-    (function addCardToHTML() {
-        const deletedCategories = categoriesLS.get()
-        const Allcategories = categoryOrder.get()
-
-        if (deletedCategories.length === 0) createCards(Allcategories)
-
-        else if (deletedCategories.length > 0) {
-            const filteredCategories = Allcategories.filter(category => !deletedCategories.includes(category))
-            createCards(filteredCategories)
-        }
-
-        categoryBtnListener()
-    })()
-
-    function createCards(categoryArray) {
-        const wrapper = document.querySelector('.wrapper')
-
-        categoryArray.forEach(category => {
-            const cardSection = document.createElement('section')
-            cardSection.classList.add('.card')
-            cardSection.innerHTML = `
-            <div class="card-header">
-                <div class="card-header__circle">
-                    <i class="${getCategoryLogo(category)} card-header__logo"></i>
-                </div>
-                <h1 class="card-header__title">${category}</h1>
-                <div class="card-header__icon-container toggleContent">
-                    <i class="fas fa-chevron-right card-header__icon"></i>    
-                </div>
-            </div>
-            `
-            wrapper.append(cardSection)
-        })    
-    }
-
-    function getCategoryLogo(categoryName) {
-        if (categoryName === "europe") return "fas fa-globe-europe"
-        if (categoryName === "health") return "fas fa-heartbeat"
-        if (categoryName === "sports") return "fas fa-futbol"
-        if (categoryName === "business") return "fas fa-briefcase"
-        if (categoryName === "technology") return "fas fa-microchip"
-    }
+    addCardsToHTML()
+    
+    categoryBtnListener()
 
     function categoryBtnListener() {
         document.addEventListener('click', e => {
-            // ARROW BTNS
+            // CARD HEADER ARROW BTNS
             if (e.target.classList.contains("toggleContent")) {
                 const cardSection = e.target.parentElement.parentElement
                 const arrowIcon = e.target.children[0]
@@ -66,12 +27,22 @@ if (window.location.pathname === "/") {
                         getNYTArticles(category, cardSection, 'save')
                     }
                     else {
-                        newsArticles.forEach(article => article.style.display = "block")
+                        newsArticles.forEach(article => {
+                            article.classList.add('fade-in-up')
+                            article.style.display = "block"    
+                        })
                     }
                     arrowIcon.style.transform = "rotate(90deg)"
                 } else {
                     arrowIcon.style.transform = ''
-                    newsArticles.forEach(article => article.style.display = "none")
+                    newsArticles.forEach(article => {
+                        article.classList.remove('fade-in-up')
+                        article.classList.add('fade-out-down')
+                        setTimeout(() => {
+                            article.style.display = "none"
+                            article.classList.remove('fade-out-down')        
+                        }, 350) 
+                    })
                 }
             }
         })
