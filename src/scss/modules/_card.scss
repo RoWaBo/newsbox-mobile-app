@@ -5,10 +5,9 @@
     align-items: center;
 
     &__circle {
-        flex: 1;
         box-shadow: 1px 1px 10px $cFossil;
-        width: 35px;
-        height: 35px;
+        min-width: 35px;
+        min-height: 35px;
         border-radius: 50%;
         margin-left: $spaceS;
         display: grid;    
@@ -19,14 +18,13 @@
         place-self: center;
     }
     &__title {
-        flex: 3;
         @include cardTitle;
         text-transform: uppercase;
         margin-left: $spaceS;
     
     }
     &__icon-container {
-        flex: 4;
+        width: 100%;
         padding: $spaceM $spaceS;
         display: grid;
         justify-content: end;
