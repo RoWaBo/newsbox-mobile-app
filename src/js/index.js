@@ -10,32 +10,39 @@ if (window.location.pathname === "/") {
     })();
 
     (function addCardToHTML() {
-        const wrapper = document.querySelector('.wrapper')
         const deletedCategories = categoriesLS.get()
         const Allcategories = categoryOrder.get()
 
-        if (deletedCategories.length === 0) {
-            Allcategories.forEach(category => {
-                const cardSection = document.createElement('section')
-                cardSection.classList.add('.card')
-                cardSection.innerHTML = `
-                <div class="card-header">
-                    <div class="card-header__circle">
-                        <i class="${getCategoryLogo(category)} card-header__logo"></i>
-                    </div>
-                    <h1 class="card-header__title">${category}</h1>
-                    <div class="card-header__icon-container toggleContent">
-                        <i class="fas fa-chevron-right card-header__icon"></i>    
-                    </div>
-                </div>
-                `
-                wrapper.append(cardSection)
-            })
-        }
+        if (deletedCategories.length === 0) createCards(Allcategories)
 
+        else if (deletedCategories.length > 0) {
+            const filteredCategories = Allcategories.filter(category => !deletedCategories.includes(category))
+            createCards(filteredCategories)
+        }
 
         categoryBtnListener()
     })()
+
+    function createCards(categoryArray) {
+        const wrapper = document.querySelector('.wrapper')
+
+        categoryArray.forEach(category => {
+            const cardSection = document.createElement('section')
+            cardSection.classList.add('.card')
+            cardSection.innerHTML = `
+            <div class="card-header">
+                <div class="card-header__circle">
+                    <i class="${getCategoryLogo(category)} card-header__logo"></i>
+                </div>
+                <h1 class="card-header__title">${category}</h1>
+                <div class="card-header__icon-container toggleContent">
+                    <i class="fas fa-chevron-right card-header__icon"></i>    
+                </div>
+            </div>
+            `
+            wrapper.append(cardSection)
+        })    
+    }
 
     function getCategoryLogo(categoryName) {
         if (categoryName === "europe") return "fas fa-globe-europe"
