@@ -10,8 +10,11 @@ if (window.location.pathname === "/settings/") {
         const categoryName = toggleSwitch.id.replace('toggle', '').toLowerCase()
         const deletedCategories = categoriesLS.get()
 
-        if (deletedCategories.includes(categoryName)) toggleSwitch.checked = false    
+        if (deletedCategories.includes(categoryName)) toggleSwitch.checked = false
+
+        categoryOrder.add(categoryName)
     })
+
 
 
 
