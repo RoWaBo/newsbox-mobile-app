@@ -13,14 +13,14 @@ const articleLS = (() => {
         save: (category, cardContent) => {
             const linkUrl = cardContent.querySelector('.card-content__link').getAttribute('href')
             const imgSrc = cardContent.querySelector('.card-content__img').getAttribute('src')
-            const heading = cardContent.querySelector('.card-content__heading').innerText
+            const title = cardContent.querySelector('.card-content__heading').innerText
             const desc = cardContent.querySelector('.card-content__description').innerText
             category = category.innerText.toLowerCase()
 
             const article = {
                 link: linkUrl,
                 img: imgSrc,
-                heading: heading,
+                title: title,
                 description: desc,
                 category: category,
                 id: createArticleID(category)

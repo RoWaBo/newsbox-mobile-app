@@ -6,15 +6,38 @@ if (window.location.pathname === "/archive/") {
         const articlesLS = articleLS.get()
 
         const finalCategoryOrder = sortCategoryOrder(categoryArrayOrder, articlesLS)
+
         createCards(finalCategoryOrder)
+
         addSavedArticlesToHTML(articlesLS)
 
+        document.querySelectorAll('section').forEach(card => createDeleteBtn(card))
+
+        addSwipability('card-content__link')
+        
         categoryBtnListener()
     }
 
     function addSavedArticlesToHTML(articlesLS) {
         articlesLS.forEach(article => {
-            
+            const cardContent = document.createElement('div')
+            cardContent.classList.add('card-content', 'fade-in-up')
+            cardContent.setAttribute('data-id', article.id)
+            cardContent.style.display = "none"
+
+            cardContent.innerHTML = `
+                    <a href="${article.link}" class="card-content__link">
+                        <div class="card-content__img-container">
+                            <img src="${article.img}" alt="" class="card-content__img">
+                        </div>
+                        <div class="card-content__text-container">
+                            <h2 class="card-content__heading">${article.title}</h2>
+                            <p class="card-content__description">${article.description}</p>
+                        </div>
+                    </a>
+                    `
+            const distElmnt = document.querySelector(`#${article.category}`)
+            distElmnt.append(cardContent);
         })
     }
 
@@ -47,15 +70,10 @@ if (window.location.pathname === "/archive/") {
                 const newsArticles = cardSection.querySelectorAll('.card-content')
 
                 if (arrowIcon.style.transform === '') {
-                    if (cardSection.children.length == 1) {
-                        getNYTArticles(category, cardSection, 'delete')
-                    }
-                    else {
-                        newsArticles.forEach(article => {
-                            article.classList.add('fade-in-up')
-                            article.style.display = "block"
-                        })
-                    }
+                    newsArticles.forEach(article => {
+                        article.classList.add('fade-in-up')
+                        article.style.display = "block"
+                    })
                     arrowIcon.style.transform = "rotate(90deg)"
                 } else {
                     arrowIcon.style.transform = ''

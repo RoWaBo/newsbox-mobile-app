@@ -1,11 +1,11 @@
 // distElmnt is the card section
 function getNYTArticles(category, distElmnt, btnMode) {
     category = category.toLowerCase()
-    
+
     fetchNews(`https://rss.nytimes.com/services/xml/rss/nyt/${category}.xml`)
         .then(response => addArticlesToHTML(response, distElmnt))
         .then(() => {
-
+            
             if (btnMode === 'save') createSaveBtn(distElmnt)
             if (btnMode === 'delete') createDeleteBtn(distElmnt)
 
@@ -54,6 +54,7 @@ function createCards(categoryArray) {
     categoryArray.forEach(category => {
         const cardSection = document.createElement('section')
         cardSection.classList.add('.card')
+        cardSection.id = category
         cardSection.innerHTML = `
         <div class="card-header">
             <div class="card-header__circle">
@@ -66,7 +67,7 @@ function createCards(categoryArray) {
         </div>
         `
         wrapper.append(cardSection)
-    })    
+    })
 }
 
 function getCategoryLogo(categoryName) {
