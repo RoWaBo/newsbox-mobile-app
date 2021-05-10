@@ -32,6 +32,9 @@
 .animate {
     transition: 150ms;
 }
+.animate-slow {
+    transition: 400ms;
+}
 .slide-in-left {
     animation: slideInLeft 400ms;
 }
