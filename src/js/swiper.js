@@ -55,8 +55,9 @@ function createDeleteBtn(distElmnt) {
     distElmnt.addEventListener('click', e => {
         if (e.target.classList.contains("swipe-btn")) {
             const cardContent = e.target.closest('.card-content')
-            const category = distElmnt.querySelector('.card-header__title')   
-            console.log('delete news item');
+            const cardContentID = cardContent.getAttribute('data-id')
+             
+            articleLS.delete(cardContentID)
         }
     })
 }
