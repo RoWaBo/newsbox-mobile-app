@@ -56,10 +56,34 @@ function createDeleteBtn(distElmnt) {
         if (e.target.classList.contains("swipe-btn")) {
             const cardContent = e.target.closest('.card-content')
             const cardContentID = cardContent.getAttribute('data-id')
-             
+
+            slideOutRemove(cardContent)
+
             articleLS.delete(cardContentID)
+            
+            if (cardContent.parentElement.children.length === 2) {
+               const card = cardContent.parentElement 
+               setTimeout(() => {
+                slideOutRemove(card)    
+               }, 700)     
+            }
         }
     })
+}
+
+function slideOutRemove(element) {
+    element.classList.add('animate-slow')
+    element.style.height = (element.clientHeight - 1) + 'px'
+    element.style.left = 0 
+    element.style.left = window.innerWidth + 'px'
+    
+    setTimeout(() => {
+        element.style.height = 0
+        // Removes all children in the parent element
+        element.replaceChildren()
+    }, 400)
+
+    setTimeout(() => element.remove(), 1000)        
 }
 
 // ==== ENABLE SWIPABILITY ON ELEMENT ====
