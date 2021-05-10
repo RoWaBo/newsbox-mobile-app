@@ -30,17 +30,6 @@ function createSaveBtn(distElmnt) {
             articleLS.save(category, cardContent) 
         })
     })
-
-    // distElmnt.addEventListener('click', e => {
-    //     if (e.target.classList.contains("swipe-btn")) {
-    //         const cardContent = e.target.closest('.card-content')
-    //         const category = distElmnt.querySelector('.card-header__title')    
-    //         console.log('save news item');
-
-    //         // saveArticleToLS(category, cardContent)
-    //         articleLS.save(category, cardContent) 
-    //     }
-    // })
 }
 
 function createDeleteBtn(distElmnt) {
@@ -89,12 +78,12 @@ function addSwipability(className) {
         swipeElmnt = e.target
         viewportWidth = e.srcElement.clientWidth
         startX = e.touches[0].clientX
-        swipeElmntX = pixelStringToNumber()
-        swipeLockX = viewportWidth * 0.3
+        swipeElmntX = Math.round(pixelStringToNumber())
+        swipeLockX = Math.round(viewportWidth * 0.3)
         deadZoneX = viewportWidth * 0.05
 
         // If swiper is in locked position then begin swipe from that position
-        if (Math.round(swipeElmntX) === Math.round(swipeLockX)) startX = startX + swipeElmntX
+        if (swipeElmntX === swipeLockX) startX = startX + swipeElmntX
     }
     function touchMove(e) {
         swipeElmntX = pixelStringToNumber()
@@ -114,7 +103,7 @@ function addSwipability(className) {
 
         saveIcon.style.transform = `scale(1.3)`
 
-        movedX > viewportWidth * 0.1 ? swipeElmnt.style.right = swipeLockX + "px" : swipeElmnt.style.right = 0
+        movedX > swipeLockX ? swipeElmnt.style.right = swipeLockX + "px" : swipeElmnt.style.right = 0
     }
     function pixelStringToNumber() {
         return Number(swipeElmnt.style.right.replace('px', ''))    
