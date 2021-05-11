@@ -27,7 +27,7 @@
     font-family: $fMain;
     font-weight: $fWeightRegular;
     font-size: 20px;
-    color: lighten($cFontDark, 15);      
+    color: $cFontDark;      
 }
 @mixin cardTitle {
     font-family: $fMain;

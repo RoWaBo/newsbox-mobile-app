@@ -14,13 +14,17 @@ $cFossil: #c8d1d3;
 $cSand: #b9b0a2;
 
 // FONT COLORS
-$cFontDark: #324755;
+$cFontDark: var(--cFontDark);
 $cFontMedium: #6e8ca0;
 $cFontLight: #FFF;
 
 // BACKGROUND COLORS
-$cBackground: #FFF;
+$cBackground: var(--cBackground);
 
+:root {
+    --cBackground: #FFF;
+    --cFontDark: #324755;
+}
 
 // ======================
 // ===== F O N T S ======
