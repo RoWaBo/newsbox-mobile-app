@@ -3,28 +3,50 @@
 // ====================
 
 // PRIMARY COLORS
-$cSage: #87bcbf;
+$cSage: var(--cSage);
 $cRust: #d97d54;
 $cDrab: #324755;
 $cDanger: #d95454;
 
 // SECONDARY COLORS
 $cIce: #f0f3f4;
-$cFossil: #c8d1d3;
+$cFossil: var(--cFossil);
 $cSand: #b9b0a2;
+$cFossilLight: var(--cFossilLight); 
 
 // FONT COLORS
 $cFontDark: var(--cFontDark);
-$cFontMedium: #6e8ca0;
+$cFontMedium: var(--cFontMedium);
 $cFontLight: #FFF;
 
 // BACKGROUND COLORS
 $cBackground: var(--cBackground);
+$cBorder: var(--cBorder);
+$cLogoBackground: var(--cLogoBackground);
 
-:root {
+// LIGHT THEME
+html {
     --cBackground: #FFF;
     --cFontDark: #324755;
+    --cSage: #87bcbf;
+    --cFossil: #c8d1d3;
+    --cFossilLight: #e7ebec;
+    --cBorder: #eaedee;
+    --cFontMedium: #6e8ca0;
+    --cLogoBackground: #FFF;   
 }
+
+// DARK THEME
+html[data-theme='dark'] {
+    --cBackground: #324755;
+    --cLogoBackground: rgb(250, 250, 250);
+    --cFontDark: rgb(250, 250, 250);
+    --cFontMedium: #d6d6d6;
+    --cFossil: #00000060;
+    --cFossilLight: #212f38;
+    --cBorder: #b8bbbd4d;   
+}
+
 
 // ======================
 // ===== F O N T S ======

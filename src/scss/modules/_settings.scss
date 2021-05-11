@@ -1,6 +1,7 @@
 
 .settings-container {
-    background-color: lighten($cFossil, 11);
+    background-color: $cFossilLight;
+    // background-color: lighten($cFossil, 11);
     padding: $spaceM $spaceS;
     height: 100%;
 
@@ -12,7 +13,8 @@
         & span {
             @include headingBig;
             letter-spacing: .03em;
-            color: darken($cSage, 5);   
+            color: $cSage;   
+            // color: darken($cSage, 5);  
         }
     }
     &__line {
@@ -52,7 +54,8 @@
 }
 
 .toggle-theme-button {
-    background-color: lighten($cFossil, 11);
+    // background-color: lighten($cFossil, 11);
+    background-color: $cFossilLight;
     border: 2px solid $cFossil;
     border-radius: 30px;
     cursor: pointer;

@@ -5,6 +5,7 @@
     align-items: center;
 
     &__circle {
+        background-color: $cLogoBackground;
         box-shadow: 1px 1px 10px $cFossil;
         min-width: 35px;
         min-height: 35px;
