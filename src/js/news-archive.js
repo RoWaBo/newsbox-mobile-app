@@ -1,7 +1,7 @@
 // Only run if on the archive.html page
 if (window.location.pathname === "/archive/") {
 
-    if (articleLS.get().length > 0) {
+    if (articleLS.get() && articleLS.get().length > 0) {
         const categoryArrayOrder = categoryOrder.get()
         const articlesLS = articleLS.get()
 
