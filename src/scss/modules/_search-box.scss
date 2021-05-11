@@ -1,0 +1,31 @@
+
+.searchbox-container {
+    @include cardDefault;
+}
+.searchbox {
+    width: 100%;
+    background-color: $cIce;
+    border-radius: 5px;
+    padding: .6rem $spaceS;
+    display: flex;
+    align-items: center;
+    &:focus-within {
+        box-shadow: 1px 1px 5px 1px $cFossil;
+    }
+
+    &__input {
+        @include cardCopy;
+        border:none;
+        background-color: $cIce;
+        outline: none;
+        width: 100%;
+        &::placeholder {
+            @include cardCopy;    
+        }
+    }
+
+    &__icon {
+        color: $cFossil;
+        font-size: 1.2rem;
+    }
+}

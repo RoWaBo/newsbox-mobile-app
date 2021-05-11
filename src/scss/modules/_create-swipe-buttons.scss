@@ -1,0 +1,16 @@
+// Remember to add these two classes to your stylesheet!
+.swipe-btn {
+    position: absolute;
+    right: 0;
+    width: 30%;
+    height: 100%;
+    display: grid;
+    place-content: center;
+    cursor: pointer;    
+}
+.swipe-btn__icon {
+    font-size: 1.3rem;
+    color: #FFF;
+    pointer-events: none;
+    transition: 50ms;  
+}

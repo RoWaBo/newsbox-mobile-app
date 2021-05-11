@@ -5,12 +5,12 @@ const imageResize = require('gulp-image-resize');
 
 function buildImage(){
     return gulp.src('./src/img/**/*.*')
-        .pipe(imageResize({
-            width : 1800,
-            height : 1000,
-            crop : false,
-            upscale : false
-        }))
+        // .pipe(imageResize({
+        //     width : 1800,
+        //     height : 1000,
+        //     crop : false,
+        //     upscale : false
+        // }))
         .pipe(imagemin([
             imagemin.gifsicle({interlaced: true}),
             imagemin.mozjpeg({quality: 60, progressive: true}),
@@ -27,12 +27,12 @@ function buildImage(){
 
 function image(){
     return gulp.src('./src/img/**/*.*')
-        .pipe(imageResize({
-            width : 1800,
-            height : 1000,
-            crop : false,
-            upscale : false
-        }))
+        // .pipe(imageResize({
+        //     width : 1800,
+        //     height : 1000,
+        //     crop : false,
+        //     upscale : false
+        // }))
         .pipe(imagemin([
             imagemin.gifsicle({interlaced: true}),
             imagemin.mozjpeg({quality: 60, progressive: true}),

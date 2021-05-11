@@ -1,0 +1,53 @@
+// ====================
+// ==== C O L O R S ===
+// ====================
+
+// PRIMARY COLORS
+$cSage: #87bcbf;
+$cRust: #d97d54;
+$cDrab: #324755;
+$cDanger: #d95454;
+
+// SECONDARY COLORS
+$cIce: #f0f3f4;
+$cFossil: #c8d1d3;
+$cSand: #b9b0a2;
+
+// FONT COLORS
+$cFontDark: #324755;
+$cFontMedium: #6e8ca0;
+$cFontLight: #FFF;
+
+// BACKGROUND COLORS
+$cBackground: #FFF;
+
+
+// ======================
+// ===== F O N T S ======
+// ======================
+
+// Inter
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
+// Antonio
+@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100;200&family=Inter:wght@200;300;400;500&display=swap');
+
+// FONT FAMILY 
+$fMain: 'Inter', sans-serif;
+$fSecond: 'Antonio', sans-serif;
+
+// FONT WEIGHTS
+$fWeightBold: 600; 
+$fWeightRegular: 500; 
+$fWeightLight: 400; 
+
+
+// ======================
+// ====== M I S C =======
+// ======================
+
+// spacing
+$spaceXS: .5rem;
+$spaceS: 1rem;
+$spaceM: 1.5rem;
+$spaceL: 2rem;
+$spaceXL: 3rem;

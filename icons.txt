@@ -1,0 +1,31 @@
+inbox:
+<i class="fas fa-inbox"></i>
+
+Cog:
+<i class="fas fa-cog"></i>
+
+Trash:
+<i class="fas fa-trash"></i>
+
+Search:
+<i class="fas fa-search"></i>
+
+Arrow left:
+<i class="fas fa-chevron-left"></i>
+
+
+NEWS CATEGORIES:
+* europe:
+<i class="fas fa-globe-europe"></i>
+
+*Health
+<i class="fas fa-heartbeat"></i>
+
+*Sport
+<i class="fas fa-futbol"></i>
+
+*Business
+<i class="fas fa-briefcase"></i>
+
+*Technologi
+<i class="fas fa-microchip"></i>

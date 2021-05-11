@@ -1,0 +1,76 @@
+
+.settings-container {
+    background-color: lighten($cFossil, 11);
+    padding: $spaceM $spaceS;
+    height: 100%;
+
+    &__heading {
+        text-align: center;
+        line-height: 1;
+        @include settingsSubHeading;
+
+        & span {
+            @include headingBig;
+            letter-spacing: .03em;
+            color: darken($cSage, 5);   
+        }
+    }
+    &__line {
+        color: $cBackground;
+        opacity: .3;
+        width: 33px;
+        border-style: solid;
+        margin: $spaceM auto $spaceXL auto;
+    }
+}
+
+.category-container {
+    background-color: $cBackground;
+    border-radius: 15px;
+    overflow: hidden;
+    width: 100%;
+    box-shadow: 0 2px 10px $cFossil;
+
+    & > :last-child {
+        border-bottom: none;    
+    }
+}
+
+.category-content {
+    @include cardDefault;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__title {
+        @include cardTitle;
+        text-transform: uppercase;
+    }
+    // &__switch {
+
+    // }
+}
+
+.toggle-theme-button {
+    background-color: lighten($cFossil, 11);
+    border: 2px solid $cFossil;
+    border-radius: 30px;
+    cursor: pointer;
+    padding: $spaceS $spaceXS;
+    @include btnLabel;
+    display: block;
+    margin: $spaceXL auto $spaceL;
+    transition: 200ms;
+
+    &:hover {
+        background-color: $cDrab;
+        border-color: $cDrab;
+        color: $cFontLight;       
+    }
+}
+
+.version-message {
+    @include timestamp;
+    text-align: center;
+}
+
