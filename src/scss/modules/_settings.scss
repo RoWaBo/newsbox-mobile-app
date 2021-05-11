@@ -55,7 +55,7 @@
 
 .toggle-theme-button {
     // background-color: lighten($cFossil, 11);
-    background-color: $cFossilLight;
+    background-color: $cThemeBtn;
     border: 2px solid $cFossil;
     border-radius: 30px;
     cursor: pointer;
@@ -64,12 +64,6 @@
     display: block;
     margin: $spaceXL auto $spaceL;
     transition: 200ms;
-
-    &:hover {
-        background-color: $cDrab;
-        border-color: $cDrab;
-        color: $cFontLight;       
-    }
 }
 
 .version-message {

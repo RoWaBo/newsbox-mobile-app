@@ -23,6 +23,7 @@ $cFontLight: #FFF;
 $cBackground: var(--cBackground);
 $cBorder: var(--cBorder);
 $cLogoBackground: var(--cLogoBackground);
+$cThemeBtn: var(--cThemeBtn);
 
 // LIGHT THEME
 html {
@@ -33,7 +34,8 @@ html {
     --cFossilLight: #e7ebec;
     --cBorder: #eaedee;
     --cFontMedium: #6e8ca0;
-    --cLogoBackground: #FFF;   
+    --cLogoBackground: #FFF;
+    --cThemeBtn: #e7ebec;   
 }
 
 // DARK THEME
@@ -44,7 +46,8 @@ html[data-theme='dark'] {
     --cFontMedium: #d6d6d6;
     --cFossil: #00000060;
     --cFossilLight: #212f38;
-    --cBorder: #b8bbbd4d;   
+    --cBorder: #b8bbbd4d;
+    --cThemeBtn: #324755;   
 }
 
 
