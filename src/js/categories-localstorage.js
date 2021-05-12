@@ -1,6 +1,7 @@
 const categoriesLS = (() => {
     return {
         toggle: e => {
+            console.log(e);
             const deletedCategories = categoriesLS.get()
             const switchStatus = e.target.checked
             const categoryName = e.target.id.replace('toggle', '').toLowerCase()
@@ -22,16 +23,23 @@ const categoriesLS = (() => {
 
 const categoryOrder = (() => {
     const defaultCategories = ["europe","health", "sports", "business", "technology"]
-    let allCategories = [];
+    // let allCategories = [];
     
     return {
-        add: categoryName => {
-            allCategories.push(categoryName)
-            localStorage.setItem('categoryOrder', JSON.stringify(allCategories))    
+        add: categoryNames => {
+            // allCategories.push(categoryName)
+            localStorage.setItem('categoryOrder', JSON.stringify(categoryNames))    
         },
         get: () => {
             const localCategoryOrder = JSON.parse(localStorage.getItem("categoryOrder"))
-            let categoryOrder = localCategoryOrder ? localCategoryOrder : defaultCategories
+            let categoryOrder
+             
+            if (!localCategoryOrder || localCategoryOrder.length === 0) {
+                categoryOrder = defaultCategories
+                localStorage.setItem('categoryOrder', JSON.stringify(defaultCategories))   
+            } else {
+                categoryOrder = localCategoryOrder    
+            } 
             return categoryOrder    
         } 
     }
