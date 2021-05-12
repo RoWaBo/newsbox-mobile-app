@@ -28,6 +28,8 @@ function createSaveBtn(distElmnt) {
 
             // saveArticleToLS(category, cardContent)
             articleLS.save(category, cardContent)
+            // takes one status/message argument
+            addInfoBox('saved', 'Article')
         })
     })
 }
@@ -62,13 +64,17 @@ function createDeleteBtn(distElmnt) {
 
             articleLS.delete(cardContentID)
 
+            addInfoBox('deleted', 'Article')
+
             if (cardContent.parentElement.children.length === 2) {
                 const card = cardContent.parentElement
                 card.removeEventListener('click', deleteArticleLS)
-                
+
                 setTimeout(() => {
                     slideOutRemove(card)
                 }, 700)
+
+                setTimeout(() => addInfoBox('deleted', 'Emty category'), 1600)
             }
         }
     }

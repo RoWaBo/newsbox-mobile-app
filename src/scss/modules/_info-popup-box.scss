@@ -1,0 +1,36 @@
+
+.info-popup {
+    background-color: $cBackground;
+    padding: 1rem;
+    min-width: 300px;
+    border-radius: 5px;
+    box-shadow: 0 2px 15px $cFossil;
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+    // centers the box
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    animation: fadePulse 4s forwards;
+    &_saved-background {
+        background-color: $cSage;    
+    }
+    &_deleted-background {
+        background-color: $cDanger;    
+    }
+
+    &__message {
+        font-family: $fMain;
+        font-size: 15px;
+        font-weight: $fWeightRegular;
+        color: $cFontLight;
+        text-align: center;    
+    }
+}
+
+@keyframes fadePulse {
+    0% {opacity: 0;}
+    10% {opacity: 1;}
+    70% {opacity: 1;}
+    100% {opacity: 0;}
+}
