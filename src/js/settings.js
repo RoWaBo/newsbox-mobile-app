@@ -29,4 +29,16 @@ if (window.location.pathname === "/settings/") {
 
         categoryOrder.add(categoryName)
     })
+
+    // ==== SLIP EVENTLISTENERS ====
+    const list = document.querySelector('.category-container');
+    new Slip(list);
+
+    list.addEventListener('slip:reorder', function (e) {
+        // e.target list item reordered.
+
+        e.target.parentNode.insertBefore(e.target, e.detail.insertBefore);
+
+    });
+
 }
