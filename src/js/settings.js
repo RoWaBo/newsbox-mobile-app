@@ -37,12 +37,31 @@ if (window.location.pathname === "/settings/") {
     list.addEventListener('slip:reorder', function (e) {
         console.log('slip:reorder');
         e.target.parentNode.insertBefore(e.target, e.detail.insertBefore);
-        
+
     });
 
-    list.addEventListener('slip:beforeswipe', function(e) {
+    list.addEventListener('slip:beforeswipe', function (e) {
         console.log('slip:beforeswipe');
         e.preventDefault();
     });
 
+    // ==== SLIP EVENTLISTENERS ====
+    const categoryContainer = document.querySelector('.category-container');
+    new Slip(categoryContainer);
+
+    categoryContainer.addEventListener('slip:reorder', function (e) {
+        // console.log('slip:reorder');
+        e.target.parentNode.insertBefore(e.target, e.detail.insertBefore);
+    });
+    categoryContainer.addEventListener('slip:beforewait', function (e) {
+        console.log('slip:beforewait');
+        e.preventDefault()
+    });
+    categoryContainer.addEventListener('slip:beforeswipe', function (e) {
+        console.log('slip:beforeswipe');
+        e.preventDefault();
+    });
+    categoryContainer.addEventListener('touchend', function (e) {
+        console.log('touchend');
+    });
 }
