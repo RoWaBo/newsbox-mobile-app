@@ -32,6 +32,7 @@
     overflow: hidden;
     width: 100%;
     box-shadow: 0 2px 10px $cFossil;
+    user-select: none;
 
     & > :last-child {
         border-bottom: none;    
@@ -43,10 +44,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 
     &__title {
         @include cardTitle;
         text-transform: uppercase;
+        pointer-events: none;
     }
     // &__switch {
 
