@@ -35,10 +35,14 @@ if (window.location.pathname === "/settings/") {
     new Slip(list);
 
     list.addEventListener('slip:reorder', function (e) {
-        // e.target list item reordered.
-
+        console.log('slip:reorder');
         e.target.parentNode.insertBefore(e.target, e.detail.insertBefore);
+        
+    });
 
+    list.addEventListener('slip:beforeswipe', function(e) {
+        console.log('slip:beforeswipe');
+        e.preventDefault();
     });
 
 }
