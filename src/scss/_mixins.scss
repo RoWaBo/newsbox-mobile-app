@@ -85,6 +85,6 @@
 }
 @mixin cardHeader {
     width: 100%;
-    background-color: $cBackground;
+    background-color: $cCardHeaderBG;
     @include borderBottom;   
 }

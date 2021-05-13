@@ -4,7 +4,7 @@
 
 // PRIMARY COLORS
 $cSage: var(--cSage);
-$cRust: #d97d54;
+$cRust: var(--cRust);
 $cDrab: #324755;
 $cDanger: #d95454;
 
@@ -24,6 +24,7 @@ $cBackground: var(--cBackground);
 $cBorder: var(--cBorder);
 $cLogoBackground: var(--cLogoBackground);
 $cThemeBtn: var(--cThemeBtn);
+$cCardHeaderBG: var(--cCardHeaderBG);
 
 // LIGHT THEME
 html {
@@ -35,19 +36,26 @@ html {
     --cBorder: #eaedee;
     --cFontMedium: #6e8ca0;
     --cLogoBackground: #FFF;
-    --cThemeBtn: #e7ebec;   
+    --cThemeBtn: #e7ebec;
+    --cRust: #d97d54;
+    --cCardHeaderBG: #FFF;   
 }
 
 // DARK THEME
 html[data-theme='dark'] {
-    --cBackground: #19242a;
-    --cLogoBackground: #FFF;
+    --cBackground: #212936;
+    --cLogoBackground: #1976D2;
+    --cCardHeaderBG: #2B3648;
+    --cBorder: #b8bbbd4d;
+    --cThemeBtn: #19242a;
+
     --cFontDark: #FFF;
     --cFontMedium: #c3c3c3;
+
     --cFossil: #00000060;
-    --cFossilLight: #212f38;
-    --cBorder: #b8bbbd4d;
-    --cThemeBtn: #19242a;   
+    --cFossilLight: #2B3648;
+    --cSage: #32a3ff;
+    --cRust: #FFF;   
 }
 
 
@@ -56,7 +64,7 @@ html[data-theme='dark'] {
 // ======================
 
 // Inter
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap');
 // Antonio
 @import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100;200&family=Inter:wght@200;300;400;500&display=swap');
 
