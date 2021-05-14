@@ -1,7 +1,7 @@
 
 function createSaveBtn(distElmnt) {
     const btnParents = distElmnt.querySelectorAll('.card-content');
-    const backgroundColor = localStorage.getItem("theme") === "dark" ? '#1976D2' : "#87bcbf" 
+    const backgroundColor = localStorage.getItem("theme") === "dark" ? '#43A0EF' : "#87bcbf" 
 
     btnParents.forEach(btnParent => {
         // CREATE BUTTON DIV
