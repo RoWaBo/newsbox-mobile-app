@@ -2,7 +2,7 @@
 .settings-container {
     background-color: $cFossilLight;
     // background-color: lighten($cFossil, 11);
-    padding: $spaceM $spaceS;
+    padding: $spaceS;
     height: 100%;
 
     &__heading {
@@ -19,10 +19,10 @@
     }
     &__line {
         color: $cBackground;
-        opacity: .3;
+        opacity: .5;
         width: 33px;
         border-style: solid;
-        margin: $spaceM auto $spaceXL auto;
+        margin: $spaceM auto $spaceM auto;
     }
 }
 
@@ -65,7 +65,7 @@
     padding: $spaceS $spaceXS;
     @include btnLabel;
     display: block;
-    margin: $spaceXL auto $spaceL;
+    margin: $spaceM auto $spaceM;
     transition: 200ms;
 }
 
