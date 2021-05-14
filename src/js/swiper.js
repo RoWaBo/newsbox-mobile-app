@@ -1,6 +1,7 @@
 
 function createSaveBtn(distElmnt) {
     const btnParents = distElmnt.querySelectorAll('.card-content');
+    const backgroundColor = localStorage.getItem("theme") === "dark" ? '#1976D2' : "#87bcbf" 
 
     btnParents.forEach(btnParent => {
         // CREATE BUTTON DIV
@@ -8,7 +9,7 @@ function createSaveBtn(distElmnt) {
         btn.classList.add('swipe-btn');
         // CREATE SAVE BUTTON
         btn.innerHTML = `<i class="fas fa-inbox swipe-btn__icon"></i>`
-        btnParent.style.backgroundColor = "#87bcbf"
+        btnParent.style.backgroundColor = backgroundColor
         // APPLYING STYLING AND ADDING TO HTML
         const swipableElement = btnParent.children.item(0)
 
