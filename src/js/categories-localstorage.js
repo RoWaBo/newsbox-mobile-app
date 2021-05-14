@@ -1,7 +1,6 @@
 const categoriesLS = (() => {
     return {
         toggle: e => {
-            console.log(e);
             const deletedCategories = categoriesLS.get()
             const switchStatus = e.target.checked
             const categoryName = e.target.id.replace('toggle', '').toLowerCase()

@@ -6,25 +6,16 @@ if (window.location.pathname === "/settings/") {
     
     addCategoriesToHTML()
 
-    dragCategories()
+    enableDragableCategories()
 
-    enableToggleSwitches()
-
-    // TOGGLE SWITCHES EVENTLISTENER
-    function enableToggleSwitches() {
-        toggleSwitches.forEach(toggleSwitch => {
-            toggleSwitch.addEventListener('click', e => categoriesLS.toggle(e))
-
-            const categoryName = toggleSwitch.id.replace('toggle', '').toLowerCase()
-            
-            syncSwitchStateWithLS(categoryName, toggleSwitch)    
-        })        
-    }
-
-    // SYNC TOGGLE SWITCH STATE WITH LOCALSTORAGE
-    function syncSwitchStateWithLS(categoryName, toggleSwitch) {
+    function syncSwitchStateWithLS() {
+        let toggleSwitches = document.querySelectorAll('.switch__check');
         const deletedCategories = categoriesLS.get();
-        if (deletedCategories.includes(categoryName)) toggleSwitch.checked = false    
+
+        toggleSwitches.forEach(toggleSwitch => {
+            const categoryName = toggleSwitch.id.replace('toggle', '').toLowerCase()
+            if (deletedCategories.includes(categoryName)) toggleSwitch.checked = false    
+        })    
     }
 
     // TOGGLE THEME BUTTON
@@ -49,7 +40,6 @@ if (window.location.pathname === "/settings/") {
             const categoryName = toggleSwitch.id.replace('toggle', '').toLowerCase()
             categoryNames.push(categoryName)    
         })
-
         categoryOrder.add(categoryNames)
     }
 
@@ -68,9 +58,13 @@ if (window.location.pathname === "/settings/") {
             ` 
             categoryContainer.append(category)             
         })
+
+        syncSwitchStateWithLS()
+        // add listener on togglebuttons 
+        categoryContainer.addEventListener('click', e => { if (e.target.classList.contains('switch__check')) categoriesLS.toggle(e) })
     }
 
-    function dragCategories() {
+    function enableDragableCategories() {
         const categoryContainer = document.querySelector('.category-container');
         new Slip(categoryContainer);
 
