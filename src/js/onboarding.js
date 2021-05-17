@@ -12,6 +12,7 @@ function controlOnboardingSteps() {
 }
 
 function onboardingWelcome() {
+    document.querySelector(".onboarding__box").style.top = "10%"
     document.querySelector(".onboarding__heading").innerHTML = "Welcome to <br> the Newsbox app!"
     document.querySelector(".onboarding__description").innerHTML = "This is a short guide on how to use the app"
 }
