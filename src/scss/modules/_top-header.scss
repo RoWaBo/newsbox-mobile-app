@@ -5,9 +5,9 @@
 
 .navigation-menu {
     width: 100%;
-    padding: $spaceM $spaceL;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background-color: $cBackground;
     @include borderBottom;
     
@@ -19,6 +19,7 @@
         }
     }
     &__icon {
-        @include iconDefault
+        @include iconDefault;
+        padding: $spaceM $spaceL;
     }
 }

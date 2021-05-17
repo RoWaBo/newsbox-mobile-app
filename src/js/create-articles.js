@@ -56,12 +56,12 @@ function createCards(categoryArray) {
         cardSection.classList.add('.card')
         cardSection.id = category
         cardSection.innerHTML = `
-        <div class="card-header">
+        <div class="card-header toggleContent">
             <div class="card-header__circle">
                 <i class="${getCategoryLogo(category)} card-header__logo"></i>
             </div>
             <h1 class="card-header__title">${category}</h1>
-            <div class="card-header__icon-container toggleContent">
+            <div class="card-header__icon-container">
                 <i class="fas fa-chevron-right card-header__icon"></i>    
             </div>
         </div>
