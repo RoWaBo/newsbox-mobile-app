@@ -1,0 +1,70 @@
+.overlay {
+    background-color: rgba(0, 0, 0, 0.699);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.onboarding {
+    display: grid;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20%;
+
+    &__box {
+        background-color: $cBackground;
+        border-radius: 10px;
+        margin: 0 $spaceL;
+        padding: $spaceS 0;
+        position: relative;
+    }
+    &__exit-icon {
+        @include iconDefault;
+        padding: .3rem .5rem;
+        position: absolute;
+        top: 0;
+        right: 0;  
+    }
+    &__heading {
+        @include headingSmall;
+        text-transform: capitalize;
+        text-align: center;
+        margin-bottom: $spaceS;
+    }
+    &__description {
+        @include cardCopy;
+        margin: 0 $spaceL;
+        text-align: center;
+    }
+    &__controls {
+        @include borderTop;
+        margin-top: $spaceS;
+        padding-top: $spaceS;
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
+.prev-btn, .next-btn {
+  @include buttonDefault;
+
+}
+
+.dot-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;    
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: $cFossilLight;
+
+    &:not(:last-of-type) {
+        margin-right: $spaceXS;
+    }
+}
