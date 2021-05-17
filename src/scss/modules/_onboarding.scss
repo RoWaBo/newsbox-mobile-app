@@ -25,7 +25,10 @@
         padding: .3rem .5rem;
         position: absolute;
         top: 0;
-        right: 0;  
+        right: 0;
+        &:hover {
+            color: $cSageDark;
+        }  
     }
     &__heading {
         @include headingSmall;
@@ -49,7 +52,16 @@
 
 .prev-btn, .next-btn {
   @include buttonDefault;
-
+}
+.prev-btn > *, .next-btn > * {
+  pointer-events: none;
+}
+.prev-btn:hover, .next-btn:hover {
+  background-color: $cSageDark;
+}
+.btn_disabled {
+    pointer-events: none;
+    background-color: $cFossilLight;
 }
 
 .dot-container {
@@ -57,7 +69,6 @@
     justify-content: space-around;
     align-items: center;    
 }
-
 .dot {
     width: 10px;
     height: 10px;
@@ -66,5 +77,8 @@
 
     &:not(:last-of-type) {
         margin-right: $spaceXS;
+    }
+    &_active {
+        background-color: $cSage;    
     }
 }
