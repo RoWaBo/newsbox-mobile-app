@@ -5,13 +5,10 @@
     right: 0;
     top: 0;
     bottom: 0;
+    
 }
 
 .onboarding {
-    display: grid;
-    justify-content: center;
-    width: 100%;
-    margin-top: 20%;
 
     &__box {
         background-color: $cBackground;
