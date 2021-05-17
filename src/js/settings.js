@@ -50,6 +50,7 @@ if (window.location.pathname === "/settings/") {
             const category = document.createElement('li')
             category.classList.add('category-content')
             category.innerHTML = `
+            <i class="fas fa-bars category-content__handlebar"></i>
             <h2 class="category-content__title">${categoryName}</h2>
             <label for="toggle${categoryName}" class="category-content__switch switch">
                 <input type="checkbox" name="toggle${categoryName}" class="switch__check" checked="true" id="toggle${categoryName}"> 
@@ -66,18 +67,23 @@ if (window.location.pathname === "/settings/") {
 
     function enableDragableCategories() {
         const categoryContainer = document.querySelector('.category-container');
+        const handlebars = document.querySelectorAll('.category-content__handlebar')
         new Slip(categoryContainer);
 
         categoryContainer.addEventListener('slip:reorder', function (e) {
             console.log('slip:reorder');
 
             e.target.parentNode.insertBefore(e.target, e.detail.insertBefore);
+            e.target.classList.remove("category-content_active");
             saveCategoryOrderToLS()
         });
-        // categoryContainer.addEventListener('slip:beforewait', function (e) {
-        //     console.log('slip:beforewait');
-        //     e.preventDefault()
-        // });
+        handlebars.forEach(handlebar => {
+            handlebar.addEventListener('slip:beforewait', function (e) {
+                console.log('slip:beforewait');
+                e.preventDefault()
+                e.target.parentElement.classList.add("category-content_active");
+            });            
+        })
         categoryContainer.addEventListener('slip:beforeswipe', function (e) {
             console.log('slip:beforeswipe');
             e.preventDefault();

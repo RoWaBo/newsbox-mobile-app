@@ -41,19 +41,28 @@
 
 .category-content {
     @include cardDefault;
+    padding: 0;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     position: relative;
 
+    &__handlebar {
+        color: $cSage;
+        padding: 1.2rem $spaceS;
+        opacity: .6; 
+    }
     &__title {
         @include cardTitle;
         text-transform: uppercase;
         pointer-events: none;
+        margin-right: auto;
     }
-    // &__switch {
-
-    // }
+    &__switch {
+        margin-right: $spaceS;
+    }
+    &_active {
+        box-shadow: 0 0 15px 1px $cSage;  
+    }
 }
 
 .toggle-theme-button {
