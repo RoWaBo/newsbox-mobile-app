@@ -1,14 +1,23 @@
-const overlay = document.querySelector('.overlay');
-let onboardingStepNum = 0;
 
+// ONBOARDING COMPLETE VARIABLE
+let localOnboardingComplete = JSON.parse(localStorage.getItem("onboardingCompleted")) 
+let onboardingComplete = localOnboardingComplete ? localOnboardingComplete : false
 
-controlOnboardingSteps()
-function controlOnboardingSteps() {
-    if (!overlay) createOnboardingBox()
-    if (onboardingStepNum === 0) onboardingWelcome()
-    
-    updateBtnStatus()
-    updateDotStatus()    
+updateOnboardingSteps()
+function updateOnboardingSteps() {
+    console.log('updateOnboardingSteps');
+    // ONBOARDING STEP NUMBER VARIABLE
+    let localOnboardingStepNum = Number(localStorage.getItem("onboardingStepNum"))
+    let onboardingStepNum = localOnboardingStepNum ? localOnboardingStepNum : 0
+    localStorage.setItem("onboardingStepNum", onboardingStepNum)
+
+    if (!onboardingComplete) {
+        if (!document.querySelector('.overlay')) createOnboardingBox()
+        if (onboardingStepNum === 0) onboardingWelcome()
+        
+        updateBtnStatus(onboardingStepNum)
+        updateDotStatus(onboardingStepNum)           
+    }
 }
 
 function onboardingWelcome() {
@@ -18,6 +27,7 @@ function onboardingWelcome() {
 }
 
 function createOnboardingBox() {
+    console.log('createOnboardingBox');
     // CREATE OVERLAY
     const body = document.querySelector('body');
     const overlay = createTag('div','overlay')
@@ -47,17 +57,18 @@ function enableOnboardingListener() {
     // GLOBAL LISTENER
     document.addEventListener('click', e => {
         // BUTTONS
-        if (e.target.classList.contains("prev-btn")) onboardingStepNum--;
-        if (e.target.classList.contains("next-btn")) onboardingStepNum++;
+        if (e.target.classList.contains("prev-btn")) changeStepNum('-1'), updateOnboardingSteps();
+        if (e.target.classList.contains("next-btn")) changeStepNum('+1'), updateOnboardingSteps();
         // DOTS
         if (e.target.classList.contains("dot")) console.log(e.target);
         // EXIT ICON
-        if (e.target.classList.contains("onboarding__exit-icon")) onboardingCompleted();
+        if (e.target.classList.contains("onboarding__exit-icon")) onboardingDisabled();
     })
 }
 
-function onboardingCompleted() {
+function onboardingDisabled() {
     localStorage.setItem("onboardingCompleted", true)
+    document.querySelector('.overlay').remove()
 }
 
 function createTag(element, className) {
@@ -66,7 +77,7 @@ function createTag(element, className) {
     return createElement
 }
 
-function updateBtnStatus() {
+function updateBtnStatus(onboardingStepNum) {
     const prevBtn = document.querySelector('.prev-btn')
     const nextBtn = document.querySelector('.next-btn')
 
@@ -78,7 +89,7 @@ function updateBtnStatus() {
     } 
 }
 
-function updateDotStatus() {
+function updateDotStatus(onboardingStepNum) {
     const dotContainer = document.querySelector(".dot-container")
     const dotArray = Array.from(dotContainer.children)
     // RESET COLORED DOT
@@ -88,7 +99,14 @@ function updateDotStatus() {
     // ADD COLORED DOT
     dotArray[onboardingStepNum].classList.add('dot_active') 
 }
+// takes one argument which can be either of two values: '+1' or '-1'
+function changeStepNum(action) {
+    let localOnboardingStepNum = Number(localStorage.getItem("onboardingStepNum"))
 
+    if (action === '+1') localOnboardingStepNum++
+    if (action === '-1') localOnboardingStepNum--
 
+    localStorage.setItem("onboardingStepNum", localOnboardingStepNum)  
+}
 
 
