@@ -14,7 +14,8 @@ if (window.location.pathname === "/settings/") {
 
         toggleSwitches.forEach(toggleSwitch => {
             const categoryName = toggleSwitch.id.replace('toggle', '').toLowerCase()
-            if (deletedCategories.includes(categoryName)) toggleSwitch.checked = false    
+            const isDeleted = deletedCategories.includes(categoryName) 
+            toggleSwitch.checked = !isDeleted   
         })    
     }
 
