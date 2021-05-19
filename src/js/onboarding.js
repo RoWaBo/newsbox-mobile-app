@@ -29,12 +29,116 @@ function runOnboarding() {
             break;
         case 3: onboardingArchive();
             break;
+        case 4: onboardingDisplaySavedArticles();
+            break;
+        case 5: onboardingDeleteArticle();
+            break;
+        case 6: onboardingSettings();
+            break;
     }
 
     updateBtnStatus(onboardingStepNum)
     updateDotStatus(onboardingStepNum)
 }
 
+// ==== STEP 6 ====
+function onboardingSettings() {
+    if (window.location.pathname === "/settings/") {
+        console.log('hej');
+    }
+    else {
+        window.location.pathname = "/settings"
+    }
+}
+// ==== STEP 5 ====
+function onboardingDeleteArticle() {
+    if (window.location.pathname === "/archive/") {
+        const cardSection = wrapper.children[2]
+        let deleteBtns;
+        queryTextElmnts()
+
+        // MAKES CARDSECTION MOVE ABOVE OVERLAY
+        cardSection.style.position = "relative"
+        cardSection.style.top = "12%"
+
+        openCategory(cardSection)
+
+        // SET ONBOARDINGBOX POSITION AND TEXT
+        onboardingBox.style.top = "2.5%"
+        heading.innerHTML = ""
+        description.innerHTML = `Delete article by swiping left and clicking the appearing icon <br> <span class="text-highlight">Delete it now!<span>`
+
+        // EVENTLISTENERS
+        prevBtn.addEventListener('click', prevBtnStep5, { once: true })
+        function prevBtnStep5() {
+            nextBtn.removeEventListener('click', nextBtnStep5)
+        }
+
+        nextBtn.addEventListener('click', nextBtnStep5, { once: true })
+        function nextBtnStep5() {
+            const cardContent = cardSection.querySelector('.card-content')
+            const cardContentID = cardContent.getAttribute('data-id')
+
+            articleLS.delete(cardContentID)
+
+            window.location.pathname = "/settings"
+        }
+
+        setTimeout(() => {
+            deleteBtns = cardSection.querySelectorAll('.swipe-btn')
+            deleteBtns.forEach(deleteBtn => deleteBtn.addEventListener('click', deleteBtnStep2))
+        }, 200)
+        function deleteBtnStep2() {
+            toggleAllPointerEvents()
+            setTimeout(() => {
+                prevBtn.removeEventListener('click', prevBtnStep5)
+                nextBtn.removeEventListener('click', nextBtnStep5)
+                deleteBtns.forEach(deleteBtn => deleteBtn.removeEventListener('click', deleteBtnStep2))
+                toggleAllPointerEvents()
+                changeStepNum('+1')
+                runOnboarding()
+            }, 3500)
+        }
+    }
+    else {
+        window.location.pathname = "/archive/"
+    }
+}
+
+// ==== STEP 4 ====
+function onboardingDisplaySavedArticles() {
+    const cardSection = wrapper.children[2]
+    const arrowIcon = nextBtn.firstElementChild
+    queryTextElmnts()
+
+    // MAKES CARDSECTION MOVE ABOVE OVERLAY
+    cardSection.style.position = "relative"
+    cardSection.style.top = "12%"
+
+    openCategory(cardSection)
+
+    arrowIcon.classList.add('notice-me')
+
+    cardSection.style.pointerEvents = "none";
+
+    // SET ONBOARDINGBOX POSITION AND TEXT
+    onboardingBox.style.top = "2.5%"
+    heading.innerHTML = "welcome to the archive"
+    description.innerHTML = `Read your saved articles here <br> <span class="text-highlight">Click arrow button to continue</span>`
+
+    // EVENTLISTENERS
+    nextBtn.addEventListener('click', nextBtnStep4, { once: true })
+    function nextBtnStep4() {
+        cardSection.style.pointerEvents = "";
+        removeClassIfExist(arrowIcon, 'notice-me')
+
+        prevBtn.removeEventListener('click', prevBtnStep4)
+    }
+    prevBtn.addEventListener('click', prevBtnStep4, { once: true })
+    function prevBtnStep4() {
+        window.location.pathname = "/"
+    }
+}
 // ==== STEP 3 ====
 function onboardingArchive() {
     if (window.location.pathname === "/") {
@@ -57,6 +161,7 @@ function onboardingArchive() {
         // EVENTLISTENERS
         nextBtn.addEventListener('click', nextBtnStep3, { once: true })
         function nextBtnStep3() {
+            window.location.pathname = "/archive"
 
             prevBtn.removeEventListener('click', prevBtnStep3)
             archiveBtn.removeEventListener('click', archiveIconStep3)
@@ -78,7 +183,7 @@ function onboardingArchive() {
 
             prevBtn.removeEventListener('click', prevBtnStep3)
             nextBtn.removeEventListener('click', nextBtnStep3)
-        }         
+        }
     }
     else {
         window.location.pathname = "/"
@@ -96,7 +201,7 @@ function onboardingSaveArticle() {
 
     // SET ONBOARDINGBOX POSITION AND TEXT
     onboardingBox.style.top = "2.5%"
-    description.innerHTML = `Save article by swiping left and clicking the appearing icon <br> <span class="text-highlight">Try it now!<span>`
+    description.innerHTML = `Save article by swiping left and clicking the appearing icon <br> <span class="text-highlight">Save it now!<span>`
 
     openCategory(cardSection)
 
@@ -104,31 +209,32 @@ function onboardingSaveArticle() {
     prevBtn.addEventListener('click', prevBtnStep2, { once: true })
     function prevBtnStep2() {
         closeCategory(cardSection)
-        nextBtn.removeEventListener('click', nextBtnStep2)    
+        nextBtn.removeEventListener('click', nextBtnStep2)
     }
-    
+
     nextBtn.addEventListener('click', nextBtnStep2, { once: true })
     function nextBtnStep2() {
         const cardContent = cardSection.querySelector('.card-content')
         const category = cardSection.id
-        
+
+        // addInfoBox('saved', 'Article')
         articleLS.save(category, cardContent)
-        
+
         prevBtn.removeEventListener('click', prevBtnStep2)
         saveBtns.forEach(saveBtn => saveBtn.removeEventListener('click', saveBtnStep2))
     }
-    
+
     setTimeout(() => {
         saveBtns = cardSection.querySelectorAll('.swipe-btn')
-        saveBtns.forEach(saveBtn => saveBtn.addEventListener('click', saveBtnStep2))    
-    }, 200) 
+        saveBtns.forEach(saveBtn => saveBtn.addEventListener('click', saveBtnStep2))
+    }, 200)
     function saveBtnStep2() {
         toggleAllPointerEvents()
         setTimeout(() => {
             prevBtn.removeEventListener('click', prevBtnStep2)
             nextBtn.removeEventListener('click', nextBtnStep2)
             saveBtns.forEach(saveBtn => saveBtn.removeEventListener('click', saveBtnStep2))
-            toggleAllPointerEvents()              
+            toggleAllPointerEvents()
             changeStepNum('+1')
             runOnboarding()
         }, 3500)
@@ -171,10 +277,15 @@ function onboardingDisplayArticles() {
 
 // ==== STEP 0 ====
 function onboardingWelcome() {
-    queryTextElmnts()
-    onboardingBox.style.top = "15%"
-    heading.innerHTML = "welcome to <br> the newsbox app"
-    description.innerHTML = "This is a short guide on how to use the app"
+    if (window.location.pathname === "/") {
+        queryTextElmnts()
+        onboardingBox.style.top = "15%"
+        heading.innerHTML = "welcome to <br> the newsbox app"
+        description.innerHTML = "This is a short guide on how to use the app"        
+    }
+    else {
+        window.location.pathname = "/"    
+    }
 }
 function createOnboardingBox() {
     console.log('createOnboardingBox');
@@ -192,6 +303,10 @@ function createOnboardingBox() {
     <div class="onboarding__controls">
         <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
         <div class="dot-container">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
             <span class="dot"></span>
             <span class="dot"></span>
             <span class="dot"></span>
@@ -322,12 +437,12 @@ function syncWithLS(itemNameLS, defaultValue) {
 }
 function toggleAllPointerEvents() {
     if (body.classList.contains('disablePointerEvents')) {
-        body.classList.remove('disablePointerEvents')    
-    } 
+        body.classList.remove('disablePointerEvents')
+    }
     else {
-        body.classList.add('disablePointerEvents')    
+        body.classList.add('disablePointerEvents')
     }
 }
 function removeClassIfExist(elmnt, className) {
-    if (elmnt.classList.contains(className)) elmnt.classList.remove(className) 
+    if (elmnt.classList.contains(className)) elmnt.classList.remove(className)
 }

@@ -50,6 +50,10 @@
 .notice-me {
     animation: heartBeat 4s infinite;    
 }
+.highlight {
+    // box-shadow: 0 0 1px 1px $cRust;
+    border: solid 2px $cRust !important;
+}
 
 /* ==== MISC ==== */
 
