@@ -27,10 +27,62 @@ function runOnboarding() {
             break;
         case 2: setTimeout(onboardingSaveArticle, 200);
             break;
+        case 3: onboardingArchive();
+            break;
     }
 
     updateBtnStatus(onboardingStepNum)
     updateDotStatus(onboardingStepNum)
+}
+
+// ==== STEP 3 ====
+function onboardingArchive() {
+    if (window.location.pathname === "/") {
+        const cardSection = wrapper.children[3]
+        const topHeader = wrapper.querySelector('.top-header')
+        const archiveBtn = topHeader.querySelector('.navigation-menu').firstElementChild
+        const archiveIcon = archiveBtn.firstElementChild
+        queryTextElmnts()
+
+        archiveIcon.classList.add('notice-me')
+        cardSection.style.position = ""
+        topHeader.style.position = "relative"
+
+        // SET ONBOARDINGBOX POSITION AND TEXT
+        onboardingBox.style.top = "15%"
+        description.innerHTML = `<span class="text-highlight">The article is now saved!</span> <br> It can be viewed by clicking the left icon to view the archive page.`
+
+        closeCategory(cardSection)
+
+        // EVENTLISTENERS
+        nextBtn.addEventListener('click', nextBtnStep3, { once: true })
+        function nextBtnStep3() {
+
+            prevBtn.removeEventListener('click', prevBtnStep3)
+            archiveBtn.removeEventListener('click', archiveIconStep3)
+        }
+
+        prevBtn.addEventListener('click', prevBtnStep3, { once: true })
+        function prevBtnStep3() {
+            topHeader.style.position = ""
+            removeClassIfExist(archiveIcon, 'notice-me')
+
+            nextBtn.removeEventListener('click', nextBtnStep3)
+            archiveBtn.removeEventListener('click', archiveIconStep3)
+        }
+
+        archiveBtn.addEventListener('click', archiveIconStep3, { once: true })
+        function archiveIconStep3() {
+            changeStepNum('+1')
+            runOnboarding()
+
+            prevBtn.removeEventListener('click', prevBtnStep3)
+            nextBtn.removeEventListener('click', nextBtnStep3)
+        }         
+    }
+    else {
+        window.location.pathname = "/"
+    }
 }
 
 // ==== STEP 2 ====
@@ -44,7 +96,7 @@ function onboardingSaveArticle() {
 
     // SET ONBOARDINGBOX POSITION AND TEXT
     onboardingBox.style.top = "2.5%"
-    description.innerHTML = `Save articles by swiping left and clicking the appearing icon <br> <span class="text-highlight">Try it now!<span>`
+    description.innerHTML = `Save article by swiping left and clicking the appearing icon <br> <span class="text-highlight">Try it now!<span>`
 
     openCategory(cardSection)
 
@@ -94,7 +146,7 @@ function onboardingDisplayArticles() {
     // SET ONBOARDINGBOX POSITION AND TEXT
     onboardingBox.style.top = "5%"
     heading.innerHTML = ""
-    description.innerHTML = "Click on a category to display related articles"
+    description.innerHTML = "Click on the category to display related articles"
 
     // EVENTLISTENERS
     nextBtn.addEventListener('click', nextBtnStep1, { once: true })
@@ -198,8 +250,8 @@ function updateBtnStatus(onboardingStepNum) {
     if (onboardingStepNum === 0) prevBtn.classList.add('btn_disabled')
     // if (onboardingStepNum > 10) nextBtn.classList.add('btn_disabled')
     else {
-        if (prevBtn.classList.contains('btn_disabled')) prevBtn.classList.remove('btn_disabled')
-        if (nextBtn.classList.contains('btn_disabled')) nextBtn.classList.remove('btn_disabled')
+        removeClassIfExist(prevBtn, 'btn_disabled')
+        removeClassIfExist(nextBtn, 'btn_disabled')
     }
 }
 
@@ -275,4 +327,7 @@ function toggleAllPointerEvents() {
     else {
         body.classList.add('disablePointerEvents')    
     }
+}
+function removeClassIfExist(elmnt, className) {
+    if (elmnt.classList.contains(className)) elmnt.classList.remove(className) 
 }
