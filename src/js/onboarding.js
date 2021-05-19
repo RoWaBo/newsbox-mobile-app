@@ -6,17 +6,14 @@ let dotContainer;
 let heading;
 let description;
 let onboardingBox;
-// ONBOARDING COMPLETE VARIABLE
-let localOnboardingComplete = JSON.parse(localStorage.getItem("onboardingCompleted"))
-let onboardingComplete = localOnboardingComplete ? localOnboardingComplete : false
+// syncWithLS takes two arguments: (itemNameLS, defaultValue)
+let onboardingComplete = syncWithLS("onboardingCompleted", false)
 // ITEMS TO BE STYLE RESET
 let itemsStyleRemove = [];
 
 runOnboarding()
 function runOnboarding() {
-    // ONBOARDING STEP NUMBER VARIABLE
-    let localOnboardingStepNum = Number(localStorage.getItem("onboardingStepNum"))
-    let onboardingStepNum = localOnboardingStepNum ? localOnboardingStepNum : 0
+    let onboardingStepNum = syncWithLS("onboardingStepNum", 0)
     localStorage.setItem("onboardingStepNum", onboardingStepNum)
 
     if (!onboardingComplete) {
@@ -225,4 +222,9 @@ function closeCategory(cardSection) {
             cardContent.classList.remove('fade-out-down')        
         }, 350) 
     })
+}
+function syncWithLS(itemNameLS, defaultValue) {
+    const valueLS = JSON.parse(localStorage.getItem(itemNameLS))
+    const valueFinal = valueLS ? valueLS : defaultValue
+    return valueFinal   
 }
