@@ -1,13 +1,19 @@
+// GLOBAL VARIABLES
 const wrapper = document.querySelector('.wrapper')
+let nextBtn;
+let prevBtn;
+let dotContainer;
+let heading;
+let description;
+let onboardingBox;
 // ONBOARDING COMPLETE VARIABLE
 let localOnboardingComplete = JSON.parse(localStorage.getItem("onboardingCompleted"))
 let onboardingComplete = localOnboardingComplete ? localOnboardingComplete : false
 // ITEMS TO BE STYLE RESET
-let styleRemoveItems = [];
+let itemsStyleRemove = [];
 
 runOnboarding()
 function runOnboarding() {
-    console.log('updateOnboardingSteps');
     // ONBOARDING STEP NUMBER VARIABLE
     let localOnboardingStepNum = Number(localStorage.getItem("onboardingStepNum"))
     let onboardingStepNum = localOnboardingStepNum ? localOnboardingStepNum : 0
@@ -17,40 +23,76 @@ function runOnboarding() {
         if (!document.querySelector('.overlay')) createOnboardingBox()
         if (onboardingStepNum === 0) onboardingWelcome()
         if (onboardingStepNum === 1) onboardingDisplayArticles()
+        if (onboardingStepNum === 2) setTimeout(onboardingSaveArticle, 200)
 
         updateBtnStatus(onboardingStepNum)
         updateDotStatus(onboardingStepNum)
     }
-}
-function onboardingDisplayArticles() {
-    moveBoxDown("5%")
-    headingText("")
-    descriptionText("Click on a category to display related articles")
-    const cardSection = wrapper.children[3]
-    const category = cardSection.id
-    const arrowIcon = cardSection.querySelector('.card-header__icon')
-    cardSection.style.position = "relative"
-    // cardSection.style.pointerEvents = "none"
-    // arrowIcon.style.transform = "rotate(90deg)"
 
-    // getNYTArticles(category, cardSection, 'save')
-    
-    cardSection.addEventListener('click', goForward)
-    function goForward() {
+}
+// ==== STEP 2 ====
+function onboardingSaveArticle() {
+    const cardSection = wrapper.children[3]
+    queryTextElmnts()
+
+    // MAKES CARDSECTION MOVE ABOVE OVERLAY
+    cardSection.style.position = "relative"
+
+    // SET ONBOARDINGBOX POSITION AND TEXT
+    onboardingBox.style.top = "2.5%"
+    description.innerHTML = `Save articles by swiping left and clicking the appearing icon <br> <span class="text-highlight">Try it now!<span>`
+
+    openCategory(cardSection)
+
+    // EVENTLISTENERS
+    prevBtn.addEventListener('click', () => {
+        closeCategory(cardSection)
+    }, { once: true })
+}
+// ==== STEP 1 ====
+function onboardingDisplayArticles() {
+    const cardSection = wrapper.children[3]
+    queryTextElmnts()
+
+    // MAKES CARDSECTION MOVE ABOVE OVERLAY
+    cardSection.style.position = "relative"
+
+    // SET ONBOARDINGBOX POSITION AND TEXT
+    onboardingBox.style.top = "5%"
+    heading.innerHTML = ""
+    description.innerHTML = "Click on a category to display related articles"
+
+    // EVENTLISTENERS
+    nextBtn.addEventListener('click', nextBtnStep1, { once: true })
+    function nextBtnStep1() {      
+        prevBtn.removeEventListener('click', prevBtnStep1)    
+        cardSection.removeEventListener('click', cardSectionStep1)    
+    }  
+    prevBtn.addEventListener('click', prevBtnStep1, { once: true }) 
+    function prevBtnStep1() {
+        cardSection.removeAttribute('style')
+        nextBtn.removeEventListener('click', nextBtnStep1)
+        cardSection.removeEventListener('click', cardSectionStep1)
+    } 
+    cardSection.addEventListener('click', cardSectionStep1, { once: true })
+    function cardSectionStep1() {
         changeStepNum('+1')
         runOnboarding()
-        cardSection.removeEventListener('click', goForward)
-    }
-
-    styleRemoveItems = [cardSection]
+        prevBtn.removeEventListener('click', prevBtnStep1)
+        nextBtn.removeEventListener('click', nextBtnStep1) 
+    } 
 }
+// ==== STEP 0 ====
 function onboardingWelcome() {
-    moveBoxDown("10%")
-    headingText("welcome to <br> the newsbox app")
-    descriptionText("This is a short guide on how to use the app")
+    queryTextElmnts()
+    onboardingBox.style.top = "15%"
+    heading.innerHTML = "welcome to <br> the newsbox app"
+    description.innerHTML = "This is a short guide on how to use the app"
 }
 function createOnboardingBox() {
     console.log('createOnboardingBox');
+    // DISABLE SCROLLING
+    wrapper.style.overflowY = "hidden"
     // CREATE OVERLAY
     const body = document.querySelector('body');
     const overlay = createTag('div', 'overlay')
@@ -73,21 +115,26 @@ function createOnboardingBox() {
     </div>`
     body.prepend(overlay);
     overlay.prepend(onboardingBox)
-    enableOnboardingListener()
+    enableOnboardingListener(onboardingBox)
 }
 
-function enableOnboardingListener() {
+function enableOnboardingListener(onboardingBox) {
+    nextBtn = document.querySelector('.next-btn')
+    prevBtn = document.querySelector('.prev-btn')
+    dotContainer = document.querySelector(".dot-container")
+    heading = document.querySelector(".onboarding__heading")
+    description = document.querySelector(".onboarding__description")
+    onboardingBox = document.querySelector(".onboarding__box")
+
     // GLOBAL LISTENER
-    document.addEventListener('click', e => {
+    onboardingBox.addEventListener('click', e => {
         // BUTTONS
         if (e.target.classList.contains("prev-btn")) {
             changeStepNum('-1')
-            removeStyle(styleRemoveItems)
             runOnboarding()
         }
         if (e.target.classList.contains("next-btn")) {
             changeStepNum('+1')
-            removeStyle(styleRemoveItems)
             runOnboarding()
         }
         // DOTS
@@ -100,6 +147,8 @@ function enableOnboardingListener() {
 function onboardingDisabled() {
     localStorage.setItem("onboardingCompleted", true)
     document.querySelector('.overlay').remove()
+    // ENABLE SCROLLING
+    wrapper.removeAttribute('style')
 }
 
 function createTag(element, className) {
@@ -109,9 +158,6 @@ function createTag(element, className) {
 }
 
 function updateBtnStatus(onboardingStepNum) {
-    const prevBtn = document.querySelector('.prev-btn')
-    const nextBtn = document.querySelector('.next-btn')
-
     if (onboardingStepNum === 0) prevBtn.classList.add('btn_disabled')
     // if (onboardingStepNum > 10) nextBtn.classList.add('btn_disabled')
     else {
@@ -121,14 +167,13 @@ function updateBtnStatus(onboardingStepNum) {
 }
 
 function updateDotStatus(onboardingStepNum) {
-    const dotContainer = document.querySelector(".dot-container")
-    const dotArray = Array.from(dotContainer.children)
+    const dotsCollection = dotContainer.children
     // RESET COLORED DOT
-    dotArray.forEach(dot => {
-        if (dot.classList.contains('dot_active')) dot.classList.remove('dot_active')
-    })
+    for (let i = 0; i < dotsCollection.length - 1; i++) {
+        if (dotsCollection[i].classList.contains('dot_active')) dotsCollection[i].classList.remove('dot_active')
+    }
     // ADD COLORED DOT
-    dotArray[onboardingStepNum].classList.add('dot_active')
+    dotsCollection[onboardingStepNum].classList.add('dot_active')
 }
 // takes one argument which can be either of two values: '+1' or '-1'
 function changeStepNum(action) {
@@ -139,19 +184,45 @@ function changeStepNum(action) {
 
     localStorage.setItem("onboardingStepNum", localOnboardingStepNum)
 }
-function headingText(text) {
-    document.querySelector(".onboarding__heading").innerHTML = text
+// function removeStyle(itemsStyleRemove) {
+//     if (itemsStyleRemove.length > 0) {
+//         itemsStyleRemove.forEach(item => {
+//             if (item.getAttribute('style')) item.removeAttribute('style')
+//         })
+//     }
+// }
+function queryTextElmnts() {
+    heading = document.querySelector(".onboarding__heading")
+    description = document.querySelector(".onboarding__description")
+    onboardingBox = document.querySelector(".onboarding__box")
 }
-function descriptionText(text) {
-    document.querySelector(".onboarding__description").innerHTML = text
-}
-function moveBoxDown(value) {
-    document.querySelector(".onboarding__box").style.top = value
-}
-function removeStyle(styleRemoveItems) {
-    if (styleRemoveItems.length > 0) {
-        styleRemoveItems.forEach(item => {
-            if (item.getAttribute('style')) item.removeAttribute('style')
-        })        
+function openCategory(cardSection) {
+    const category = cardSection.id
+    const arrowIcon = cardSection.querySelector('.card-header__icon')
+    const cardContentAll = cardSection.querySelectorAll('.card-content')
+    arrowIcon.style.transform = "rotate(90deg)"
+
+    if (cardSection.children.length == 1) {
+        getNYTArticles(category, cardSection, 'save')    
     }
+    else {
+        cardContentAll.forEach(article => {
+            article.classList.add('fade-in-up')
+            article.style.display = "block"    
+        })
+    }
+}
+function closeCategory(cardSection) {
+    const arrowIcon = cardSection.querySelector('.card-header__icon')
+    const cardContentAll = cardSection.querySelectorAll('.card-content')
+
+    arrowIcon.style.transform = ''
+    cardContentAll.forEach(cardContent => {
+        cardContent.classList.remove('fade-in-up')
+        cardContent.classList.add('fade-out-down')
+        setTimeout(() => {
+            cardContent.style.display = "none"
+            cardContent.classList.remove('fade-out-down')        
+        }, 350) 
+    })
 }
