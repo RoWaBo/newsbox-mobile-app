@@ -1,13 +1,13 @@
 // Only run if on the index.html page
 if (window.location.pathname === "/") {
 
-    (function addAnimationToWrapper() {
-        const wrapper = document.querySelector('.wrapper');
-        const previousPage = document.referrer;
+    // (function addAnimationToWrapper() {
+    //     const wrapper = document.querySelector('.wrapper');
+    //     const previousPage = document.referrer;
 
-        if (previousPage.includes("archive")) wrapper.classList.add('slide-in-right')
-        if (previousPage.includes("settings")) wrapper.classList.add('slide-in-left')
-    })();
+    //     if (previousPage.includes("archive")) wrapper.classList.add('slide-in-right')
+    //     if (previousPage.includes("settings")) wrapper.classList.add('slide-in-left')
+    // })();
 
     addCardsToHTML()
     
