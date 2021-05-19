@@ -18,15 +18,21 @@ function runOnboarding() {
 
     if (!onboardingComplete) {
         if (!document.querySelector('.overlay')) createOnboardingBox()
-        if (onboardingStepNum === 0) onboardingWelcome()
-        if (onboardingStepNum === 1) onboardingDisplayArticles()
-        if (onboardingStepNum === 2) setTimeout(onboardingSaveArticle, 200)
+        switch (onboardingStepNum) {
+            case 0: onboardingWelcome();
+            break;
+            case 1: onboardingDisplayArticles();
+            break;
+            case 2: setTimeout(onboardingSaveArticle, 200);
+            break;
+        }
 
         updateBtnStatus(onboardingStepNum)
         updateDotStatus(onboardingStepNum)
     }
 
 }
+
 // ==== STEP 2 ====
 function onboardingSaveArticle() {
     const cardSection = wrapper.children[3]
@@ -46,6 +52,7 @@ function onboardingSaveArticle() {
         closeCategory(cardSection)
     }, { once: true })
 }
+
 // ==== STEP 1 ====
 function onboardingDisplayArticles() {
     const cardSection = wrapper.children[3]
@@ -79,6 +86,7 @@ function onboardingDisplayArticles() {
         nextBtn.removeEventListener('click', nextBtnStep1) 
     } 
 }
+
 // ==== STEP 0 ====
 function onboardingWelcome() {
     queryTextElmnts()
@@ -123,7 +131,7 @@ function enableOnboardingListener(onboardingBox) {
     description = document.querySelector(".onboarding__description")
     onboardingBox = document.querySelector(".onboarding__box")
 
-    // GLOBAL LISTENER
+    // LISTENER
     onboardingBox.addEventListener('click', e => {
         // BUTTONS
         if (e.target.classList.contains("prev-btn")) {
@@ -135,7 +143,7 @@ function enableOnboardingListener(onboardingBox) {
             runOnboarding()
         }
         // DOTS
-        if (e.target.classList.contains("dot")) console.log(e.target);
+        // if (e.target.classList.contains("dot")) console.log(e.target);
         // EXIT ICON
         if (e.target.classList.contains("onboarding__exit-icon")) onboardingDisabled();
     })
