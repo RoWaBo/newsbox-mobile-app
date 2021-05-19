@@ -1,5 +1,7 @@
 // GLOBAL VARIABLES
+const body = document.querySelector('body')
 const wrapper = document.querySelector('.wrapper')
+let overlay;
 let nextBtn;
 let prevBtn;
 let dotContainer;
@@ -11,31 +13,30 @@ let onboardingComplete = syncWithLS("onboardingCompleted", false)
 // ITEMS TO BE STYLE RESET
 let itemsStyleRemove = [];
 
-runOnboarding()
+if (!onboardingComplete) runOnboarding()
+
 function runOnboarding() {
     let onboardingStepNum = syncWithLS("onboardingStepNum", 0)
     localStorage.setItem("onboardingStepNum", onboardingStepNum)
 
-    if (!onboardingComplete) {
-        if (!document.querySelector('.overlay')) createOnboardingBox()
-        switch (onboardingStepNum) {
-            case 0: onboardingWelcome();
+    if (!document.querySelector('.overlay')) createOnboardingBox()
+    switch (onboardingStepNum) {
+        case 0: onboardingWelcome();
             break;
-            case 1: onboardingDisplayArticles();
+        case 1: onboardingDisplayArticles();
             break;
-            case 2: setTimeout(onboardingSaveArticle, 200);
+        case 2: setTimeout(onboardingSaveArticle, 200);
             break;
-        }
-
-        updateBtnStatus(onboardingStepNum)
-        updateDotStatus(onboardingStepNum)
     }
 
+    updateBtnStatus(onboardingStepNum)
+    updateDotStatus(onboardingStepNum)
 }
 
 // ==== STEP 2 ====
 function onboardingSaveArticle() {
     const cardSection = wrapper.children[3]
+    let saveBtns;
     queryTextElmnts()
 
     // MAKES CARDSECTION MOVE ABOVE OVERLAY
@@ -48,9 +49,38 @@ function onboardingSaveArticle() {
     openCategory(cardSection)
 
     // EVENTLISTENERS
-    prevBtn.addEventListener('click', () => {
+    prevBtn.addEventListener('click', prevBtnStep2, { once: true })
+    function prevBtnStep2() {
         closeCategory(cardSection)
-    }, { once: true })
+        nextBtn.removeEventListener('click', nextBtnStep2)    
+    }
+    
+    nextBtn.addEventListener('click', nextBtnStep2, { once: true })
+    function nextBtnStep2() {
+        const cardContent = cardSection.querySelector('.card-content')
+        const category = cardSection.id
+        
+        articleLS.save(category, cardContent)
+        
+        prevBtn.removeEventListener('click', prevBtnStep2)
+        saveBtns.forEach(saveBtn => saveBtn.removeEventListener('click', saveBtnStep2))
+    }
+    
+    setTimeout(() => {
+        saveBtns = cardSection.querySelectorAll('.swipe-btn')
+        saveBtns.forEach(saveBtn => saveBtn.addEventListener('click', saveBtnStep2))    
+    }, 200) 
+    function saveBtnStep2() {
+        toggleAllPointerEvents()
+        setTimeout(() => {
+            prevBtn.removeEventListener('click', prevBtnStep2)
+            nextBtn.removeEventListener('click', nextBtnStep2)
+            saveBtns.forEach(saveBtn => saveBtn.removeEventListener('click', saveBtnStep2))
+            toggleAllPointerEvents()              
+            changeStepNum('+1')
+            runOnboarding()
+        }, 3500)
+    }
 }
 
 // ==== STEP 1 ====
@@ -68,23 +98,23 @@ function onboardingDisplayArticles() {
 
     // EVENTLISTENERS
     nextBtn.addEventListener('click', nextBtnStep1, { once: true })
-    function nextBtnStep1() {      
-        prevBtn.removeEventListener('click', prevBtnStep1)    
-        cardSection.removeEventListener('click', cardSectionStep1)    
-    }  
-    prevBtn.addEventListener('click', prevBtnStep1, { once: true }) 
+    function nextBtnStep1() {
+        prevBtn.removeEventListener('click', prevBtnStep1)
+        cardSection.removeEventListener('click', cardSectionStep1)
+    }
+    prevBtn.addEventListener('click', prevBtnStep1, { once: true })
     function prevBtnStep1() {
         cardSection.removeAttribute('style')
         nextBtn.removeEventListener('click', nextBtnStep1)
         cardSection.removeEventListener('click', cardSectionStep1)
-    } 
+    }
     cardSection.addEventListener('click', cardSectionStep1, { once: true })
     function cardSectionStep1() {
         changeStepNum('+1')
         runOnboarding()
         prevBtn.removeEventListener('click', prevBtnStep1)
-        nextBtn.removeEventListener('click', nextBtnStep1) 
-    } 
+        nextBtn.removeEventListener('click', nextBtnStep1)
+    }
 }
 
 // ==== STEP 0 ====
@@ -124,6 +154,7 @@ function createOnboardingBox() {
 }
 
 function enableOnboardingListener(onboardingBox) {
+    overlay = document.querySelector('.overlay')
     nextBtn = document.querySelector('.next-btn')
     prevBtn = document.querySelector('.prev-btn')
     dotContainer = document.querySelector(".dot-container")
@@ -151,6 +182,7 @@ function enableOnboardingListener(onboardingBox) {
 
 function onboardingDisabled() {
     localStorage.setItem("onboardingCompleted", true)
+    localStorage.removeItem("onboardingStepNum")
     document.querySelector('.overlay').remove()
     // ENABLE SCROLLING
     wrapper.removeAttribute('style')
@@ -208,12 +240,12 @@ function openCategory(cardSection) {
     arrowIcon.style.transform = "rotate(90deg)"
 
     if (cardSection.children.length == 1) {
-        getNYTArticles(category, cardSection, 'save')    
+        getNYTArticles(category, cardSection, 'save')
     }
     else {
         cardContentAll.forEach(article => {
             article.classList.add('fade-in-up')
-            article.style.display = "block"    
+            article.style.display = "block"
         })
     }
 }
@@ -227,12 +259,20 @@ function closeCategory(cardSection) {
         cardContent.classList.add('fade-out-down')
         setTimeout(() => {
             cardContent.style.display = "none"
-            cardContent.classList.remove('fade-out-down')        
-        }, 350) 
+            cardContent.classList.remove('fade-out-down')
+        }, 350)
     })
 }
 function syncWithLS(itemNameLS, defaultValue) {
     const valueLS = JSON.parse(localStorage.getItem(itemNameLS))
     const valueFinal = valueLS ? valueLS : defaultValue
-    return valueFinal   
+    return valueFinal
+}
+function toggleAllPointerEvents() {
+    if (body.classList.contains('disablePointerEvents')) {
+        body.classList.remove('disablePointerEvents')    
+    } 
+    else {
+        body.classList.add('disablePointerEvents')    
+    }
 }

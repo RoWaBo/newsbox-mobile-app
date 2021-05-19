@@ -15,7 +15,7 @@ const articleLS = (() => {
             const imgSrc = cardContent.querySelector('.card-content__img').getAttribute('src')
             const title = cardContent.querySelector('.card-content__heading').innerText
             const desc = cardContent.querySelector('.card-content__description').innerText
-            category = category.innerText.toLowerCase()
+            category = category.innerText ? category.innerText.toLowerCase() : category 
 
             const article = {
                 link: linkUrl,

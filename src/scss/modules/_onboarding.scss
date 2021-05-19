@@ -80,3 +80,8 @@
         background-color: $cSage;    
     }
 }
+
+.disablePointerEvents {
+    z-index: 30;
+    pointer-events: none;
+}
