@@ -10,11 +10,8 @@ let description;
 let onboardingBox;
 // syncWithLS takes two arguments: (itemNameLS, defaultValue)
 let onboardingComplete = syncWithLS("onboardingCompleted", false)
-// ITEMS TO BE STYLE RESET
-let itemsStyleRemove = [];
 
 if (!onboardingComplete) runOnboarding()
-
 function runOnboarding() {
     let onboardingStepNum = syncWithLS("onboardingStepNum", 0)
     localStorage.setItem("onboardingStepNum", onboardingStepNum)
@@ -57,47 +54,54 @@ function onboardingDeleteArticle() {
         let deleteBtns;
         queryTextElmnts()
 
-        // MAKES CARDSECTION MOVE ABOVE OVERLAY
-        cardSection.style.position = "relative"
-        cardSection.style.top = "12%"
+        if (cardSection) {
+            // MAKES CARDSECTION MOVE ABOVE OVERLAY
+            cardSection.style.position = "relative"
+            cardSection.style.top = "12%"
 
-        openCategory(cardSection)
+            openCategory(cardSection)
 
-        // SET ONBOARDINGBOX POSITION AND TEXT
-        onboardingBox.style.top = "2.5%"
-        heading.innerHTML = ""
-        description.innerHTML = `Delete article by swiping left and clicking the appearing icon <br> <span class="text-highlight">Delete it now!<span>`
+            // SET ONBOARDINGBOX POSITION AND TEXT
+            onboardingBox.style.top = "2.5%"
+            heading.innerHTML = ""
+            description.innerHTML = `Delete article by swiping left and clicking the appearing icon <br> <span class="text-highlight">Delete it now!<span>`
 
-        // EVENTLISTENERS
-        prevBtn.addEventListener('click', prevBtnStep5, { once: true })
-        function prevBtnStep5() {
-            nextBtn.removeEventListener('click', nextBtnStep5)
-        }
-
-        nextBtn.addEventListener('click', nextBtnStep5, { once: true })
-        function nextBtnStep5() {
-            const cardContent = cardSection.querySelector('.card-content')
-            const cardContentID = cardContent.getAttribute('data-id')
-
-            articleLS.delete(cardContentID)
-
-            window.location.pathname = "/settings"
-        }
-
-        setTimeout(() => {
-            deleteBtns = cardSection.querySelectorAll('.swipe-btn')
-            deleteBtns.forEach(deleteBtn => deleteBtn.addEventListener('click', deleteBtnStep2))
-        }, 200)
-        function deleteBtnStep2() {
-            toggleAllPointerEvents()
-            setTimeout(() => {
-                prevBtn.removeEventListener('click', prevBtnStep5)
+            // EVENTLISTENERS
+            prevBtn.addEventListener('click', prevBtnStep5, { once: true })
+            function prevBtnStep5() {
                 nextBtn.removeEventListener('click', nextBtnStep5)
-                deleteBtns.forEach(deleteBtn => deleteBtn.removeEventListener('click', deleteBtnStep2))
+            }
+
+            nextBtn.addEventListener('click', nextBtnStep5, { once: true })
+            function nextBtnStep5() {
+                const cardContent = cardSection.querySelector('.card-content')
+                const cardContentID = cardContent.getAttribute('data-id')
+
+                articleLS.delete(cardContentID)
+
+                window.location.pathname = "/settings"
+            }
+
+            setTimeout(() => {
+                deleteBtns = cardSection.querySelectorAll('.swipe-btn')
+                deleteBtns.forEach(deleteBtn => deleteBtn.addEventListener('click', deleteBtnStep2))
+            }, 200)
+            function deleteBtnStep2() {
                 toggleAllPointerEvents()
-                changeStepNum('+1')
-                runOnboarding()
-            }, 3500)
+                setTimeout(() => {
+                    prevBtn.removeEventListener('click', prevBtnStep5)
+                    nextBtn.removeEventListener('click', nextBtnStep5)
+                    deleteBtns.forEach(deleteBtn => deleteBtn.removeEventListener('click', deleteBtnStep2))
+                    toggleAllPointerEvents()
+                    changeStepNum('+1')
+                    runOnboarding()
+                }, 3500)
+            }
+        }
+        else {
+            // If no article is saved - jump back to where you save article
+            localStorage.setItem("onboardingStepNum", 2)
+            window.location.pathname = "/" 
         }
     }
     else {
@@ -281,10 +285,10 @@ function onboardingWelcome() {
         queryTextElmnts()
         onboardingBox.style.top = "15%"
         heading.innerHTML = "welcome to <br> the newsbox app"
-        description.innerHTML = "This is a short guide on how to use the app"        
+        description.innerHTML = "This is a short guide on how to use the app"
     }
     else {
-        window.location.pathname = "/"    
+        window.location.pathname = "/"
     }
 }
 function createOnboardingBox() {
@@ -388,13 +392,6 @@ function changeStepNum(action) {
 
     localStorage.setItem("onboardingStepNum", localOnboardingStepNum)
 }
-// function removeStyle(itemsStyleRemove) {
-//     if (itemsStyleRemove.length > 0) {
-//         itemsStyleRemove.forEach(item => {
-//             if (item.getAttribute('style')) item.removeAttribute('style')
-//         })
-//     }
-// }
 function queryTextElmnts() {
     heading = document.querySelector(".onboarding__heading")
     description = document.querySelector(".onboarding__description")
