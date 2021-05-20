@@ -13,7 +13,7 @@ let onboardingComplete = syncWithLS("onboardingCompleted", false)
 
 if (!onboardingComplete) runOnboarding()
 function runOnboarding() {
-    let onboardingStepNum = syncWithLS("onboardingStepNum", 0)
+    const onboardingStepNum = syncWithLS("onboardingStepNum", 0)
     localStorage.setItem("onboardingStepNum", onboardingStepNum)
 
     if (!document.querySelector('.overlay')) createOnboardingBox()
@@ -38,11 +38,20 @@ function runOnboarding() {
             break;
         case 9: onboardingTheme();
             break;
+        case 10: onboardingEnd();
+            break;
     }
     updateBtnStatus(onboardingStepNum)
     updateDotStatus(onboardingStepNum)
 }
 
+// ==== STEP 10 ====
+function onboardingEnd() {
+    queryTextElmnts()
+    onboardingBox.style.top = "15%"
+    heading.innerHTML = "you made it <br> to the end!"
+    description.innerHTML = "You have completed the guide. <br> Thanks for taking the time to try out my app! :)"    
+}
 // ==== STEP 9 ====
 function onboardingTheme() {
     if (window.location.pathname === "/settings/") {
@@ -52,7 +61,7 @@ function onboardingTheme() {
         queryTextElmnts()
 
         // SET ONBOARDINGBOX POSITION AND TEXT
-        onboardingBox.style.top = "27%"
+        onboardingBox.style.top = "30%"
         heading.innerHTML = ""
         description.innerHTML = `Change the theme by clicking the "toggle dark mode" button`
 
@@ -63,12 +72,7 @@ function onboardingTheme() {
         // EVENTLISTENERS
         nextBtn.addEventListener('click', nextBtnStep9, { once: true })
         function nextBtnStep9() {
-            page.setAttribute('data-theme', "dark")
-            toggleAllPointerEvents()
-            description.innerHTML = `Dark theme is on!`
-            setTimeout(() => {
-                window.location.pathname = "/"            
-            }, 2000)
+            window.location.pathname = "/"            
         }
 
         prevBtn.addEventListener('click', prevBtnStep9, { once: true })
@@ -83,12 +87,13 @@ function onboardingTheme() {
         themeBtn.addEventListener('click', themeBtnStep9, { once: true })
         function themeBtnStep9() {
             toggleAllPointerEvents()
+            overlay.style.backgroundColor = "unset"
             description.innerHTML = `Dark theme is on!`
             setTimeout(() => {
                 localStorage.removeItem("theme")
                 changeStepNum('+1')
                 window.location.pathname = "/"            
-            }, 2000)
+            }, 3000)
         }        
     } else {
         window.location.pathname = "/settings/"    
@@ -137,9 +142,9 @@ function onboardingTurnOffCategory() {
         queryTextElmnts()
 
         // SET ONBOARDINGBOX POSITION AND TEXT
-        onboardingBox.style.top = "2.5%"
+        onboardingBox.style.top = "1%"
         heading.innerHTML = "welcome to settings"
-        description.innerHTML = `Control which categories you want to display news from <br> <span class="text-highlight">Use the switch to turn a category off<span>`
+        description.innerHTML = `Manage categories you want to display news from <br> <span class="text-highlight">Use the switch to turn a category off<span>`
 
         categoryContainer.style.marginTop = "29%"
 
@@ -229,7 +234,7 @@ function onboardingDeleteArticle() {
         if (cardSection) {
             // MAKES CARDSECTION MOVE ABOVE OVERLAY
             cardSection.style.position = "relative"
-            cardSection.style.top = "12%"
+            cardSection.style.top = "17%"
 
             openCategory(cardSection)
 
@@ -289,7 +294,7 @@ function onboardingDisplaySavedArticles() {
 
     // MAKES CARDSECTION MOVE ABOVE OVERLAY
     cardSection.style.position = "relative"
-    cardSection.style.top = "12%"
+    cardSection.style.top = "17%"
 
     openCategory(cardSection)
 
@@ -298,7 +303,7 @@ function onboardingDisplaySavedArticles() {
     cardSection.style.pointerEvents = "none";
 
     // SET ONBOARDINGBOX POSITION AND TEXT
-    onboardingBox.style.top = "2.5%"
+    onboardingBox.style.top = "1%"
     heading.innerHTML = "welcome to the archive"
     description.innerHTML = `Read your saved articles here <br> <span class="text-highlight">Click arrow button to continue</span>`
 
@@ -376,7 +381,7 @@ function onboardingSaveArticle() {
     cardSection.style.position = "relative"
 
     // SET ONBOARDINGBOX POSITION AND TEXT
-    onboardingBox.style.top = "2.5%"
+    onboardingBox.style.top = "1%"
     description.innerHTML = `Save article by swiping left and clicking the appearing icon <br> <span class="text-highlight">Save it now!<span>`
 
     openCategory(cardSection)
@@ -479,8 +484,6 @@ function createOnboardingBox() {
     <div class="onboarding__controls">
         <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
         <div class="dot-container">
-            <span class="dot"></span>
-            <span class="dot"></span>
             <span class="dot"></span>
             <span class="dot"></span>
             <span class="dot"></span>
