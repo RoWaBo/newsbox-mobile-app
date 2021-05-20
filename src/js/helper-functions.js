@@ -20,3 +20,22 @@ function slideOutRemove(element) {
 
     setTimeout(() => element.remove(), 1000)
 }
+
+// WRITE "ONBOARDING" IN SEARCHBAR AND ENABLE ONBOARDING
+const searchInput = document.querySelector('.searchbox__input')
+if (searchInput) searchInput.addEventListener('keyup', () => {
+    if (searchInput.value === "onboarding") enableOnboarding()
+    if (searchInput.value === "reset") resetLS()    
+})  
+function enableOnboarding() {
+    localStorage.removeItem("onboardingCompleted")
+    location.reload();    
+}
+function resetLS() {
+    localStorage.removeItem("theme")
+    localStorage.removeItem("onboardingCompleted")
+    localStorage.removeItem("savedArticles")
+    localStorage.removeItem("deletedCategories")
+    localStorage.removeItem("categoryOrder")
+    location.reload();
+}
