@@ -13,21 +13,15 @@ const categoriesLS = (() => {
             
             if (deletedCategories && deletedCategories.length === 0) localStorage.removeItem('deletedCategories')   
         },
-        get: () => {
-            const localDeletedCategories = JSON.parse(localStorage.getItem("deletedCategories"))
-            let deletedCategories = localDeletedCategories ? localDeletedCategories : []
-            return deletedCategories     
-        }
+        get: () => syncWithLS("deletedCategories", [])
     }
 })();
 
 const categoryOrder = (() => {
     const defaultCategories = ["europe","health", "sports", "business", "technology"]
-    // let allCategories = [];
     
     return {
         add: categoryNames => {
-            // allCategories.push(categoryName)
             localStorage.setItem('categoryOrder', JSON.stringify(categoryNames))    
         },
         get: () => {
@@ -44,3 +38,22 @@ const categoryOrder = (() => {
         } 
     }
 })();
+
+function sortCategoryOrder(categoryArrayOrder, articlesLS) {
+    let articleLSCatories = []
+    let finalCategoryOrder = []
+
+    // create array of saved categories from LS 
+    articlesLS.forEach(article => {
+        if (!articleLSCatories.includes(article.category)) {
+            articleLSCatories.push(article.category)
+        }
+    })
+    // sort the saved categories to match user selected order
+    categoryArrayOrder.forEach(category => {
+        if (articleLSCatories.includes(category)) {
+            finalCategoryOrder.push(category)
+        }
+    })
+    return finalCategoryOrder
+}

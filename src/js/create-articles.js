@@ -77,3 +77,26 @@ function getCategoryLogo(categoryName) {
     if (categoryName === "business") return "fas fa-briefcase"
     if (categoryName === "technology") return "fas fa-microchip"
 }
+
+function addSavedArticlesToHTML(articlesLS) {
+    articlesLS.forEach(article => {
+        const cardContent = document.createElement('div')
+        cardContent.classList.add('card-content', 'fade-in-up')
+        cardContent.setAttribute('data-id', article.id)
+        cardContent.style.display = "none"
+
+        cardContent.innerHTML = `
+                <a href="${article.link}" class="card-content__link">
+                    <div class="card-content__img-container">
+                        <img src="${article.img}" alt="" class="card-content__img">
+                    </div>
+                    <div class="card-content__text-container">
+                        <h2 class="card-content__heading">${article.title}</h2>
+                        <p class="card-content__description">${article.description}</p>
+                    </div>
+                </a>
+                `
+        const distElmnt = document.querySelector(`#${article.category}`)
+        distElmnt.append(cardContent);
+    })
+}

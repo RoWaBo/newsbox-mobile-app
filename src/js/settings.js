@@ -3,7 +3,10 @@ if (window.location.pathname === "/settings/") {
 
     let toggleSwitches = document.querySelectorAll('.switch__check');
     const themeBtn = document.querySelector('.toggle-theme-button');
-    
+
+    // WRAPPER ANIMATION
+    if (localStorage.getItem("onboardingCompleted")) document.querySelector('.wrapper').classList.add('slide-in-right')
+
     addCategoriesToHTML()
 
     enableDragableCategories()
@@ -14,9 +17,9 @@ if (window.location.pathname === "/settings/") {
 
         toggleSwitches.forEach(toggleSwitch => {
             const categoryName = toggleSwitch.id.replace('toggle', '').toLowerCase()
-            const isDeleted = deletedCategories.includes(categoryName) 
-            toggleSwitch.checked = !isDeleted   
-        })    
+            const isDeleted = deletedCategories.includes(categoryName)
+            toggleSwitch.checked = !isDeleted
+        })
     }
 
     // TOGGLE THEME BUTTON
@@ -39,7 +42,7 @@ if (window.location.pathname === "/settings/") {
 
         toggleSwitches.forEach(toggleSwitch => {
             const categoryName = toggleSwitch.id.replace('toggle', '').toLowerCase()
-            categoryNames.push(categoryName)    
+            categoryNames.push(categoryName)
         })
         categoryOrder.add(categoryNames)
     }
@@ -57,8 +60,8 @@ if (window.location.pathname === "/settings/") {
                 <input type="checkbox" name="toggle${categoryName}" class="switch__check" checked="true" id="toggle${categoryName}"> 
                 <span class="switch__slider switch__slider_round"></span>
             </label>       
-            ` 
-            categoryContainer.append(category)             
+            `
+            categoryContainer.append(category)
         })
 
         syncSwitchStateWithLS()
@@ -92,12 +95,11 @@ if (window.location.pathname === "/settings/") {
                 console.log('slip:beforewait');
                 e.preventDefault()
                 e.target.parentElement.classList.add("category-content_active");
-            });            
+            });
         })
         categoryContainer.addEventListener('slip:beforeswipe', function (e) {
             console.log('slip:beforeswipe');
             e.preventDefault();
-        });        
+        });
     }
-
 }

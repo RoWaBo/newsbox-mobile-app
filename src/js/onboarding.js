@@ -50,7 +50,7 @@ function onboardingEnd() {
     queryTextElmnts()
     onboardingBox.style.top = "15%"
     heading.innerHTML = "you made it to the end!"
-    description.innerHTML = "You have completed the guide. <br> Thanks for taking the time to try the my app! :)"    
+    description.innerHTML = "You have completed the guide. <br> Thanks for taking the time to try the app!"    
 }
 // ==== STEP 9 ====
 function onboardingTheme() {

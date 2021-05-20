@@ -1,8 +1,7 @@
 
 const articleLS = (() => {
-    let localSavedArticles = JSON.parse(localStorage.getItem("savedArticles"))
-    let savedArticles = localSavedArticles ? localSavedArticles : []
-
+    let savedArticles = syncWithLS("savedArticles", [])
+    
     function createArticleID(category) {
         const randomNumber = Math.random().toString().slice(2, 8)
         const categoryFirstLetter = category.slice(0, 1)
