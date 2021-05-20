@@ -374,7 +374,9 @@ function onboardingArchive() {
 // ==== STEP 2 ====
 function onboardingSaveArticle() {
     const cardSection = wrapper.children[3]
+    let cardContent;
     let saveBtns;
+    let swipeIcon;
     queryTextElmnts()
 
     // MAKES CARDSECTION MOVE ABOVE OVERLAY
@@ -387,6 +389,17 @@ function onboardingSaveArticle() {
     openCategory(cardSection)
 
     // EVENTLISTENERS
+    setTimeout(() => {
+        cardContent = document.querySelector('.card-content')
+        swipeIcon = document.querySelector('.swipe-btn__icon')
+        cardContent.classList.add("hand-swipe-animation")
+        cardContent.addEventListener('touchmove', removeSwiperAnimationStep2)     
+    }, 500)    
+    function removeSwiperAnimationStep2() {
+        cardContent.classList.remove("hand-swipe-animation")
+        swipeIcon.classList.add("small-hand-pointer-animation")    
+    } 
+
     prevBtn.addEventListener('click', prevBtnStep2, { once: true })
     function prevBtnStep2() {
         closeCategory(cardSection)
@@ -408,7 +421,7 @@ function onboardingSaveArticle() {
     setTimeout(() => {
         saveBtns = cardSection.querySelectorAll('.swipe-btn')
         saveBtns.forEach(saveBtn => saveBtn.addEventListener('click', saveBtnStep2))
-    }, 500)
+    }, 700)
     function saveBtnStep2() {
         toggleAllPointerEvents()
         setTimeout(() => {
@@ -431,24 +444,31 @@ function onboardingDisplayArticles() {
     cardSection.style.position = "relative"
 
     // SET ONBOARDINGBOX POSITION AND TEXT
-    onboardingBox.style.top = "5%"
+    onboardingBox.style.top = "2.5%"
     heading.innerHTML = ""
-    description.innerHTML = "Click on the category to display related articles"
+    description.innerHTML = `Click on the category to display related articles <br> <span class="text-highlight">Press the category box below<span>`
+
+    setTimeout(() => {
+        cardSection.classList.add('hand-pointer-animation')        
+    }, 500)
 
     // EVENTLISTENERS
     nextBtn.addEventListener('click', nextBtnStep1, { once: true })
     function nextBtnStep1() {
+        cardSection.classList.remove('hand-pointer-animation')
         prevBtn.removeEventListener('click', prevBtnStep1)
         cardSection.removeEventListener('click', cardSectionStep1)
     }
     prevBtn.addEventListener('click', prevBtnStep1, { once: true })
     function prevBtnStep1() {
+        cardSection.classList.remove('hand-pointer-animation')
         cardSection.removeAttribute('style')
         nextBtn.removeEventListener('click', nextBtnStep1)
         cardSection.removeEventListener('click', cardSectionStep1)
     }
     cardSection.addEventListener('click', cardSectionStep1, { once: true })
     function cardSectionStep1() {
+        cardSection.classList.remove('hand-pointer-animation')
         changeStepNum('+1')
         runOnboarding()
         prevBtn.removeEventListener('click', prevBtnStep1)
@@ -534,6 +554,10 @@ function onboardingDisabled() {
     document.querySelector('.overlay').remove()
     // ENABLE SCROLLING
     wrapper.removeAttribute('style')
+    localStorage.removeItem("savedArticles")
+    localStorage.removeItem("deletedCategories")
+    localStorage.removeItem("categoryOrder")
+    window.location.pathname = "/"
 }
 function createTag(element, className) {
     const createElement = document.createElement(element)
@@ -600,11 +624,6 @@ function closeCategory(cardSection) {
             cardContent.classList.remove('fade-out-down')
         }, 350)
     })
-}
-function syncWithLS(itemNameLS, defaultValue) {
-    const valueLS = JSON.parse(localStorage.getItem(itemNameLS))
-    const valueFinal = valueLS ? valueLS : defaultValue
-    return valueFinal
 }
 function toggleAllPointerEvents() {
     if (body.classList.contains('disablePointerEvents')) {

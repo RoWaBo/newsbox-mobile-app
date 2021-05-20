@@ -44,8 +44,14 @@
 .fade-in-up {
     animation: fadeInUp 400ms;    
 }
+.fade-in {
+    animation: fadeIn 1s;    
+}
 .fade-out-down {
     animation: fadeOut 350ms;    
+}
+.fade-out {
+    animation: fadeOut 500ms forwards;    
 }
 .notice-me {
     animation: heartBeat 4s infinite;    
