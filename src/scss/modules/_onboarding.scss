@@ -74,7 +74,7 @@
     background-color: $cFossilLight;
 
     &:not(:last-of-type) {
-        margin-right: $spaceXS;
+        margin-right: .2rem;
     }
     &_active {
         background-color: $cSage;    

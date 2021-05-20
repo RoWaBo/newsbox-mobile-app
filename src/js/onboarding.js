@@ -30,21 +30,193 @@ function runOnboarding() {
             break;
         case 5: onboardingDeleteArticle();
             break;
-        case 6: onboardingSettings();
+        case 6: onboardingGoToSettings();
+            break;
+        case 7: onboardingTurnOffCategory();
+            break;
+        case 8: onboardingMoveCategory();
+            break;
+        case 9: onboardingTheme();
             break;
     }
-
     updateBtnStatus(onboardingStepNum)
     updateDotStatus(onboardingStepNum)
 }
 
-// ==== STEP 6 ====
-function onboardingSettings() {
+// ==== STEP 9 ====
+function onboardingTheme() {
     if (window.location.pathname === "/settings/") {
-        console.log('hej');
+        const categoryContainer = document.querySelector('.category-container')
+        const themeBtn = document.querySelector('.toggle-theme-button')
+        const page = document.querySelector('html')
+        queryTextElmnts()
+
+        // SET ONBOARDINGBOX POSITION AND TEXT
+        onboardingBox.style.top = "27%"
+        heading.innerHTML = ""
+        description.innerHTML = `Change the theme by clicking the "toggle dark mode" button`
+
+        themeBtn.style.position = "relative"
+        themeBtn.style.bottom = "25%"
+        categoryContainer.style.opacity = "0%"
+
+        // EVENTLISTENERS
+        nextBtn.addEventListener('click', nextBtnStep9, { once: true })
+        function nextBtnStep9() {
+            page.setAttribute('data-theme', "dark")
+            toggleAllPointerEvents()
+            description.innerHTML = `Dark theme is on!`
+            setTimeout(() => {
+                window.location.pathname = "/"            
+            }, 2000)
+        }
+
+        prevBtn.addEventListener('click', prevBtnStep9, { once: true })
+        function prevBtnStep9() {
+            themeBtn.removeAttribute('style')
+            categoryContainer.style.opacity = ""
+
+            nextBtn.removeEventListener('click', nextBtnStep9)
+            themeBtn.removeEventListener('click', themeBtnStep9)
+        }
+
+        themeBtn.addEventListener('click', themeBtnStep9, { once: true })
+        function themeBtnStep9() {
+            toggleAllPointerEvents()
+            description.innerHTML = `Dark theme is on!`
+            setTimeout(() => {
+                localStorage.removeItem("theme")
+                changeStepNum('+1')
+                window.location.pathname = "/"            
+            }, 2000)
+        }        
+    } else {
+        window.location.pathname = "/settings/"    
     }
-    else {
+}
+// ==== STEP 8 ====
+function onboardingMoveCategory() {
+    const categoryContainer = document.querySelector('.category-container')
+    let barIcons;
+    queryTextElmnts()
+
+    // SET ONBOARDINGBOX POSITION AND TEXT
+    onboardingBox.style.top = "5%"
+    heading.innerHTML = ""
+    description.innerHTML = `Control the order of categories by dragging on the left bar icon <br> <span class="text-highlight">Move a  category now<span>`
+
+    categoryContainer.style.marginTop = "29%"
+
+    // EVENTLISTENERS
+    prevBtn.addEventListener('click', prevBtnStep8, { once: true })
+    function prevBtnStep8() {
+        localStorage.removeItem('deletedCategories')
         window.location.pathname = "/settings"
+    }
+    nextBtn.addEventListener('click', nextBtnStep8, { once: true })
+    function nextBtnStep8() {
+        prevBtn.removeEventListener('click', prevBtnStep8)
+        barIcons.forEach(barIcon => barIcon.removeEventListener('click', barIconsStep8))
+    }
+    setTimeout(() => {
+        barIcons = document.querySelectorAll('.category-content__handlebar')
+        barIcons.forEach(barIcon => barIcon.addEventListener('click', barIconsStep8))
+    }, 200)
+    function barIconsStep8() {
+        prevBtn.removeEventListener('click', prevBtnStep8)
+        nextBtn.removeEventListener('click', nextBtnStep8)
+        barIcons.forEach(barIcon => barIcon.removeEventListener('click', barIconsStep8))
+    }
+}
+
+// ==== STEP 7 ====
+function onboardingTurnOffCategory() {
+    if (window.location.pathname === "/settings/") {
+        const categoryContainer = document.querySelector('.category-container')
+        let toggleSwitches;
+        queryTextElmnts()
+
+        // SET ONBOARDINGBOX POSITION AND TEXT
+        onboardingBox.style.top = "2.5%"
+        heading.innerHTML = "welcome to settings"
+        description.innerHTML = `Control which categories you want to display news from <br> <span class="text-highlight">Use the switch to turn a category off<span>`
+
+        categoryContainer.style.marginTop = "29%"
+
+        // EVENTLISTENERS
+        prevBtn.addEventListener('click', prevBtnStep7, { once: true })
+        function prevBtnStep7() {
+            window.location.pathname = "/archive"
+        }
+        nextBtn.addEventListener('click', nextBtnStep7, { once: true })
+        function nextBtnStep7() {
+            toggleSwitches[0].checked = false
+            categoriesLS.toggle(toggleSwitches[0])
+
+            prevBtn.removeEventListener('click', prevBtnStep7)
+            toggleSwitches.forEach(toggleSwitch => toggleSwitch.removeEventListener('click', toggleSwitchesStep7))
+        }
+        setTimeout(() => {
+            toggleSwitches = document.querySelectorAll('.switch__check')
+            toggleSwitches.forEach(toggleSwitch => toggleSwitch.addEventListener('click', toggleSwitchesStep7))
+        }, 200)
+        function toggleSwitchesStep7() {
+            console.log('triggered');
+            changeStepNum('+1')
+            runOnboarding()
+
+            prevBtn.removeEventListener('click', prevBtnStep7)
+            nextBtn.removeEventListener('click', nextBtnStep7)
+            toggleSwitches.forEach(toggleSwitch => toggleSwitch.removeEventListener('click', toggleSwitchesStep7))
+        }
+    } else {
+        window.location.pathname = "/settings"
+    }
+}
+
+// ==== STEP 6 ====
+function onboardingGoToSettings() {
+    if (window.location.pathname === "/archive/") {
+        const topHeader = wrapper.querySelector('.top-header')
+        const settingsBtn = topHeader.querySelector('.navigation-menu').lastElementChild
+        const gearIcon = settingsBtn.firstElementChild
+        queryTextElmnts()
+
+        gearIcon.classList.add('notice-me')
+        topHeader.style.position = "relative"
+
+        // SET ONBOARDINGBOX POSITION AND TEXT
+        onboardingBox.style.top = "15%"
+        description.innerHTML = `<span class="text-highlight">The article is now deleted!</span> <br> Go to settings by clicking the right gear icon.`
+
+        // EVENTLISTENERS
+        nextBtn.addEventListener('click', nextBtnStep6, { once: true })
+        function nextBtnStep6() {
+            window.location.pathname = "/settings"
+
+            prevBtn.removeEventListener('click', prevBtnStep6)
+            settingsBtn.removeEventListener('click', archiveIconStep6)
+        }
+
+        prevBtn.addEventListener('click', prevBtnStep6, { once: true })
+        function prevBtnStep6() {
+            topHeader.style.position = ""
+            removeClassIfExist(gearIcon, 'notice-me')
+
+            nextBtn.removeEventListener('click', nextBtnStep6)
+            settingsBtn.removeEventListener('click', archiveIconStep6)
+        }
+
+        settingsBtn.addEventListener('click', archiveIconStep6, { once: true })
+        function archiveIconStep6() {
+            changeStepNum('+1')
+            runOnboarding()
+
+            prevBtn.removeEventListener('click', prevBtnStep6)
+            nextBtn.removeEventListener('click', nextBtnStep6)
+        }
+    } else {
+        window.location.pathname = "/archive"
     }
 }
 // ==== STEP 5 ====
@@ -79,7 +251,7 @@ function onboardingDeleteArticle() {
 
                 articleLS.delete(cardContentID)
 
-                window.location.pathname = "/settings"
+                window.location.pathname = "/archive"
             }
 
             setTimeout(() => {
@@ -101,7 +273,7 @@ function onboardingDeleteArticle() {
         else {
             // If no article is saved - jump back to where you save article
             localStorage.setItem("onboardingStepNum", 2)
-            window.location.pathname = "/" 
+            window.location.pathname = "/"
         }
     }
     else {
@@ -231,7 +403,7 @@ function onboardingSaveArticle() {
     setTimeout(() => {
         saveBtns = cardSection.querySelectorAll('.swipe-btn')
         saveBtns.forEach(saveBtn => saveBtn.addEventListener('click', saveBtnStep2))
-    }, 200)
+    }, 500)
     function saveBtnStep2() {
         toggleAllPointerEvents()
         setTimeout(() => {
@@ -307,6 +479,10 @@ function createOnboardingBox() {
     <div class="onboarding__controls">
         <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
         <div class="dot-container">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
             <span class="dot"></span>
             <span class="dot"></span>
             <span class="dot"></span>
