@@ -49,8 +49,8 @@ function runOnboarding() {
 function onboardingEnd() {
     queryTextElmnts()
     onboardingBox.style.top = "15%"
-    heading.innerHTML = "you made it <br> to the end!"
-    description.innerHTML = "You have completed the guide. <br> Thanks for taking the time to try out my app! :)"    
+    heading.innerHTML = "you made it to the end!"
+    description.innerHTML = "You have completed the guide. <br> Thanks for taking the time to try the my app! :)"    
 }
 // ==== STEP 9 ====
 function onboardingTheme() {
@@ -110,7 +110,7 @@ function onboardingMoveCategory() {
     heading.innerHTML = ""
     description.innerHTML = `Control the order of categories by dragging on the left bar icon <br> <span class="text-highlight">Move a  category now<span>`
 
-    categoryContainer.style.marginTop = "29%"
+    categoryContainer.style.marginTop = "25%"
 
     // EVENTLISTENERS
     prevBtn.addEventListener('click', prevBtnStep8, { once: true })
@@ -142,7 +142,7 @@ function onboardingTurnOffCategory() {
         queryTextElmnts()
 
         // SET ONBOARDINGBOX POSITION AND TEXT
-        onboardingBox.style.top = "1%"
+        onboardingBox.style.top = "2.5%"
         heading.innerHTML = "welcome to settings"
         description.innerHTML = `Manage categories you want to display news from <br> <span class="text-highlight">Use the switch to turn a category off<span>`
 
@@ -234,7 +234,7 @@ function onboardingDeleteArticle() {
         if (cardSection) {
             // MAKES CARDSECTION MOVE ABOVE OVERLAY
             cardSection.style.position = "relative"
-            cardSection.style.top = "17%"
+            cardSection.style.top = "13%"
 
             openCategory(cardSection)
 
@@ -294,7 +294,7 @@ function onboardingDisplaySavedArticles() {
 
     // MAKES CARDSECTION MOVE ABOVE OVERLAY
     cardSection.style.position = "relative"
-    cardSection.style.top = "17%"
+    cardSection.style.top = "13%"
 
     openCategory(cardSection)
 
@@ -303,7 +303,7 @@ function onboardingDisplaySavedArticles() {
     cardSection.style.pointerEvents = "none";
 
     // SET ONBOARDINGBOX POSITION AND TEXT
-    onboardingBox.style.top = "1%"
+    onboardingBox.style.top = "2.5%"
     heading.innerHTML = "welcome to the archive"
     description.innerHTML = `Read your saved articles here <br> <span class="text-highlight">Click arrow button to continue</span>`
 
@@ -381,7 +381,7 @@ function onboardingSaveArticle() {
     cardSection.style.position = "relative"
 
     // SET ONBOARDINGBOX POSITION AND TEXT
-    onboardingBox.style.top = "1%"
+    onboardingBox.style.top = "2.5%"
     description.innerHTML = `Save article by swiping left and clicking the appearing icon <br> <span class="text-highlight">Save it now!<span>`
 
     openCategory(cardSection)
@@ -502,7 +502,6 @@ function createOnboardingBox() {
     overlay.prepend(onboardingBox)
     enableOnboardingListener(onboardingBox)
 }
-
 function enableOnboardingListener(onboardingBox) {
     overlay = document.querySelector('.overlay')
     nextBtn = document.querySelector('.next-btn')
@@ -529,7 +528,6 @@ function enableOnboardingListener(onboardingBox) {
         if (e.target.classList.contains("onboarding__exit-icon")) onboardingDisabled();
     })
 }
-
 function onboardingDisabled() {
     localStorage.setItem("onboardingCompleted", true)
     localStorage.removeItem("onboardingStepNum")
@@ -537,13 +535,11 @@ function onboardingDisabled() {
     // ENABLE SCROLLING
     wrapper.removeAttribute('style')
 }
-
 function createTag(element, className) {
     const createElement = document.createElement(element)
     createElement.classList.add(className)
     return createElement
 }
-
 function updateBtnStatus(onboardingStepNum) {
     if (onboardingStepNum === 0) prevBtn.classList.add('btn_disabled')
     // if (onboardingStepNum > 10) nextBtn.classList.add('btn_disabled')
@@ -552,7 +548,6 @@ function updateBtnStatus(onboardingStepNum) {
         removeClassIfExist(nextBtn, 'btn_disabled')
     }
 }
-
 function updateDotStatus(onboardingStepNum) {
     const dotsCollection = dotContainer.children
     // RESET COLORED DOT
