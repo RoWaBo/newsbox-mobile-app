@@ -77,6 +77,15 @@ if (window.location.pathname === "/settings/") {
             e.target.parentNode.insertBefore(e.target, e.detail.insertBefore);
             e.target.classList.remove("category-content_active");
             saveCategoryOrderToLS()
+
+            if (!localStorage.getItem("onboardingCompleted") && localStorage.getItem("onboardingStepNum") == 8) {
+                toggleAllPointerEvents()
+                setTimeout(() => {
+                    changeStepNum('+1')
+                    runOnboarding()
+                    toggleAllPointerEvents()
+                }, 500)
+            }
         });
         handlebars.forEach(handlebar => {
             handlebar.addEventListener('slip:beforewait', function (e) {
