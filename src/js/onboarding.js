@@ -52,23 +52,30 @@ function onboardingEnd() {
     queryTextElmnts()
     onboardingBox.style.top = "15%"
     heading.innerHTML = "you made it to the end!"
-    description.innerHTML = "You have completed the guide. <br> Thanks for taking the time to try the app!"    
+    description.innerHTML = "You have completed the guide. <br> Thanks for taking the time to try the app!"
+    addMessageBox("Continue")
+
+    document.querySelector('.message-popup').addEventListener('click', step10ContinueBtn)
+    function step10ContinueBtn() {
+        removeMessageBox()
+        onboardingDisabled()
+    }    
 }
 // ==== STEP 9 ====
 function onboardingTheme() {
     if (window.location.pathname === "/settings/") {
         const categoryContainer = document.querySelector('.category-container')
         const themeBtn = document.querySelector('.toggle-theme-button')
-        const page = document.querySelector('html')
         queryTextElmnts()
 
         // SET ONBOARDINGBOX POSITION AND TEXT
         onboardingBox.style.top = "30%"
         heading.innerHTML = ""
-        description.innerHTML = `Change the theme by clicking the "toggle dark mode" button`
+        description.innerHTML = `Change the theme by clicking the "toggle dark mode" button.`
 
         themeBtn.style.position = "relative"
         themeBtn.style.bottom = "20%"
+        themeBtn.classList.add('step9-pointer-animation')
         categoryContainer.style.opacity = "0%"
 
         // EVENTLISTENERS
@@ -89,13 +96,14 @@ function onboardingTheme() {
         themeBtn.addEventListener('click', themeBtnStep9, { once: true })
         function themeBtnStep9() {
             toggleAllPointerEvents()
+            themeBtn.classList.remove('step9-pointer-animation')
             overlay.style.backgroundColor = "unset"
-            description.innerHTML = `Dark theme is on!`
+            description.innerHTML = `<span class="text-highlight">Dark mode is on!<span> <br> Take a second to look at it.`
             setTimeout(() => {
                 localStorage.removeItem("theme")
                 changeStepNum('+1')
                 window.location.pathname = "/"            
-            }, 3000)
+            }, 4000)
         }        
     } else {
         window.location.pathname = "/settings/"    
@@ -105,12 +113,13 @@ function onboardingTheme() {
 function onboardingMoveCategory() {
     const categoryContainer = document.querySelector('.category-container')
     let barIcons;
+    let categoryContent;
     queryTextElmnts()
 
     // SET ONBOARDINGBOX POSITION AND TEXT
     onboardingBox.style.top = "5%"
     heading.innerHTML = ""
-    description.innerHTML = `Control the order of categories by dragging on the left bar icon <br> <span class="text-highlight">Move a  category now<span>`
+    description.innerHTML = `Control the order of categories by dragging on the left bar icon. <br> <span class="text-highlight">Move a category now <span>`
 
     categoryContainer.style.marginTop = "25%"
 
@@ -126,8 +135,10 @@ function onboardingMoveCategory() {
         barIcons.forEach(barIcon => barIcon.removeEventListener('click', barIconsStep8))
     }
     setTimeout(() => {
+        categoryContent = categoryContainer.querySelectorAll('.category-content')
         barIcons = document.querySelectorAll('.category-content__handlebar')
         barIcons.forEach(barIcon => barIcon.addEventListener('click', barIconsStep8))
+        categoryContent[0].classList.add('step8-pointer-animation')
     }, 200)
     function barIconsStep8() {
         prevBtn.removeEventListener('click', prevBtnStep8)
@@ -141,12 +152,13 @@ function onboardingTurnOffCategory() {
     if (window.location.pathname === "/settings/") {
         const categoryContainer = document.querySelector('.category-container')
         let toggleSwitches;
+        let categoryContent;
         queryTextElmnts()
 
         // SET ONBOARDINGBOX POSITION AND TEXT
         onboardingBox.style.top = "2.5%"
         heading.innerHTML = "welcome to settings"
-        description.innerHTML = `Manage categories you want to display news from <br> <span class="text-highlight">Use the switch to turn a category off<span>`
+        description.innerHTML = `Manage categories you want to display news from. <br> <span class="text-highlight">Use the switch to turn a category off<span>`
 
         categoryContainer.style.marginTop = "29%"
 
@@ -160,18 +172,21 @@ function onboardingTurnOffCategory() {
             toggleSwitches[0].checked = false
             categoriesLS.toggle(toggleSwitches[0])
 
+            categoryContent[0].classList.remove('step7-pointer-animation')
             prevBtn.removeEventListener('click', prevBtnStep7)
             toggleSwitches.forEach(toggleSwitch => toggleSwitch.removeEventListener('click', toggleSwitchesStep7))
         }
         setTimeout(() => {
+            categoryContent = categoryContainer.querySelectorAll('.category-content')
             toggleSwitches = document.querySelectorAll('.switch__check')
             toggleSwitches.forEach(toggleSwitch => toggleSwitch.addEventListener('click', toggleSwitchesStep7))
+            categoryContent[0].classList.add('step7-pointer-animation')
         }, 200)
         function toggleSwitchesStep7() {
-            console.log('triggered');
             changeStepNum('+1')
             runOnboarding()
 
+            categoryContent[0].classList.remove('step7-pointer-animation')
             prevBtn.removeEventListener('click', prevBtnStep7)
             nextBtn.removeEventListener('click', nextBtnStep7)
             toggleSwitches.forEach(toggleSwitch => toggleSwitch.removeEventListener('click', toggleSwitchesStep7))
@@ -188,8 +203,9 @@ function onboardingGoToSettings() {
         const settingsBtn = topHeader.querySelector('.navigation-menu').lastElementChild
         const gearIcon = settingsBtn.firstElementChild
         queryTextElmnts()
-
-        gearIcon.classList.add('notice-me')
+        
+        gearIcon.style.position = "relative"
+        gearIcon.classList.add('step6-pointer-animation')
         topHeader.style.position = "relative"
 
         // SET ONBOARDINGBOX POSITION AND TEXT
@@ -208,8 +224,8 @@ function onboardingGoToSettings() {
         prevBtn.addEventListener('click', prevBtnStep6, { once: true })
         function prevBtnStep6() {
             topHeader.style.position = ""
-            removeClassIfExist(gearIcon, 'notice-me')
-
+            gearIcon.classList.remove('step6-pointer-animation') 
+            location.reload()
             nextBtn.removeEventListener('click', nextBtnStep6)
             settingsBtn.removeEventListener('click', archiveIconStep6)
         }
@@ -245,7 +261,7 @@ function onboardingDeleteArticle() {
             // SET ONBOARDINGBOX POSITION AND TEXT
             onboardingBox.style.top = "2.5%"
             heading.innerHTML = ""
-            description.innerHTML = `Delete article by swiping left and clicking the appearing icon <br> <span class="text-highlight">Delete it now!<span>`
+            description.innerHTML = `Delete article by swiping left and pressing the appearing icon.`
 
             // EVENTLISTENERS
             // swiper pointer animations
@@ -262,6 +278,7 @@ function onboardingDeleteArticle() {
 
             prevBtn.addEventListener('click', prevBtnStep5, { once: true })
             function prevBtnStep5() {
+                cardContent.classList.remove("swipe-pointer-animation")
                 nextBtn.removeEventListener('click', nextBtnStep5)
             }
 
@@ -326,7 +343,7 @@ function onboardingDisplaySavedArticles() {
     // SET ONBOARDINGBOX POSITION AND TEXT
     onboardingBox.style.top = "2.5%"
     heading.innerHTML = "welcome to the archive"
-    description.innerHTML = `Read your saved articles here <br> <span class="text-highlight">Click arrow button to continue</span>`
+    description.innerHTML = `Read your saved articles here. <br> <span class="text-highlight">Click arrow button to continue </span>`
 
     // EVENTLISTENERS
     nextBtn.addEventListener('click', nextBtnStep4, { once: true })
@@ -634,10 +651,9 @@ function openCategory(cardSection) {
 function closeCategory(cardSection) {
     const arrowIcon = cardSection.querySelector('.card-header__icon')
     const cardContentAll = cardSection.querySelectorAll('.card-content')
-    if (cardContentAll) {
-        arrowIcon.style.transform = ''
-        cardContentAll.forEach(cardContent => slideOutRemove(cardContent))        
-    }
+     
+    if (arrowIcon) arrowIcon.style.transform = ''
+    if (cardContentAll) cardContentAll.forEach(cardContent => slideOutRemove(cardContent))        
 }
 function toggleAllPointerEvents() {
     if (body.classList.contains('disablePointerEvents')) {

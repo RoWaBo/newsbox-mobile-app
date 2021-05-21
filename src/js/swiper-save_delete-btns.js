@@ -73,7 +73,7 @@ function createDeleteBtn(distElmnt) {
             if (cardContent.parentElement.children.length === 2) {
                 const card = cardContent.parentElement
                 card.removeEventListener('click', deleteArticleLS)
-                console.log(card);
+
                 setTimeout(() => {
                     slideOutRemove(card)
                 }, 700)

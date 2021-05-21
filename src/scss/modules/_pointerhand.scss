@@ -63,3 +63,36 @@
     bottom: -140%;
     animation: bounceScale 1s ease-out alternate infinite;
 }
+
+.step6-pointer-animation::after {
+    @include hand-pointer;
+    font-size: 2rem;
+    left: 55%;
+    bottom: -5%;
+    animation: bounceScale 1s ease-out alternate infinite;
+}
+
+.step7-pointer-animation::after {
+    @include hand-pointer;
+    font-size: 2rem;
+    right: 3%;
+    bottom: -30%;
+    animation: bounceScale 1s ease-out alternate infinite;
+}
+
+.step8-pointer-animation::after {
+    @include hand-pointer;
+    font-size: 2rem;
+    left: 9%;
+    bottom: -30%;
+    animation: bounceScale 1s ease-out alternate infinite;
+}
+
+.step9-pointer-animation::after {
+    @include hand-pointer;
+    font-size: 3rem;
+    color: rgb(255, 255, 255);
+    right: 0;
+    bottom: -90%;
+    animation: bounceScale 1s ease-out alternate infinite;
+}
