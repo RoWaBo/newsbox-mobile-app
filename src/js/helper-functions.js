@@ -21,6 +21,10 @@ function slideOutRemove(element) {
     setTimeout(() => element.remove(), 1000)
 }
 
+function removeClassIfExist(elmnt, className) {
+    if (elmnt.classList.contains(className)) elmnt.classList.remove(className)
+}
+
 // WRITE "ONBOARDING" IN SEARCHBAR AND ENABLE ONBOARDING
 const searchInput = document.querySelector('.searchbox__input')
 if (searchInput) searchInput.addEventListener('keyup', () => {
