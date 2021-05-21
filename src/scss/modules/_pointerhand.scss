@@ -1,47 +1,16 @@
-
-.hand-pointer-animation::after {
+// MIXINS
+@mixin hand-pointer {
     content: "\f0a6";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
-    font-size: 2.5rem;
-    color: #324755;
+    color: $cFontDark;
+    pointer-events: none;
     position: absolute;
     z-index: 20;
-    left: 50%;
-    top: 10%;
-    animation: bounceScale 1s ease-out alternate infinite;
-}
-@keyframes bounceScale {
-    100% { transform: scale(1.3) }
-}
-.small-hand-pointer-animation::after {
-    content: "\f0a6";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    font-size: 2rem;
-    color: #324755;
-    position: absolute;
-    z-index: 20;
-    left: 45%;
-    bottom: -140%;
-    animation: bounceScale 1s ease-out alternate infinite;
-    // animation: heartBeat 4s infinite;
+    transform: rotate(-20deg);    
 }
 
-.hand-swipe-animation::after {
-    content: "\f0a6";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    font-size: 4rem;
-    color: #324755;
-    position: absolute;
-    z-index: 20;
-    right: 40%;
-    top: 40%;
-    transform: rotate(-20deg);
-    animation: swipeLeft 2.5s infinite;
-}
-
+// KEYFRAMES
 @keyframes swipeLeft {
     0% { right: 5%; }
     65% { opacity: 100%; }
@@ -50,15 +19,47 @@
         opacity: 0;
     }
 }
+@keyframes bounceScale {
+    100% { transform: scale(1.3) rotate(-20deg) }
+}
 
-.thumbs-up-animation::after {
-    content: "\f164";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 400;
+// HAND POINTER ANIMATIONS CLASSES
+.hand-pointer-animation::after {
+    @include hand-pointer;
+    font-size: 2.5rem;
+    left: 50%;
+    top: 10%;
+    animation: bounceScale 1s ease-out alternate infinite;
+}
+
+.swipebtn-pointer-animation::after {
+    @include hand-pointer;
+    font-size: 2rem;
+    left: 45%;
+    bottom: -140%;
+    animation: bounceScale 1s ease-out alternate infinite;
+}
+
+.swipe-pointer-animation::after {
+    @include hand-pointer;
     font-size: 4rem;
-    color: #324755;
-    position: absolute;
-    z-index: 20;
     right: 40%;
-    top: 40%;    
+    top: 40%;
+    animation: swipeLeft 2.5s infinite;
+}
+
+.nav-pointer-animation::after {
+    @include hand-pointer;
+    font-size: 2rem;
+    left: 15%;
+    bottom: 3%;
+    animation: bounceScale 1s ease-out alternate infinite;
+}
+
+.nextbtn-pointer-animation::after {
+    @include hand-pointer;
+    font-size: 2rem;
+    left: 70%;
+    bottom: -140%;
+    animation: bounceScale 1s ease-out alternate infinite;
 }
