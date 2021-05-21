@@ -634,7 +634,7 @@ function openCategory(cardSection) {
 function closeCategory(cardSection) {
     const arrowIcon = cardSection.querySelector('.card-header__icon')
     const cardContentAll = cardSection.querySelectorAll('.card-content')
-    if (arrowIcon) {
+    if (cardContentAll) {
         arrowIcon.style.transform = ''
         cardContentAll.forEach(cardContent => slideOutRemove(cardContent))        
     }
