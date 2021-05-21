@@ -16,6 +16,8 @@ function runOnboarding() {
     const onboardingStepNum = syncWithLS("onboardingStepNum", 0)
     localStorage.setItem("onboardingStepNum", onboardingStepNum)
 
+    console.log("onboardingstep: "+onboardingStepNum);
+
     if (!document.querySelector('.overlay')) createOnboardingBox()
     switch (onboardingStepNum) {
         case 0: onboardingWelcome();
@@ -66,7 +68,7 @@ function onboardingTheme() {
         description.innerHTML = `Change the theme by clicking the "toggle dark mode" button`
 
         themeBtn.style.position = "relative"
-        themeBtn.style.bottom = "25%"
+        themeBtn.style.bottom = "20%"
         categoryContainer.style.opacity = "0%"
 
         // EVENTLISTENERS
@@ -229,6 +231,8 @@ function onboardingDeleteArticle() {
     if (window.location.pathname === "/archive/") {
         const cardSection = wrapper.children[2]
         let deleteBtns;
+        let cardContent;
+        let swipeIcon;
         queryTextElmnts()
 
         if (cardSection) {
@@ -244,6 +248,18 @@ function onboardingDeleteArticle() {
             description.innerHTML = `Delete article by swiping left and clicking the appearing icon <br> <span class="text-highlight">Delete it now!<span>`
 
             // EVENTLISTENERS
+            // swiper pointer animations
+            setTimeout(() => {
+                cardContent = document.querySelector('.card-content')
+                swipeIcon = document.querySelector('.swipe-btn__icon')
+                cardContent.classList.add("swipe-pointer-animation")
+                cardContent.addEventListener('touchmove', removeSwiperAnimationStep5)     
+            }, 500)    
+            function removeSwiperAnimationStep5() {
+                cardContent.classList.remove("swipe-pointer-animation")
+                swipeIcon.classList.add("swipebtn-pointer-animation")    
+            } 
+
             prevBtn.addEventListener('click', prevBtnStep5, { once: true })
             function prevBtnStep5() {
                 nextBtn.removeEventListener('click', nextBtnStep5)
@@ -256,7 +272,7 @@ function onboardingDeleteArticle() {
 
                 articleLS.delete(cardContentID)
 
-                window.location.pathname = "/archive"
+                location.reload()
             }
 
             setTimeout(() => {
@@ -266,13 +282,17 @@ function onboardingDeleteArticle() {
             function deleteBtnStep2() {
                 toggleAllPointerEvents()
                 setTimeout(() => {
+                    closeCategory(cardSection)
+                    cardSection.style.position = ""          
+                }, 1300)        
+                setTimeout(() => {
                     prevBtn.removeEventListener('click', prevBtnStep5)
                     nextBtn.removeEventListener('click', nextBtnStep5)
                     deleteBtns.forEach(deleteBtn => deleteBtn.removeEventListener('click', deleteBtnStep2))
                     toggleAllPointerEvents()
                     changeStepNum('+1')
                     runOnboarding()
-                }, 3500)
+                }, 2000)
             }
         }
         else {
@@ -298,7 +318,8 @@ function onboardingDisplaySavedArticles() {
 
     openCategory(cardSection)
 
-    arrowIcon.classList.add('notice-me')
+    arrowIcon.style.position = "relative"
+    arrowIcon.classList.add('nextbtn-pointer-animation')
 
     cardSection.style.pointerEvents = "none";
 
@@ -311,7 +332,8 @@ function onboardingDisplaySavedArticles() {
     nextBtn.addEventListener('click', nextBtnStep4, { once: true })
     function nextBtnStep4() {
         cardSection.style.pointerEvents = "";
-        removeClassIfExist(arrowIcon, 'notice-me')
+        arrowIcon.classList.remove('nextbtn-pointer-animation')
+        arrowIcon.style.position = ""
 
         prevBtn.removeEventListener('click', prevBtnStep4)
     }
@@ -329,13 +351,14 @@ function onboardingArchive() {
         const archiveIcon = archiveBtn.firstElementChild
         queryTextElmnts()
 
-        archiveIcon.classList.add('notice-me')
+        // archiveIcon.style.position = "relative"
+        archiveIcon.classList.add('nav-pointer-animation')
         cardSection.style.position = ""
         topHeader.style.position = "relative"
 
         // SET ONBOARDINGBOX POSITION AND TEXT
         onboardingBox.style.top = "15%"
-        description.innerHTML = `<span class="text-highlight">The article is now saved!</span> <br> It can be viewed by clicking the left icon to view the archive page.`
+        description.innerHTML = `<span class="text-highlight">The article is now saved!</span> <br> It can be viewed by pressing the left icon to view the archive page.`
 
         closeCategory(cardSection)
 
@@ -351,7 +374,7 @@ function onboardingArchive() {
         prevBtn.addEventListener('click', prevBtnStep3, { once: true })
         function prevBtnStep3() {
             topHeader.style.position = ""
-            removeClassIfExist(archiveIcon, 'notice-me')
+            archiveIcon.classList.remove('nav-pointer-animation') 
 
             nextBtn.removeEventListener('click', nextBtnStep3)
             archiveBtn.removeEventListener('click', archiveIconStep3)
@@ -374,6 +397,7 @@ function onboardingArchive() {
 // ==== STEP 2 ====
 function onboardingSaveArticle() {
     const cardSection = wrapper.children[3]
+    fetchCategory(cardSection)
     let cardContent;
     let saveBtns;
     let swipeIcon;
@@ -384,20 +408,19 @@ function onboardingSaveArticle() {
 
     // SET ONBOARDINGBOX POSITION AND TEXT
     onboardingBox.style.top = "2.5%"
-    description.innerHTML = `Save article by swiping left and clicking the appearing icon <br> <span class="text-highlight">Save it now!<span>`
-
-    openCategory(cardSection)
+    description.innerHTML = `Save article by swiping left and pressing the appearing icon. <br> <span class="text-highlight">Swipe and save it now!<span>`
 
     // EVENTLISTENERS
+    // swiper pointer animations
     setTimeout(() => {
         cardContent = document.querySelector('.card-content')
         swipeIcon = document.querySelector('.swipe-btn__icon')
-        cardContent.classList.add("hand-swipe-animation")
+        cardContent.classList.add("swipe-pointer-animation")
         cardContent.addEventListener('touchmove', removeSwiperAnimationStep2)     
     }, 500)    
     function removeSwiperAnimationStep2() {
-        cardContent.classList.remove("hand-swipe-animation")
-        swipeIcon.classList.add("small-hand-pointer-animation")    
+        cardContent.classList.remove("swipe-pointer-animation")
+        swipeIcon.classList.add("swipebtn-pointer-animation")    
     } 
 
     prevBtn.addEventListener('click', prevBtnStep2, { once: true })
@@ -411,17 +434,15 @@ function onboardingSaveArticle() {
         const cardContent = cardSection.querySelector('.card-content')
         const category = cardSection.id
 
-        // addInfoBox('saved', 'Article')
         articleLS.save(category, cardContent)
 
         prevBtn.removeEventListener('click', prevBtnStep2)
-        saveBtns.forEach(saveBtn => saveBtn.removeEventListener('click', saveBtnStep2))
     }
 
     setTimeout(() => {
         saveBtns = cardSection.querySelectorAll('.swipe-btn')
         saveBtns.forEach(saveBtn => saveBtn.addEventListener('click', saveBtnStep2))
-    }, 700)
+    }, 800)
     function saveBtnStep2() {
         toggleAllPointerEvents()
         setTimeout(() => {
@@ -431,7 +452,7 @@ function onboardingSaveArticle() {
             toggleAllPointerEvents()
             changeStepNum('+1')
             runOnboarding()
-        }, 3500)
+        }, 2000)
     }
 }
 
@@ -446,11 +467,11 @@ function onboardingDisplayArticles() {
     // SET ONBOARDINGBOX POSITION AND TEXT
     onboardingBox.style.top = "2.5%"
     heading.innerHTML = ""
-    description.innerHTML = `Click on the category to display related articles <br> <span class="text-highlight">Press the category box below<span>`
+    description.innerHTML = `Click on the category to display related articles. <br> <span class="text-highlight">Press the category box below<span>`
 
     setTimeout(() => {
         cardSection.classList.add('hand-pointer-animation')        
-    }, 500)
+    }, 300)
 
     // EVENTLISTENERS
     nextBtn.addEventListener('click', nextBtnStep1, { once: true })
@@ -482,7 +503,7 @@ function onboardingWelcome() {
         queryTextElmnts()
         onboardingBox.style.top = "15%"
         heading.innerHTML = "welcome to <br> the newsbox app"
-        description.innerHTML = "This is a short guide on how to use the app"
+        description.innerHTML = "This is a short guide on how to use the app."
     }
     else {
         window.location.pathname = "/"
@@ -542,8 +563,6 @@ function enableOnboardingListener(onboardingBox) {
             changeStepNum('+1')
             runOnboarding()
         }
-        // DOTS
-        // if (e.target.classList.contains("dot")) console.log(e.target);
         // EXIT ICON
         if (e.target.classList.contains("onboarding__exit-icon")) onboardingDisabled();
     })
@@ -566,7 +585,7 @@ function createTag(element, className) {
 }
 function updateBtnStatus(onboardingStepNum) {
     if (onboardingStepNum === 0) prevBtn.classList.add('btn_disabled')
-    // if (onboardingStepNum > 10) nextBtn.classList.add('btn_disabled')
+    else if (onboardingStepNum === dotContainer.children.length-1) nextBtn.classList.add('btn_disabled')
     else {
         removeClassIfExist(prevBtn, 'btn_disabled')
         removeClassIfExist(nextBtn, 'btn_disabled')
@@ -595,35 +614,30 @@ function queryTextElmnts() {
     description = document.querySelector(".onboarding__description")
     onboardingBox = document.querySelector(".onboarding__box")
 }
-function openCategory(cardSection) {
+function fetchCategory(cardSection) {
     const category = cardSection.id
     const arrowIcon = cardSection.querySelector('.card-header__icon')
-    const cardContentAll = cardSection.querySelectorAll('.card-content')
-    arrowIcon.style.transform = "rotate(90deg)"
 
-    if (cardSection.children.length == 1) {
-        getNYTArticles(category, cardSection, 'save')
-    }
-    else {
-        cardContentAll.forEach(article => {
-            article.classList.add('fade-in-up')
-            article.style.display = "block"
-        })
-    }
+    arrowIcon.style.transform = "rotate(90deg)"
+    if (cardSection.children.length == 1) getNYTArticles(category, cardSection, 'save')
+}
+function openCategory(cardSection) {
+    const arrowIcon = cardSection.querySelector('.card-header__icon')
+    const cardContentAll = cardSection.querySelectorAll('.card-content')
+    
+    cardContentAll.forEach(article => {
+        article.classList.add('fade-in-up')
+        article.style.display = "block"
+    })
+    arrowIcon.style.transform = "rotate(90deg)"
 }
 function closeCategory(cardSection) {
     const arrowIcon = cardSection.querySelector('.card-header__icon')
     const cardContentAll = cardSection.querySelectorAll('.card-content')
-
-    arrowIcon.style.transform = ''
-    cardContentAll.forEach(cardContent => {
-        cardContent.classList.remove('fade-in-up')
-        cardContent.classList.add('fade-out-down')
-        setTimeout(() => {
-            cardContent.style.display = "none"
-            cardContent.classList.remove('fade-out-down')
-        }, 350)
-    })
+    if (arrowIcon) {
+        arrowIcon.style.transform = ''
+        cardContentAll.forEach(cardContent => slideOutRemove(cardContent))        
+    }
 }
 function toggleAllPointerEvents() {
     if (body.classList.contains('disablePointerEvents')) {
@@ -632,7 +646,4 @@ function toggleAllPointerEvents() {
     else {
         body.classList.add('disablePointerEvents')
     }
-}
-function removeClassIfExist(elmnt, className) {
-    if (elmnt.classList.contains(className)) elmnt.classList.remove(className)
 }
