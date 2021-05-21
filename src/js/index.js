@@ -23,30 +23,12 @@ if (window.location.pathname === "/") {
                 const category = cardSection.querySelector('.card-header__title').innerText
                 const newsArticles = cardSection.querySelectorAll('.card-content')
 
-                // if (arrowIcon.style.transform === '') {
                 if (cardSection.children.length == 1) {
-                    // if (cardSection.children.length == 1) {
-                    //     getNYTArticles(category, cardSection, 'save')
-                    // }
-                    // else {
-                    //     newsArticles.forEach(article => {
-                    //         article.classList.add('fade-in-up')
-                    //         article.style.display = "block"    
-                    //     })
-                    // }
                     getNYTArticles(category, cardSection, 'save')
                     arrowIcon.style.transform = "rotate(90deg)"
                 } else {
                     arrowIcon.style.transform = ''
-                    newsArticles.forEach(article => {
-                        slideOutRemove(article)
-                        // article.classList.remove('fade-in-up')
-                        // article.classList.add('fade-out-down')
-                        // setTimeout(() => {
-                        //     article.style.display = "none"
-                        //     article.classList.remove('fade-out-down')        
-                        // }, 350) 
-                    })
+                    newsArticles.forEach(article => slideOutRemove(article))
                 }
             }
         })
