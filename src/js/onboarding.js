@@ -77,7 +77,7 @@ function onboardingTheme() {
         // SET ONBOARDINGBOX POSITION AND TEXT
         onboardingBox.style.top = "30%"
         heading.innerHTML = ""
-        description.innerHTML = `Change the theme by clicking the "toggle dark mode" button.`
+        description.innerHTML = `Change the theme by pressing the "toggle dark mode" button.`
 
         themeBtn.style.position = "absolute"
         themeBtn.style.bottom = "10%"
