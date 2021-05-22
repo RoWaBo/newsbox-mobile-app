@@ -1,34 +1,5 @@
-/* ==== FONT CLASSES ==== */
-.heading-big {
-    @include headingBig
-}
-.heading-medium {
-    @include headingMedium
-}
-.heading-small {
-    @include headingSmall
-}
-.heading-sub {
-    @include headingSub
-}
-.card-title {
-    @include cardTitle
-}
-.card-copy {
-    @include cardCopy
-}
-.body-copy {
-    @include bodyCopy
-}
-.timestamp {
-    @include timestamp
-}
-.btn-label {
-    @include btnLabel
-}
 
 /* ==== ANIMATION CLASSES ==== */
-
 .animate {
     transition: 150ms;
 }
@@ -62,7 +33,26 @@
 }
 
 /* ==== MISC ==== */
-
 .text-highlight {
     font-weight: $fWeightBold;
+}
+
+.action-btn {
+    background-color: $cSage;
+    padding: 1rem;
+    width: fit-content;
+    border: none;
+    border-radius: 5px;
+    margin: $spaceM auto 0;
+
+    font-family: $fMain;
+    font-size: 15px;
+    font-weight: $fWeightRegular;
+    color: $cFontLight;
+    text-align: center;
+
+    animation: grow 1.1s ease-out alternate infinite;
+}
+@keyframes grow {
+    100% { transform: scale(1.05) }
 }

@@ -33,27 +33,3 @@
     70% {opacity: 1;}
     100% {opacity: 0;}
 }
-
-.message-popup {
-    background-color: $cSage;
-    padding: 1rem;
-    width: fit-content;
-    border-radius: 5px;
-    position: fixed;
-    bottom: 33%;
-    // centers the box
-    left: 50%;
-    transform: translate(-50%);
-    z-index: 10;
-
-    font-family: $fMain;
-    font-size: 15px;
-    font-weight: $fWeightRegular;
-    color: $cFontLight;
-    text-align: center;
-
-    animation: grow 1s ease-out alternate infinite;
-}
-@keyframes grow {
-    100% { transform: scale(1.1) translate(-50%) }
-}

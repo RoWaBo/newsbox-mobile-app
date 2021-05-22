@@ -11,6 +11,7 @@
 .onboarding {
 
     &__box {
+        display: grid;
         background-color: $cBackground;
         border-radius: 10px;
         max-width: 390px;

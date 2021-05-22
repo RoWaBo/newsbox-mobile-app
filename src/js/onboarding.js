@@ -50,14 +50,19 @@ function runOnboarding() {
 // ==== STEP 10 ====
 function onboardingEnd() {
     queryTextElmnts()
+
+    // CREATING CALL TO ACTION BUTTON
+    const continueBtn = document.createElement('button')
+    continueBtn.classList.add('action-btn')
+    continueBtn.innerText = "Continue"
+    description.insertAdjacentElement('afterend', continueBtn)
+
     onboardingBox.style.top = "15%"
     heading.innerHTML = "you made it to the end!"
     description.innerHTML = "You have completed the guide. <br> Thanks for taking the time to try the app!"
-    addMessageBox("Continue")
 
-    document.querySelector('.message-popup').addEventListener('click', step10ContinueBtn)
+    document.querySelector('.action-btn').addEventListener('click', step10ContinueBtn)
     function step10ContinueBtn() {
-        removeMessageBox()
         onboardingDisabled()
     }    
 }
