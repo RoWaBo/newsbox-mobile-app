@@ -421,10 +421,10 @@ function onboardingArchive() {
 // ==== STEP 2 ====
 function onboardingSaveArticle() {
     const cardSection = wrapper.children[3]
-    fetchCategory(cardSection)
     let cardContent;
     let saveBtns;
     let swipeIcon;
+    setTimeout(() => fetchCategory(cardSection),100)
     queryTextElmnts()
 
     // MAKES CARDSECTION MOVE ABOVE OVERLAY

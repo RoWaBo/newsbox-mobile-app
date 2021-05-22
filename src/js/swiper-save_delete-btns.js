@@ -1,5 +1,4 @@
 
-
 // ==== CREATE SAVE BUTTON ====
 function createSaveBtn(distElmnt) {
     const btnParents = distElmnt.querySelectorAll('.card-content');
@@ -27,7 +26,6 @@ function createSaveBtn(distElmnt) {
         swipeBtn.addEventListener('click', e => {
             const cardContent = e.target.closest('.card-content')
             const category = distElmnt.querySelector('.card-header__title')
-            console.log('save news item');
 
             // saveArticleToLS(category, cardContent)
             articleLS.save(category, cardContent)

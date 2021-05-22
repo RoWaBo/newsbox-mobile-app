@@ -51,8 +51,8 @@
 .nav-pointer-animation::after {
     @include hand-pointer;
     font-size: 2rem;
-    left: 15%;
-    bottom: 3%;
+    left: 14%;
+    bottom: -1%;
     animation: bounceScale 1s ease-out alternate infinite;
 }
 
