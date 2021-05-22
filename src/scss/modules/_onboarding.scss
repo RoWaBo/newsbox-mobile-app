@@ -1,6 +1,7 @@
 .overlay {
     background-color: rgba(0, 0, 0, 0.609);
     position: absolute;
+    padding: 0 $spaceS;
     left: 0;
     right: 0;
     top: 0;
@@ -12,9 +13,11 @@
     &__box {
         background-color: $cBackground;
         border-radius: 10px;
-        margin: 0 $spaceS;
+        max-width: 390px;
         padding: $spaceS 0;
         position: relative;
+        left: 50%;
+        transform: translate(-50%);
         transition: 300ms;
         z-index: 11;
     }

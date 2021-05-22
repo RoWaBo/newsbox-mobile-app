@@ -73,8 +73,10 @@ function onboardingTheme() {
         heading.innerHTML = ""
         description.innerHTML = `Change the theme by clicking the "toggle dark mode" button.`
 
-        themeBtn.style.position = "relative"
-        themeBtn.style.bottom = "20%"
+        themeBtn.style.position = "absolute"
+        themeBtn.style.bottom = "10%"
+        themeBtn.style.left = "50%"
+        themeBtn.style.transform = "translate(-50%, -50%)"
         themeBtn.classList.add('step9-pointer-animation')
         categoryContainer.style.opacity = "0%"
 
