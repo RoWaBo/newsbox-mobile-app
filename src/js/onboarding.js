@@ -49,6 +49,7 @@ function runOnboarding() {
 
 // ==== STEP 10 ====
 function onboardingEnd() {
+    nextStepAnimation(overlay)
     queryTextElmnts()
 
     // CREATING CALL TO ACTION BUTTON
@@ -157,6 +158,7 @@ function onboardingMoveCategory() {
 // ==== STEP 7 ====
 function onboardingTurnOffCategory() {
     if (window.location.pathname === "/settings/") {
+        nextStepAnimation(overlay)
         const categoryContainer = document.querySelector('.category-container')
         let toggleSwitches;
         let categoryContent;
@@ -206,6 +208,7 @@ function onboardingTurnOffCategory() {
 // ==== STEP 6 ====
 function onboardingGoToSettings() {
     if (window.location.pathname === "/archive/") {
+        nextStepAnimation(overlay)
         const topHeader = wrapper.querySelector('.top-header')
         const settingsBtn = topHeader.querySelector('.navigation-menu').lastElementChild
         const gearIcon = settingsBtn.firstElementChild
@@ -332,6 +335,7 @@ function onboardingDeleteArticle() {
 
 // ==== STEP 4 ====
 function onboardingDisplaySavedArticles() {
+    nextStepAnimation(overlay)
     const cardSection = wrapper.children[2]
     const arrowIcon = nextBtn.firstElementChild
     queryTextElmnts()
@@ -524,6 +528,7 @@ function onboardingDisplayArticles() {
 // ==== STEP 0 ====
 function onboardingWelcome() {
     if (window.location.pathname === "/") {
+        nextStepAnimation(overlay)
         queryTextElmnts()
         onboardingBox.style.top = "15%"
         heading.innerHTML = "welcome to <br> the newsbox app"
@@ -592,15 +597,18 @@ function enableOnboardingListener(onboardingBox) {
     })
 }
 function onboardingDisabled() {
-    localStorage.setItem("onboardingCompleted", true)
-    localStorage.removeItem("onboardingStepNum")
-    document.querySelector('.overlay').remove()
-    // ENABLE SCROLLING
-    wrapper.removeAttribute('style')
-    localStorage.removeItem("savedArticles")
-    localStorage.removeItem("deletedCategories")
-    localStorage.removeItem("categoryOrder")
-    window.location.pathname = "/"
+    overlay.classList.add('fade-out')
+    setTimeout(() => {
+        localStorage.setItem("onboardingCompleted", true)
+        localStorage.removeItem("onboardingStepNum")
+        document.querySelector('.overlay').remove()
+        // ENABLE SCROLLING
+        wrapper.removeAttribute('style')
+        localStorage.removeItem("savedArticles")
+        localStorage.removeItem("deletedCategories")
+        localStorage.removeItem("categoryOrder")
+        window.location.pathname = "/"        
+    }, 550)
 }
 function createTag(element, className) {
     const createElement = document.createElement(element)
@@ -637,6 +645,7 @@ function queryTextElmnts() {
     heading = document.querySelector(".onboarding__heading")
     description = document.querySelector(".onboarding__description")
     onboardingBox = document.querySelector(".onboarding__box")
+    nextStepAnimation([heading, description])
 }
 function fetchCategory(cardSection) {
     const category = cardSection.id

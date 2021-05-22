@@ -44,3 +44,16 @@ function resetLS() {
     localStorage.removeItem("categoryOrder")
     location.reload();
 }
+
+function nextStepAnimation(elmntsToAnimate) {
+    if (elmntsToAnimate.length) {
+        const elmntsArray = elmntsToAnimate
+        elmntsArray.forEach(elmnt => elmnt.classList.add('fade-in'))
+        setTimeout(() => {
+            elmntsArray.forEach(elmnt => elmnt.classList.remove('fade-in'))
+        }, 1050)          
+    } else {
+        elmntsToAnimate.classList.add('fade-in')
+        setTimeout(() => elmntsToAnimate.classList.remove('fade-in'), 1050)    
+    }
+}
