@@ -28,8 +28,9 @@ function removeClassIfExist(elmnt, className) {
 // WRITE "ONBOARDING" IN SEARCHBAR AND ENABLE ONBOARDING
 const searchInput = document.querySelector('.searchbox__input')
 if (searchInput) searchInput.addEventListener('keyup', () => {
-    if (searchInput.value === "onboarding") enableOnboarding()
-    if (searchInput.value === "reset") resetLS()    
+    const searchText = searchInput.value.toLowerCase()
+    if (searchText === "onboarding") enableOnboarding()
+    if (searchText === "reset") resetLS()    
 })  
 function enableOnboarding() {
     localStorage.removeItem("onboardingCompleted")
