@@ -15,16 +15,19 @@ function getNYTArticles(category, distElmnt, btnMode) {
 }
 
 function addArticlesToHTML(newsArticles, distElmnt) {
-    newsArticles.slice(0, 5).forEach(article => {
+    newsArticles.slice(0, 10).forEach(article => {
+
         const cardContent = document.createElement('div')
         cardContent.classList.add('card-content', 'fade-in-up')
 
         const description = article["media:description"] ? article["media:description"] : article.description
 
+        const img = article["media:content"] ? article["media:content"].url : './img/placeholder-img.png'  
+
         cardContent.innerHTML = `
                 <a href="${article.link}" class="card-content__link">
                     <div class="card-content__img-container">
-                        <img src="${article["media:content"]}" alt="" class="card-content__img">
+                        <img src="${img}" alt="" class="card-content__img">
                     </div>
                     <div class="card-content__text-container">
                         <h2 class="card-content__heading">${article.title}</h2>
