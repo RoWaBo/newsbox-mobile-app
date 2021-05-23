@@ -18,7 +18,7 @@ function addSwipability(className) {
         startX = e.touches[0].clientX
         swipeElmntX = Math.round(pixelStringToNumber())
         swipeLockX = Math.round(viewportWidth * 0.3)
-        deadZoneX = viewportWidth * 0.05
+        deadZoneX = viewportWidth * 0.06
 
         // If swiper is in locked position then begin swipe from that position
         if (swipeElmntX === swipeLockX) startX = startX + swipeElmntX
