@@ -428,7 +428,7 @@ function onboardingSaveArticle() {
     let cardContent;
     let saveBtns;
     let swipeIcon;
-    setTimeout(() => fetchCategory(cardSection),100)
+    setTimeout(() => fetchCategory(cardSection), 200)
     queryTextElmnts()
 
     // MAKES CARDSECTION MOVE ABOVE OVERLAY
@@ -619,8 +619,8 @@ function updateBtnStatus(onboardingStepNum) {
     if (onboardingStepNum === 0) prevBtn.classList.add('btn_disabled')
     else if (onboardingStepNum === dotContainer.children.length-1) nextBtn.classList.add('btn_disabled')
     else {
-        removeClassIfExist(prevBtn, 'btn_disabled')
-        removeClassIfExist(nextBtn, 'btn_disabled')
+        if (prevBtn.classList.contains('btn_disabled')) prevBtn.classList.remove('btn_disabled')
+        if (nextBtn.classList.contains('btn_disabled')) nextBtn.classList.remove('btn_disabled')
     }
 }
 function updateDotStatus(onboardingStepNum) {
