@@ -21,30 +21,7 @@ function slideOutRemove(element) {
     setTimeout(() => element.remove(), 1000)
 }
 
-function removeClassIfExist(elmnt, className) {
-    if (elmnt.classList.contains(className)) elmnt.classList.remove(className)
-}
-
-// WRITE "ONBOARDING" IN SEARCHBAR AND ENABLE ONBOARDING
-const searchInput = document.querySelector('.searchbox__input')
-if (searchInput) searchInput.addEventListener('keyup', () => {
-    const searchText = searchInput.value.toLowerCase()
-    if (searchText === "onboarding") enableOnboarding()
-    if (searchText === "reset") resetLS()    
-})  
-function enableOnboarding() {
-    localStorage.removeItem("onboardingCompleted")
-    location.reload();    
-}
-function resetLS() {
-    localStorage.removeItem("theme")
-    localStorage.removeItem("onboardingCompleted")
-    localStorage.removeItem("savedArticles")
-    localStorage.removeItem("deletedCategories")
-    localStorage.removeItem("categoryOrder")
-    location.reload();
-}
-
+// Can take a single element or an array of elements
 function nextStepAnimation(elmntsToAnimate) {
     if (elmntsToAnimate.length) {
         const elmntsArray = elmntsToAnimate
