@@ -22,7 +22,7 @@ function addArticlesToHTML(newsArticles, distElmnt) {
 
         const description = article["media:description"] ? article["media:description"] : article.description
 
-        const img = article["media:content"] ? article["media:content"].url : './img/placeholder-img.png'  
+        const img = article["media:content"] ? article["media:content"].url : '/img/placeholder-img.png'  
 
         cardContent.innerHTML = `
                 <a href="${article.link}" class="card-content__link">
