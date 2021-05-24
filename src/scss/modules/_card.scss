@@ -5,22 +5,26 @@
     align-items: center;
 
     &__circle {
+        background-color: $cLogoBackground;
         box-shadow: 1px 1px 10px $cFossil;
         min-width: 35px;
         min-height: 35px;
         border-radius: 50%;
         margin-left: $spaceS;
-        display: grid;    
+        display: grid;
+        pointer-events: none;    
     }
     &__logo {
         color: $cRust;
         font-size: 1.2rem;
         place-self: center;
+        pointer-events: none;
     }
     &__title {
         @include cardTitle;
         text-transform: uppercase;
         margin-left: $spaceS;
+        pointer-events: none;
     
     }
     &__icon-container {
@@ -28,7 +32,7 @@
         padding: $spaceM $spaceS;
         display: grid;
         justify-content: end;
-        
+        pointer-events: none; 
     }
     &__icon {
         @include iconDefault;

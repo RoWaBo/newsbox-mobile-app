@@ -3,31 +3,86 @@
 // ====================
 
 // PRIMARY COLORS
-$cSage: #87bcbf;
-$cRust: #d97d54;
+$cSage: var(--cSage);
+$cSageDark: var(--cSageDark);
+$cRust: var(--cRust);
 $cDrab: #324755;
 $cDanger: #d95454;
 
 // SECONDARY COLORS
 $cIce: #f0f3f4;
-$cFossil: #c8d1d3;
+$cFossil: var(--cFossil);
 $cSand: #b9b0a2;
+$cFossilLight: var(--cFossilLight); 
 
 // FONT COLORS
-$cFontDark: #324755;
-$cFontMedium: #6e8ca0;
+$cFontDark: var(--cFontDark);
+$cFontMedium: var(--cFontMedium);
 $cFontLight: #FFF;
 
 // BACKGROUND COLORS
-$cBackground: #FFF;
+$cBackground: var(--cBackground);
+$cBorder: var(--cBorder);
+$cLogoBackground: var(--cLogoBackground);
+$cThemeBtn: var(--cThemeBtn);
+$cCardHeaderBG: var(--cCardHeaderBG);
 
+// LIGHT THEME
+html {
+    --cBackground: #FFF;
+    --cFontDark: #324755;
+    --cSage: #87bcbf;
+    --cSageDark: #6f999b;
+    --cFossil: #c8d1d3;
+    --cFossilLight: #e7ebec;
+    --cBorder: #eaedee;
+    --cFontMedium: #6e8ca0;
+    --cLogoBackground: #FFF;
+    --cThemeBtn: #e7ebec;
+    --cRust: #d97d54;
+    --cCardHeaderBG: #FFF;   
+}
+
+// DARK THEME
+// html[data-theme='dark'] {
+//     --cBackground: #212936;
+//     --cLogoBackground: #1976D2;
+//     --cCardHeaderBG: #2B3648;
+//     --cBorder: #b8bbbd3a;
+//     --cThemeBtn: #19242a;
+
+//     --cFontDark: #FFF;
+//     --cFontMedium: #c3c3c3;
+
+//     --cFossil: #00000060;
+//     --cFossilLight: #2B3648;
+//     --cSage: #32a3ff;
+//     --cRust: #FFF;   
+// }
+
+// SUPER DARK THEME
+html[data-theme='dark'] {
+    --cBackground: #181818;
+    --cLogoBackground: #43A0EF;
+    --cCardHeaderBG: #262626;
+    --cBorder: #b8bbbd3a;
+    --cThemeBtn: #181818;
+
+    --cFontDark: #FFF;
+    --cFontMedium: #A9A9A9;
+
+    --cFossil: #00000060;
+    --cFossilLight: #262626;
+    --cSage: #43A0EF;
+    --cRust: #FFF;   
+}
 
 // ======================
 // ===== F O N T S ======
 // ======================
 
 // Inter
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap');
 // Antonio
 @import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100;200&family=Inter:wght@200;300;400;500&display=swap');
 

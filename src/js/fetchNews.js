@@ -1,6 +1,4 @@
 function fetchNews(url) {
-    // RESET IMAGE ARRAY
-    imgUrls = [];
 
     return fetch(url)
         .then(response => response.text())
@@ -10,51 +8,50 @@ function fetchNews(url) {
             const srcDOM = parser.parseFromString(strxml, "application/xml");
             return xml2json(srcDOM)
         })
-        .then(jsonResult => {
-            const articles = jsonResult.rss.channel.item
-            let articlesWithImg = []
-
-            articles.forEach((article, index) => {
-                article["media:content"] = imgUrls[index]
-                articlesWithImg.push(article)
-            })
-            
-            return articlesWithImg
-        })      
+        .then(jsonResult => jsonResult.rss.channel.item)      
 }
-
-// All ARTICLE IMAGE ARRAY
-let imgUrls = [];
 
 function xml2json(srcDOM) {
-    let children = [...srcDOM.children];
 
+    let children = [...srcDOM.children];
+  
     // base case for recursion. 
     if (!children.length) {
+  
+      if (srcDOM.hasAttributes()) {      
+        var attrs = srcDOM.attributes;
+        var output = {};
+        for(var i = attrs.length - 1; i >= 0; i--) {
+          output[attrs[i].name] = attrs[i].value;
+        }
+  
+        output.value = srcDOM.innerHTML;
+        return output;
+  
+      } else {
         return srcDOM.innerHTML
+      }  
     }
-
+  
     // initializing object to be returned. 
     let jsonResult = {};
-     
+  
     for (let child of children) {
-
-        // checking is child has siblings of same name. 
-        let childIsArray = children.filter(eachChild => eachChild.nodeName === child.nodeName).length > 1;
-
-        // if child is array, save the values as array, else as strings. 
-        if (childIsArray) {
-            if (jsonResult[child.nodeName] === undefined) {
-                jsonResult[child.nodeName] = [xml2json(child)];
-            } else {
-                jsonResult[child.nodeName].push(xml2json(child));
-            }
+  
+      // checking is child has siblings of same name. 
+      let childIsArray = children.filter(eachChild => eachChild.nodeName === child.nodeName).length > 1;
+  
+      // if child is array, save the values as array, else as strings. 
+      if (childIsArray) {
+        if (jsonResult[child.nodeName] === undefined) {
+          jsonResult[child.nodeName] = [xml2json(child)];
         } else {
-            jsonResult[child.nodeName] = xml2json(child);
+          jsonResult[child.nodeName].push(xml2json(child));
         }
-        // MY CHANGES TO THE ORIGINAL CODE
-        if (child.nodeName === 'media:content') imgUrls.push(child.getAttribute('url'))
+      } else {
+        jsonResult[child.nodeName] = xml2json(child);
+      }
     }
-
+  
     return jsonResult;
-}
+  }

@@ -15,16 +15,19 @@ function getNYTArticles(category, distElmnt, btnMode) {
 }
 
 function addArticlesToHTML(newsArticles, distElmnt) {
-    newsArticles.slice(0, 5).forEach(article => {
+    newsArticles.slice(0, 10).forEach(article => {
+
         const cardContent = document.createElement('div')
         cardContent.classList.add('card-content', 'fade-in-up')
 
         const description = article["media:description"] ? article["media:description"] : article.description
 
+        const img = article["media:content"] ? article["media:content"].url : '/img/placeholder-img.png'  
+
         cardContent.innerHTML = `
                 <a href="${article.link}" class="card-content__link">
                     <div class="card-content__img-container">
-                        <img src="${article["media:content"]}" alt="" class="card-content__img">
+                        <img src="${img}" alt="" class="card-content__img">
                     </div>
                     <div class="card-content__text-container">
                         <h2 class="card-content__heading">${article.title}</h2>
@@ -56,12 +59,12 @@ function createCards(categoryArray) {
         cardSection.classList.add('.card')
         cardSection.id = category
         cardSection.innerHTML = `
-        <div class="card-header">
+        <div class="card-header toggleContent">
             <div class="card-header__circle">
                 <i class="${getCategoryLogo(category)} card-header__logo"></i>
             </div>
             <h1 class="card-header__title">${category}</h1>
-            <div class="card-header__icon-container toggleContent">
+            <div class="card-header__icon-container">
                 <i class="fas fa-chevron-right card-header__icon"></i>    
             </div>
         </div>
@@ -76,4 +79,27 @@ function getCategoryLogo(categoryName) {
     if (categoryName === "sports") return "fas fa-futbol"
     if (categoryName === "business") return "fas fa-briefcase"
     if (categoryName === "technology") return "fas fa-microchip"
+}
+
+function addSavedArticlesToHTML(articlesLS) {
+    articlesLS.forEach(article => {
+        const cardContent = document.createElement('div')
+        cardContent.classList.add('card-content', 'fade-in-up')
+        cardContent.setAttribute('data-id', article.id)
+        cardContent.style.display = "none"
+
+        cardContent.innerHTML = `
+                <a href="${article.link}" class="card-content__link">
+                    <div class="card-content__img-container">
+                        <img src="${article.img}" alt="" class="card-content__img">
+                    </div>
+                    <div class="card-content__text-container">
+                        <h2 class="card-content__heading">${article.title}</h2>
+                        <p class="card-content__description">${article.description}</p>
+                    </div>
+                </a>
+                `
+        const distElmnt = document.querySelector(`#${article.category}`)
+        distElmnt.append(cardContent);
+    })
 }

@@ -27,7 +27,7 @@
     font-family: $fMain;
     font-weight: $fWeightRegular;
     font-size: 20px;
-    color: lighten($cFontDark, 15);      
+    color: $cFontDark;   
 }
 @mixin cardTitle {
     font-family: $fMain;
@@ -68,7 +68,12 @@
 // ======================
 
 @mixin borderBottom {
-    border-bottom: solid 2px lighten($cFossil, 12) ;
+    // border-bottom: solid 2px lighten($cFossil, 12);
+    border-bottom: solid 2px $cBorder;
+}
+@mixin borderTop {
+    // border-bottom: solid 2px lighten($cFossil, 12);
+    border-top: solid 2px $cBorder;
 }
 @mixin iconDefault {
     font-size: 1.3rem;
@@ -84,6 +89,16 @@
 }
 @mixin cardHeader {
     width: 100%;
-    background-color: $cBackground;
+    background-color: $cCardHeaderBG;
     @include borderBottom;   
+}
+
+@mixin buttonDefault {
+    @include iconDefault;
+    width: 45px;
+    height: 40px;
+    color: $cFontLight;
+    background-color: $cSage;
+    border: none;
+    border-radius: 5px;      
 }

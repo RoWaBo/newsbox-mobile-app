@@ -1,7 +1,8 @@
 
 .settings-container {
-    background-color: lighten($cFossil, 11);
-    padding: $spaceM $spaceS;
+    background-color: $cFossilLight;
+    // background-color: lighten($cFossil, 11);
+    padding: $spaceS;
     height: 100%;
 
     &__heading {
@@ -12,15 +13,16 @@
         & span {
             @include headingBig;
             letter-spacing: .03em;
-            color: darken($cSage, 5);   
+            color: $cSage;   
+            // color: darken($cSage, 5);  
         }
     }
     &__line {
         color: $cBackground;
-        opacity: .3;
+        opacity: .5;
         width: 33px;
         border-style: solid;
-        margin: $spaceM auto $spaceXL auto;
+        margin: $spaceM auto $spaceM auto;
     }
 }
 
@@ -38,35 +40,45 @@
 
 .category-content {
     @include cardDefault;
+    padding: 0;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    position: relative;
 
+    &__handlebar {
+        color: $cSage;
+        padding: 1.2rem $spaceS;
+        opacity: .6;
+        font-size: 1.3rem;
+        cursor: move; 
+    }
     &__title {
         @include cardTitle;
         text-transform: uppercase;
+        pointer-events: none;
+        margin-right: auto;
+        user-select: none;
     }
-    // &__switch {
-
-    // }
+    &__switch {
+        margin-right: $spaceS;
+    }
+    &_active {
+        box-shadow: 0 0 15px 1px $cSage;  
+    }
 }
 
 .toggle-theme-button {
-    background-color: lighten($cFossil, 11);
+    // background-color: lighten($cFossil, 11);
+    background-color: $cThemeBtn;
     border: 2px solid $cFossil;
     border-radius: 30px;
     cursor: pointer;
     padding: $spaceS $spaceXS;
     @include btnLabel;
     display: block;
-    margin: $spaceXL auto $spaceL;
+    margin: $spaceM auto $spaceM;
+    min-width: 180px;
     transition: 200ms;
-
-    &:hover {
-        background-color: $cDrab;
-        border-color: $cDrab;
-        color: $cFontLight;       
-    }
 }
 
 .version-message {

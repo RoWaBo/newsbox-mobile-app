@@ -1,91 +1,4 @@
 
-function createSaveBtn(distElmnt) {
-    const btnParents = distElmnt.querySelectorAll('.card-content');
-
-    btnParents.forEach(btnParent => {
-        // CREATE BUTTON DIV
-        const btn = document.createElement('div');
-        btn.classList.add('swipe-btn');
-        // CREATE SAVE BUTTON
-        btn.innerHTML = `<i class="fas fa-inbox swipe-btn__icon"></i>`
-        btnParent.style.backgroundColor = "#87bcbf"
-        // APPLYING STYLING AND ADDING TO HTML
-        const swipableElement = btnParent.children.item(0)
-
-        swipableElement.style.position = "relative"
-        swipableElement.style.zIndex = "1"
-        btnParent.style.position = "relative"
-
-        btnParent.prepend(btn)
-    })
-
-    const swipeBtns = distElmnt.querySelectorAll('.swipe-btn')
-    swipeBtns.forEach(swipeBtn => {
-        swipeBtn.addEventListener('click', e => {
-            const cardContent = e.target.closest('.card-content')
-            const category = distElmnt.querySelector('.card-header__title')    
-            console.log('save news item');
-
-            // saveArticleToLS(category, cardContent)
-            articleLS.save(category, cardContent) 
-        })
-    })
-}
-
-function createDeleteBtn(distElmnt) {
-    const btnParents = distElmnt.querySelectorAll('.card-content');
-
-    btnParents.forEach(btnParent => {
-        // CREATE BUTTON DIV
-        const btn = document.createElement('div');
-        btn.classList.add('swipe-btn');
-        // CREATE DELETE BUTTON
-        btn.innerHTML = `<i class="fas fa-trash swipe-btn__icon"></i>`
-        btnParent.style.backgroundColor = "#d95454"
-        // APPLYING STYLING AND ADDING TO HTML
-        const swipableElement = btnParent.children.item(0)
-
-        swipableElement.style.position = "relative"
-        swipableElement.style.zIndex = "1"
-        btnParent.style.position = "relative"
-
-        btnParent.prepend(btn)
-    })
-
-    distElmnt.addEventListener('click', e => {
-        if (e.target.classList.contains("swipe-btn")) {
-            const cardContent = e.target.closest('.card-content')
-            const cardContentID = cardContent.getAttribute('data-id')
-
-            slideOutRemove(cardContent)
-
-            articleLS.delete(cardContentID)
-            
-            if (cardContent.parentElement.children.length === 2) {
-               const card = cardContent.parentElement 
-               setTimeout(() => {
-                slideOutRemove(card)    
-               }, 700)     
-            }
-        }
-    })
-}
-
-function slideOutRemove(element) {
-    element.classList.add('animate-slow')
-    element.style.height = (element.clientHeight - 1) + 'px'
-    element.style.left = 0 
-    element.style.left = window.innerWidth + 'px'
-    
-    setTimeout(() => {
-        element.style.height = 0
-        // Removes all children in the parent element
-        element.replaceChildren()
-    }, 400)
-
-    setTimeout(() => element.remove(), 1000)        
-}
-
 // ==== ENABLE SWIPABILITY ON ELEMENT ====
 function addSwipability(className) {
     let startX;
@@ -96,7 +9,7 @@ function addSwipability(className) {
     let swipeElmntX;
     let swipeLockX;
     let saveIcon;
-    let deadZoneX; 
+    let deadZoneX;
 
     // TOUCH FUNCTIONS
     function touchStart(e) {
@@ -105,7 +18,7 @@ function addSwipability(className) {
         startX = e.touches[0].clientX
         swipeElmntX = Math.round(pixelStringToNumber())
         swipeLockX = Math.round(viewportWidth * 0.3)
-        deadZoneX = viewportWidth * 0.05
+        deadZoneX = viewportWidth * 0.06
 
         // If swiper is in locked position then begin swipe from that position
         if (swipeElmntX === swipeLockX) startX = startX + swipeElmntX
@@ -115,13 +28,13 @@ function addSwipability(className) {
         currentX = e.touches[0].clientX
         movedX = startX - currentX
 
-        saveIcon = e.target.previousElementSibling.children[0]        
-        saveIcon.style.transform = `scale(${ 0.4 + (swipeElmntX / 200)})`
+        saveIcon = e.target.previousElementSibling.children[0]
+        saveIcon.style.transform = `scale(${0.4 + (swipeElmntX / 200)})`
 
         if (swipeElmnt.classList.contains('animate')) swipeElmnt.classList.remove('animate')
 
         if (movedX > deadZoneX) swipeElmnt.style.right = movedX + "px"
-        if (swipeElmntX != 0 && movedX >= 0) swipeElmnt.style.right = movedX + "px" 
+        if (swipeElmntX != 0 && movedX >= 0) swipeElmnt.style.right = movedX + "px"
     }
     function touchEnd(e) {
         swipeElmnt.classList.add('animate')
@@ -131,7 +44,7 @@ function addSwipability(className) {
         movedX > swipeLockX ? swipeElmnt.style.right = swipeLockX + "px" : swipeElmnt.style.right = 0
     }
     function pixelStringToNumber() {
-        return Number(swipeElmnt.style.right.replace('px', ''))    
+        return Number(swipeElmnt.style.right.replace('px', ''))
     }
     // EVENTLISTENERS
     document.addEventListener('touchstart', e => {

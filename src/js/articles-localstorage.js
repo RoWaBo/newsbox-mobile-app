@@ -1,8 +1,7 @@
 
 const articleLS = (() => {
-    let localSavedArticles = JSON.parse(localStorage.getItem("savedArticles"))
-    let savedArticles = localSavedArticles ? localSavedArticles : []
-
+    let savedArticles = syncWithLS("savedArticles", [])
+    
     function createArticleID(category) {
         const randomNumber = Math.random().toString().slice(2, 8)
         const categoryFirstLetter = category.slice(0, 1)
@@ -15,7 +14,7 @@ const articleLS = (() => {
             const imgSrc = cardContent.querySelector('.card-content__img').getAttribute('src')
             const title = cardContent.querySelector('.card-content__heading').innerText
             const desc = cardContent.querySelector('.card-content__description').innerText
-            category = category.innerText.toLowerCase()
+            category = category.innerText ? category.innerText.toLowerCase() : category 
 
             const article = {
                 link: linkUrl,
