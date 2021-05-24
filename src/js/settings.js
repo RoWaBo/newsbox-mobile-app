@@ -3,9 +3,16 @@ if (window.location.pathname === "/settings/") {
 
     let toggleSwitches = document.querySelectorAll('.switch__check');
     const themeBtn = document.querySelector('.toggle-theme-button');
+    const wrapper = document.querySelector('.wrapper');
 
     // WRAPPER ANIMATION
-    if (localStorage.getItem("onboardingCompleted")) document.querySelector('.wrapper').classList.add('slide-in-right')
+    if (localStorage.getItem("onboardingCompleted")) {
+        wrapper.classList.add('slide-in-right')
+        setTimeout(() => {
+            wrapper.classList.remove('slide-in-right')
+            document.querySelector('body').style.overflowX = "hidden" 
+        }, 500)    
+    } 
 
     addCategoriesToHTML()
 
