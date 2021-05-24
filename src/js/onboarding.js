@@ -49,8 +49,9 @@ function runOnboarding() {
 
 // ==== STEP 10 ====
 function onboardingEnd() {
-    nextStepAnimation(overlay)
     queryTextElmnts()
+
+    onboardingBox.classList.add('fade-in')
 
     // CREATING CALL TO ACTION BUTTON
     const continueBtn = document.createElement('button')
@@ -77,7 +78,7 @@ function onboardingTheme() {
         // SET ONBOARDINGBOX POSITION AND TEXT
         onboardingBox.style.top = "30%"
         heading.innerHTML = ""
-        description.innerHTML = `Change the theme by pressing the "toggle dark mode" button.`
+        description.innerHTML = `Change the theme by pressing the "toggle dark mode" button on the settings page.`
 
         themeBtn.style.position = "absolute"
         themeBtn.style.bottom = "10%"
@@ -89,6 +90,9 @@ function onboardingTheme() {
         // EVENTLISTENERS
         nextBtn.addEventListener('click', nextBtnStep9, { once: true })
         function nextBtnStep9() {
+            onboardingBox.classList.add('fade-out')
+            themeBtn.classList.remove('step9-pointer-animation')
+            onboardingBox.classList.add('fade-out')
             window.location.pathname = "/"            
         }
 
@@ -127,7 +131,7 @@ function onboardingMoveCategory() {
     // SET ONBOARDINGBOX POSITION AND TEXT
     onboardingBox.style.top = "5%"
     heading.innerHTML = ""
-    description.innerHTML = `Control the order of categories by dragging on the left bar icon. <br> <span class="text-highlight">Move a category now <span>`
+    description.innerHTML = `Change order of categories by dragging on the left icon. <br> <span class="text-highlight">Move a category now <span>`
 
     categoryContainer.style.marginTop = "25%"
 
@@ -135,7 +139,7 @@ function onboardingMoveCategory() {
     prevBtn.addEventListener('click', prevBtnStep8, { once: true })
     function prevBtnStep8() {
         localStorage.removeItem('deletedCategories')
-        window.location.pathname = "/settings"
+        categoryContent[0].classList.remove('step8-pointer-animation')
     }
     nextBtn.addEventListener('click', nextBtnStep8, { once: true })
     function nextBtnStep8() {
@@ -158,16 +162,18 @@ function onboardingMoveCategory() {
 // ==== STEP 7 ====
 function onboardingTurnOffCategory() {
     if (window.location.pathname === "/settings/") {
-        nextStepAnimation(overlay)
         const categoryContainer = document.querySelector('.category-container')
         let toggleSwitches;
         let categoryContent;
         queryTextElmnts()
 
+        onboardingBox.classList.add('fade-in')
+        categoryContainer.classList.add('fade-in')
+
         // SET ONBOARDINGBOX POSITION AND TEXT
         onboardingBox.style.top = "2.5%"
         heading.innerHTML = "welcome to settings"
-        description.innerHTML = `Manage categories you want to display news from. <br> <span class="text-highlight">Use the switch to turn a category off<span>`
+        description.innerHTML = `Manage categories you want to view news from. <br> <span class="text-highlight">Press the switch to turn a category off<span>`
 
         categoryContainer.style.marginTop = "29%"
 
@@ -208,7 +214,6 @@ function onboardingTurnOffCategory() {
 // ==== STEP 6 ====
 function onboardingGoToSettings() {
     if (window.location.pathname === "/archive/") {
-        nextStepAnimation(overlay)
         const topHeader = wrapper.querySelector('.top-header')
         const settingsBtn = topHeader.querySelector('.navigation-menu').lastElementChild
         const gearIcon = settingsBtn.firstElementChild
@@ -220,7 +225,7 @@ function onboardingGoToSettings() {
 
         // SET ONBOARDINGBOX POSITION AND TEXT
         onboardingBox.style.top = "15%"
-        description.innerHTML = `<span class="text-highlight">The article is now deleted!</span> <br> Go to settings by clicking the right gear icon.`
+        description.innerHTML = `<span class="text-highlight">The article is now deleted!</span> <br> Go to the settings page by pressing the right icon above.`
 
         // EVENTLISTENERS
         nextBtn.addEventListener('click', nextBtnStep6, { once: true })
@@ -297,9 +302,9 @@ function onboardingDeleteArticle() {
                 const cardContent = cardSection.querySelector('.card-content')
                 const cardContentID = cardContent.getAttribute('data-id')
 
+                cardSection.style.position = ""
+                closeCategory(cardSection)
                 articleLS.delete(cardContentID)
-
-                location.reload()
             }
 
             setTimeout(() => {
@@ -335,16 +340,18 @@ function onboardingDeleteArticle() {
 
 // ==== STEP 4 ====
 function onboardingDisplaySavedArticles() {
-    nextStepAnimation(overlay)
     const cardSection = wrapper.children[2]
     const arrowIcon = nextBtn.firstElementChild
     queryTextElmnts()
+
+    onboardingBox.classList.add('fade-in')
+    cardSection.classList.add('fade-in')
 
     // MAKES CARDSECTION MOVE ABOVE OVERLAY
     cardSection.style.position = "relative"
     cardSection.style.top = "13%"
 
-    openCategory(cardSection)
+    setTimeout(() => openCategory(cardSection), 300)    
 
     arrowIcon.style.position = "relative"
     arrowIcon.classList.add('nextbtn-pointer-animation')
@@ -379,20 +386,23 @@ function onboardingArchive() {
         const archiveIcon = archiveBtn.firstElementChild
         queryTextElmnts()
 
-        // archiveIcon.style.position = "relative"
         archiveIcon.classList.add('nav-pointer-animation')
         cardSection.style.position = ""
         topHeader.style.position = "relative"
 
         // SET ONBOARDINGBOX POSITION AND TEXT
         onboardingBox.style.top = "15%"
-        description.innerHTML = `<span class="text-highlight">The article is now saved!</span> <br> It can be viewed by pressing the left icon to view the archive page.`
+        description.innerHTML = `<span class="text-highlight">The article is now saved!</span> <br> Saved Articles can be viewed on the archive page. <br> <span class="text-highlight">Press the left icon above to go to the archive page.<span>`
 
         closeCategory(cardSection)
 
         // EVENTLISTENERS
         nextBtn.addEventListener('click', nextBtnStep3, { once: true })
         function nextBtnStep3() {
+            archiveIcon.classList.remove('nav-pointer-animation')
+            topHeader.classList.add('fade-out')
+            onboardingBox.classList.add('fade-out')
+            wrapper.children[2].classList.add('fade-out')
             window.location.pathname = "/archive"
 
             prevBtn.removeEventListener('click', prevBtnStep3)
@@ -410,6 +420,10 @@ function onboardingArchive() {
 
         archiveBtn.addEventListener('click', archiveIconStep3, { once: true })
         function archiveIconStep3() {
+            archiveIcon.classList.remove('nav-pointer-animation')
+            topHeader.classList.add('fade-out')
+            onboardingBox.classList.add('fade-out')
+            wrapper.children[2].classList.add('fade-out')
             changeStepNum('+1')
             runOnboarding()
 
@@ -495,7 +509,7 @@ function onboardingDisplayArticles() {
     // SET ONBOARDINGBOX POSITION AND TEXT
     onboardingBox.style.top = "2.5%"
     heading.innerHTML = ""
-    description.innerHTML = `Click on the category to display related articles. <br> <span class="text-highlight">Press the category box below<span>`
+    description.innerHTML = `Press the category box below to view related articles. <br> <span class="text-highlight">Try it now!<span>`
 
     setTimeout(() => {
         cardSection.classList.add('hand-pointer-animation')        
@@ -532,7 +546,7 @@ function onboardingWelcome() {
         queryTextElmnts()
         onboardingBox.style.top = "15%"
         heading.innerHTML = "welcome to <br> the newsbox app"
-        description.innerHTML = "This is a short guide on how to use the app."
+        description.innerHTML = `This is a detailed guide on how to use the app. <br> It's possible to interact with the upcoming examples. <br> <span class="text-highlight">Follow the hand gestures.<span>`
     }
     else {
         window.location.pathname = "/"
