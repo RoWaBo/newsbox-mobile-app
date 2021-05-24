@@ -61,7 +61,8 @@ function onboardingEnd() {
 
     onboardingBox.style.top = "15%"
     heading.innerHTML = "you made it to the end!"
-    description.innerHTML = "You have completed the guide. <br> Thanks for taking the time to try the app!"
+    description.innerHTML = `
+    <p>You have completed the guide. <br> Thanks for taking the time to try the app!</p>`
 
     document.querySelector('.action-btn').addEventListener('click', step10ContinueBtn)
     function step10ContinueBtn() {
@@ -78,7 +79,8 @@ function onboardingTheme() {
         // SET ONBOARDINGBOX POSITION AND TEXT
         onboardingBox.style.top = "30%"
         heading.innerHTML = ""
-        description.innerHTML = `Change the theme by pressing the "toggle dark mode" button on the settings page.`
+        description.innerHTML = `
+        <p>Change the theme by pressing the "toggle dark mode" button on the settings page.</p>`
 
         themeBtn.style.position = "absolute"
         themeBtn.style.bottom = "10%"
@@ -98,6 +100,8 @@ function onboardingTheme() {
 
         prevBtn.addEventListener('click', prevBtnStep9, { once: true })
         function prevBtnStep9() {
+            themeBtn.classList.add('fade-out')
+            setTimeout(() => themeBtn.classList.remove('fade-out'), 1000)
             themeBtn.removeAttribute('style')
             categoryContainer.style.opacity = ""
 
@@ -131,7 +135,9 @@ function onboardingMoveCategory() {
     // SET ONBOARDINGBOX POSITION AND TEXT
     onboardingBox.style.top = "5%"
     heading.innerHTML = ""
-    description.innerHTML = `Change order of categories by dragging on the left icon. <br> <span class="text-highlight">Move a category now <span>`
+    description.innerHTML = `
+    <p>Change the order of categories by dragging on the left icon.</p>
+    <p><span class="text-highlight">Move a category now <span></p>`
 
     categoryContainer.style.marginTop = "25%"
 
@@ -171,9 +177,11 @@ function onboardingTurnOffCategory() {
         categoryContainer.classList.add('fade-in')
 
         // SET ONBOARDINGBOX POSITION AND TEXT
-        onboardingBox.style.top = "2.5%"
+        onboardingBox.style.top = "2%"
         heading.innerHTML = "welcome to settings"
-        description.innerHTML = `Manage categories you want to view news from. <br> <span class="text-highlight">Press the switch to turn a category off<span>`
+        description.innerHTML = `
+        <p>Manage the categories you want to receive news from.</p>
+        <p><span class="text-highlight">Press the switch to turn a category off<span></p>`
 
         categoryContainer.style.marginTop = "29%"
 
@@ -225,7 +233,9 @@ function onboardingGoToSettings() {
 
         // SET ONBOARDINGBOX POSITION AND TEXT
         onboardingBox.style.top = "15%"
-        description.innerHTML = `<span class="text-highlight">The article is now deleted!</span> <br> Go to the settings page by pressing the right icon above.`
+        description.innerHTML = `
+        <p><span class="text-highlight">The article is now deleted!</span></p>
+        <p>Go to the settings page by pressing the right icon above.</p>`
 
         // EVENTLISTENERS
         nextBtn.addEventListener('click', nextBtnStep6, { once: true })
@@ -276,7 +286,8 @@ function onboardingDeleteArticle() {
             // SET ONBOARDINGBOX POSITION AND TEXT
             onboardingBox.style.top = "2.5%"
             heading.innerHTML = ""
-            description.innerHTML = `Delete article by swiping left and pressing the appearing icon.`
+            description.innerHTML = `
+            <p>Delete article by swiping left and pressing the appearing icon.</p>`
 
             // EVENTLISTENERS
             // swiper pointer animations
@@ -361,7 +372,9 @@ function onboardingDisplaySavedArticles() {
     // SET ONBOARDINGBOX POSITION AND TEXT
     onboardingBox.style.top = "2.5%"
     heading.innerHTML = "welcome to the archive"
-    description.innerHTML = `Read your saved articles here. <br> <span class="text-highlight">Click arrow button to continue </span>`
+    description.innerHTML = `
+    <p>Read your saved articles here.</p>
+    <p><span class="text-highlight">Press button to continue</span></p>`
 
     // EVENTLISTENERS
     nextBtn.addEventListener('click', nextBtnStep4, { once: true })
@@ -392,7 +405,10 @@ function onboardingArchive() {
 
         // SET ONBOARDINGBOX POSITION AND TEXT
         onboardingBox.style.top = "15%"
-        description.innerHTML = `<span class="text-highlight">The article is now saved!</span> <br> Saved Articles can be viewed on the archive page. <br> <span class="text-highlight">Press the left icon above to go to the archive page.<span>`
+        description.innerHTML = `
+        <p><span class="text-highlight">The article is now saved!</span></p>
+        <p>Saved Articles can be viewed on the archive page.</p>
+        <p><span class="text-highlight">Press the left icon above to go to the archive page.<span></p>`
 
         closeCategory(cardSection)
 
@@ -450,7 +466,9 @@ function onboardingSaveArticle() {
 
     // SET ONBOARDINGBOX POSITION AND TEXT
     onboardingBox.style.top = "2.5%"
-    description.innerHTML = `Save article by swiping left and pressing the appearing icon. <br> <span class="text-highlight">Swipe and save it now!<span>`
+    description.innerHTML = `
+    <p>Save article by swiping left and pressing the appearing icon.</p>
+    <p><span class="text-highlight">Swipe and save it now!<span></p>`
 
     // EVENTLISTENERS
     // swiper pointer animations
@@ -459,7 +477,7 @@ function onboardingSaveArticle() {
         swipeIcon = document.querySelector('.swipe-btn__icon')
         cardContent.classList.add("swipe-pointer-animation")
         cardContent.addEventListener('touchmove', removeSwiperAnimationStep2)     
-    }, 500)    
+    }, 700)    
     function removeSwiperAnimationStep2() {
         cardContent.classList.remove("swipe-pointer-animation")
         swipeIcon.classList.add("swipebtn-pointer-animation")    
@@ -509,7 +527,8 @@ function onboardingDisplayArticles() {
     // SET ONBOARDINGBOX POSITION AND TEXT
     onboardingBox.style.top = "2.5%"
     heading.innerHTML = ""
-    description.innerHTML = `Press the category box below to view related articles. <br> <span class="text-highlight">Try it now!<span>`
+    description.innerHTML = `
+    <p>Press the category box below to view related articles.</p> <p><span class="text-highlight">Try it now!<span></p>`
 
     setTimeout(() => {
         cardSection.classList.add('hand-pointer-animation')        
@@ -546,7 +565,9 @@ function onboardingWelcome() {
         queryTextElmnts()
         onboardingBox.style.top = "15%"
         heading.innerHTML = "welcome to <br> the newsbox app"
-        description.innerHTML = `This is a detailed guide on how to use the app. <br> It's possible to interact with the upcoming examples. <br> <span class="text-highlight">Follow the hand gestures.<span>`
+        description.innerHTML = `
+        <p>This is a detailed guide on how to use the app.</p> 
+        <p><span class="text-highlight">It's possible to interact with the upcoming examples. <br> Follow the hand gestures.<span></p>`
     }
     else {
         window.location.pathname = "/"
@@ -564,7 +585,7 @@ function createOnboardingBox() {
     onboardingBox.innerHTML = `
     <i class="fas fa-times onboarding__exit-icon"></i>
     <h2 class="onboarding__heading"></h2>
-    <p class="onboarding__description"></p>
+    <div class="onboarding__description"></div>
     <div class="onboarding__controls">
         <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
         <div class="dot-container">

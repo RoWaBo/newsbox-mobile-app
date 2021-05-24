@@ -36,13 +36,16 @@
         @include headingSmall;
         text-transform: capitalize;
         text-align: center;
-        margin-bottom: $spaceS;
+        margin-bottom: $spaceXS;
     }
     &__description {
         @include cardCopy;
         margin: 0 auto;
         text-align: center;
         max-width: 240px;
+        & > p {
+            margin-top: .3rem;
+        }
     }
     &__controls {
         @include borderTop;
