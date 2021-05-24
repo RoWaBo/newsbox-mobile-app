@@ -631,6 +631,8 @@ function enableOnboardingListener(onboardingBox) {
         if (e.target.classList.contains("onboarding__exit-icon")) onboardingDisabled();
     })
 }
+
+// ==== ONBOARDING HELPER FUNCTIONS ====
 function onboardingDisabled() {
     overlay.classList.add('fade-out')
     setTimeout(() => {
@@ -707,10 +709,7 @@ function closeCategory(cardSection) {
     if (cardContentAll) cardContentAll.forEach(cardContent => slideOutRemove(cardContent))        
 }
 function toggleAllPointerEvents() {
-    if (body.classList.contains('disablePointerEvents')) {
-        body.classList.remove('disablePointerEvents')
-    }
-    else {
-        body.classList.add('disablePointerEvents')
-    }
+    body.classList.contains('disablePointerEvents')
+        ? body.classList.remove('disablePointerEvents') 
+        : body.classList.add('disablePointerEvents')
 }
