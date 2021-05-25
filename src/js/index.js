@@ -14,6 +14,8 @@ if (window.location.pathname === "/") {
     
     categoryBtnListener()
 
+    updateNotification()
+
     function categoryBtnListener() {
         document.addEventListener('click', e => {
             // CARD HEADER ARROW BTNS

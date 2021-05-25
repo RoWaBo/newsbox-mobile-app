@@ -1,0 +1,16 @@
+
+.notification {
+    background-color: $cDanger;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: grid;
+    place-content: center;
+    position: absolute;
+    right: 21%;
+    top: 13%;
+    font-family: $fMain;
+    font-weight: $fWeightLight;
+    color: $cFontLight;
+    font-size: 12px;
+}
