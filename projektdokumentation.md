@@ -1,6 +1,6 @@
 # Projektdokumentation
 
-#### Navn:
+#### Navn: Robert Watt Boolsen
 
 ##### Hold: 1146521c105 / WU05
 
@@ -25,7 +25,8 @@
 
 ### Redegørelse for oprindelsen af evt. tredjeparts kode anvendt i opgaveløsningen (Teknisk dokumentation)
 
-(Hvilke node-pakker har du installeret for at dit projekt virker? Beskriv kort hvilket "problem" hver pakke løser.)
+Jeg bruger et drag n' drop bibliotek ved navn: slip.js. Biblioteket er hentet fra github og bruger ingen node-pakker.
+Jeg bruger koden til at ændre rækkefølgen af kategorier på settings siden. Når brugeren holder fingeren over et bestemt ikon, løfter kategorien sig og kan flyttes rundt. 
 
 ---
 
