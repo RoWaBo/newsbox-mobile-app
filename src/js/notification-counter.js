@@ -1,5 +1,5 @@
 
-function updateNotification() {
+function notificationCounter() {
     const savedArticles = syncWithLS("savedArticles", [])
     
     if (savedArticles.length > 0) {

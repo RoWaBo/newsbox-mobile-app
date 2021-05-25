@@ -14,7 +14,7 @@ if (window.location.pathname === "/") {
     
     categoryBtnListener()
 
-    updateNotification()
+    notificationCounter()
 
     function categoryBtnListener() {
         document.addEventListener('click', e => {

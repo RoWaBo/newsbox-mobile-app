@@ -31,7 +31,7 @@ function createSaveBtn(distElmnt) {
             articleLS.save(category, cardContent)
             // takes one status/message argument
             addInfoBox('saved', 'Article')
-            updateNotification()
+            notificationCounter()
         })
     })
 }
