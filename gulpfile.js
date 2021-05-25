@@ -5,7 +5,6 @@ const connect = require('gulp-connect');
 const { watchHTML, buildHTML } = require('./tasks/html');
 const { watchSCSS, buildSCSS } = require('./tasks/scss');
 const { watchJS, buildJS } = require('./tasks/js');
-const { watchMedia, buildMedia } = require('./tasks/media');
 const { watchImage, buildImage } = require('./tasks/image');
 
 
@@ -15,7 +14,6 @@ function dist(done) {
     watchHTML()
     watchSCSS()
     watchJS()
-    watchMedia()
     watchImage()
 
     connect.server({
@@ -31,7 +29,6 @@ function build (done){
     buildImage()
     buildSCSS()
     buildJS()
-    buildMedia()
     done()    
 }
 
