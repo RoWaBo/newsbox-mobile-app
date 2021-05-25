@@ -24,9 +24,15 @@
 
 
 ### Redegørelse for oprindelsen af evt. tredjeparts kode anvendt i opgaveløsningen (Teknisk dokumentation)
-
-Jeg bruger et drag n' drop bibliotek ved navn: slip.js. Biblioteket er hentet fra github og bruger ingen node-pakker.
-Jeg bruger koden til at ændre rækkefølgen af kategorier på settings siden. Når brugeren holder fingeren over et bestemt ikon, løfter kategorien sig og kan flyttes rundt. 
+#### SLIP.JS
+Slip.js er et drag n' drop bibliotek. Biblioteket er hentet fra github og bruger ingen node-pakker.
+Jeg bruger koden til at ændre rækkefølgen af kategorier på settings siden. Når brugeren holder fingeren over et bestemt ikon, løfter kategorien sig og kan flyttes rundt.
+Link: https://kornel.ski/slip/
+#### ANIMATE.STYLE
+Animate.style er en samling af færdiglavede css keyframe animationer, som giver mulighed for hurtigt og nemt at tilføje animationer til elementer via classes.
+link: https://animate.style/
+#### FONTAWESOME
+Jeg bruger
 
 ---
 
