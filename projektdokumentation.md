@@ -35,7 +35,8 @@ Fontawesome er et bibliotek af ikoner, som kan tilføjes til elementer via class
 * Imagemin: Komprimerer billeder til at fylde meget lidt. Her bruger jeg det til at komprimere et placeholder billede.
 * Concat: Tager alle js filer og skriver dem sammen til en fil, som får navnet app.js. 
 * Sourcemaps: Da alle js filer bliver skrevet sammen, bruges sourcemap til at tracke filnavnet, som js koden oprindeligt kommer fra. Er brugbart når man får fejlbeskeder i konsollen.
-* Babel: omskriver js kode til at være funktionelt i alle browsere, også i outdatede browser versioner. Gør appen tilgængelig for en bredere brugergruppe.       
+* Babel: omskriver js kode til at være funktionelt i alle browsere, også i outdatede browser versioner. Gør appen tilgængelig for en bredere brugergruppe.
+* Uglify: Komprimerer koden ved at fjerne alle linjeskift og omskriver variabler. Bruges kun i build processen, når appen går live.        
 
 ---
 
