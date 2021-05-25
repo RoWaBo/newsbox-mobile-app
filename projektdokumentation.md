@@ -26,13 +26,11 @@
 ### Redegørelse for oprindelsen af evt. tredjeparts kode anvendt i opgaveløsningen (Teknisk dokumentation)
 #### SLIP.JS
 Slip.js er et drag n' drop bibliotek. Biblioteket er hentet fra github og bruger ingen node-pakker.
-Jeg bruger koden til at ændre rækkefølgen af kategorier på settings siden. Når brugeren holder fingeren over et bestemt ikon, løfter kategorien sig og kan flyttes rundt.
-Link: https://kornel.ski/slip/
+Jeg bruger koden til at ændre rækkefølgen af kategorier på settings siden. Når brugeren holder fingeren over et bestemt ikon, løfter kategorien sig og kan flyttes rundt. Link: https://kornel.ski/slip/
 #### ANIMATE.STYLE
-Animate.style er en samling af færdiglavede css keyframe animationer, som giver mulighed for hurtigt og nemt at tilføje animationer til elementer via classes.
-link: https://animate.style/
+Animate.style er en samling af færdiglavede css keyframe animationer, som giver mulighed for hurtigt og nemt at tilføje animationer til elementer via classes. Jeg bruger animationerne på side skift, visning af artikler og ikke mindst til at fade elementer ind og ud i onboarding. link: https://animate.style/
 #### FONTAWESOME
-Jeg bruger
+Fontawesome er et bibliotek af ikoner, som kan tilføjes til elementer via classes. 
 
 ---
 
