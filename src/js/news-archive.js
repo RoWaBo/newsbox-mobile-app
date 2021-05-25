@@ -27,7 +27,6 @@ if (window.location.pathname === "/archive/") {
             if (e.target.classList.contains("toggleContent")) {
                 const cardSection = e.target.parentElement
                 const arrowIcon = cardSection.querySelector('.card-header__icon')
-                const category = cardSection.querySelector('.card-header__title').innerText
                 const newsArticles = cardSection.querySelectorAll('.card-content')
 
                 if (arrowIcon.style.transform === '') {
