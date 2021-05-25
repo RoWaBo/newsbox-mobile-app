@@ -47,9 +47,9 @@ Fontawesome er et bibliotek af ikoner, som kan tilføjes til elementer via class
 Jeg har forsøgt at dele alt kode op i mindre moduler. Koden bliver nemmere at vedligeholde og overskue, men det giver også mulighed for nemt at genbruge den.
 Ud fra den mentalitet har jeg har oprettet en hel del scss variabler og mixins for hurtigt at kunne inkludere kode blokke, men også for at bevare samme system/mønstre på tværs af alle sider. Det gør det også meget lettere at lave store globale ændringer i appen. Såsom at ændre farver, skrifttyper og afstande. 
 
-Når det kommer til større functions, har jeg forsøgt at dele dem op i mindre functions. Hver ny function giver jeg et navn, som svarer til dens arbejdsopgave. Derfor bliver den samlede arbejdsopaven beskrevet mere detaljeret, da den består af flere mindre functions. Der er dog nogen steder, hvor jeg har overgjort det, men det vil jeg forbedre i vores næste projekt.
+Når det kommer til større funktioner, har jeg forsøgt at dele arbejdsopgaverne op i mindre funktioner. Hver ny funktion giver jeg et navn, som svarer til dens arbejdsopgave. Derfor bliver den samlede arbejdsopave beskrevet mere detaljeret, da den består af flere mindre funktioner. Der er dog nogen steder, hvor jeg har overgjort det, men det vil jeg forbedre i vores næste projekt.
 
-Det samme gælder, når det kommer til funktions variabler. For at gøre koden mere læsbart og lettere at ændre, har jeg lavet en del af dem. Jeg har foreksempel omskrevet swiperen en del så alle udregninger kommer ind i variabler der forklarer, hvad udregningen bliver brugt til i funktionen. 
+Det samme gælder, når det kommer til funktions variabler. For at gøre koden mere læsbart og lettere at ændre, har jeg lavet en del af dem. Jeg har f.eks. omskrevet swiperen en del så alle udregninger kommer ind i variabler der forklarer, hvad udregningen bliver brugt til i funktionen. Link til swiper koden: https://github.com/rts-cmk-wu05/newsbox-RoWaBo/blob/master/src/js/swiper.js 
 
 
 (Hvilke overvejelser har du gjort dig, fx. i forbindelse med dit valg af animationer)
