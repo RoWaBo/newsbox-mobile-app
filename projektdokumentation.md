@@ -36,7 +36,8 @@ Fontawesome er et bibliotek af ikoner, som kan tilføjes til elementer via class
 * Concat: Tager alle js filer og skriver dem sammen til en fil, som får navnet app.js. 
 * Sourcemaps: Da alle js filer bliver skrevet sammen, bruges sourcemap til at tracke filnavnet, som js koden oprindeligt kommer fra. Er brugbart når man får fejlbeskeder i konsollen.
 * Babel: omskriver js kode til at være funktionelt i alle browsere, også i outdatede browser versioner. Gør appen tilgængelig for en bredere brugergruppe.
-* Uglify: Komprimerer koden ved at fjerne alle linjeskift og omskriver variabler. Bruges kun i build processen, når appen går live.        
+* Uglify: Komprimerer koden ved at fjerne alle linjeskift og omskriver variabler. Bruges kun i build processen, når appen går live.
+* SASS: Kompilerer scss filer, så de kan læses af browseren som en almindelig css fil. Jeg bruger SASS til at neste regler, lave variabler og mixins        
 
 ---
 
