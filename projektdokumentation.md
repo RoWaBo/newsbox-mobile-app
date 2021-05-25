@@ -56,17 +56,21 @@ Det samme gælder, når det kommer til funktions variabler. For at gøre koden m
 ---
 ### Vurdering af egen indsats & gennemførelse af opgaveforløbet (Arbejdsgangen)
 
-- Fået lavet et par gode korte og præcise funktions moduler, som bruges mange forskellige steder i appen.
+#### Det gik godt: 
+- Fået lavet et par gode korte og præcise funktioner, som var generelle nok til at blive brugt mange forskellige steder i appen.
 - Har været motiveret og haft det sjovt med opgaven
 - Været rimelig konsekvent i kode opstilling og formatering
-- Har fået alt til at virke udemærket. 
-
-- gøre funktioner og navne mere generelle så de også giver mening hvis de genbruges i et andet projekt.
-- Blive bedre til at bruge eventlisteners og fjerne dem efter de ikke er relevante længere
-- Blive bedre til at håndtere asynkrone funktioner med .then og .catch. Havde gang i noget rigtig rod i onboarding med mange setTimeout, for at sikre at data fra fetch var returneret.
+- Har fået alt til at virke udemærket, og nået næsten alle  ekstraopgaver.
+- Følte at der var rigeligt med tid til at løse opgaven, så var ikke tvunget til at vælge prioritere features til eller fra.
+- Fik tilføjet mine egne features/funktioner til appen: såsom popup-box, når artikel gemmes eller slettes og notifikations tæller.
+ 
+#### Det jeg gerne vil blive bedre til:
+- Gøre funktioner og navne mere generelle så de også giver mening hvis de genbruges i et andet projekt.
+- Bruge eventlisteners og fjerne dem efter de ikke er relevante længere
+- Håndtere asynkrone funktioner med .then og .catch. Havde gang i noget lidt rodet kode i onboarding.js med mange setTimeout funktioner.
 - Lære smartere måder at tilføje html via js (jeg venter spændt på React)
-- Bruge conditions som er mere alsidige og sikre. Specielt i forhold til potientielle ændringer af kode senere i udviklingen.
-(Hvad gik godt. Hvor prioriterede du forkert. Klagesange fra de varme lande om halvfærdigt produkt, på grund af manglende nattesøvn, fordi din kæle-skildpadde havde tandpine er IKKE interessante.)
+- Bruge conditions som er mere alsidige og sikre. Specielt i forhold til potentielle ændringer af koden senere i udviklingen.
+- Forudset problemer med systemer og bedre planlægning: Jeg kunne have undgået nogle problemer, hivs jeg havde tænkt mig bedre om, før jeg begyndte at kode.
 
 ---
 ### En beskrivelse af særlige punkter til bedømmelse
