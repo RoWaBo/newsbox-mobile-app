@@ -60,8 +60,8 @@ Det samme gælder, når det kommer til funktions variabler. For at gøre koden m
 - Fået lavet et par gode korte og præcise funktioner, som var generelle nok til at blive brugt mange forskellige steder i appen.
 - Har været motiveret og haft det sjovt med opgaven
 - Været rimelig konsekvent i kode opstilling og formatering
-- Har fået alt til at virke udemærket, og nået næsten alle  ekstraopgaver.
-- Følte at der var rigeligt med tid til at løse opgaven, så var ikke tvunget til at vælge prioritere features til eller fra.
+- Har fået alt til at virke udemærket og nået næsten alle  ekstraopgaver.
+- Jeg havde rigeligt med tid til at løse opgaven, så var ikke tvunget til at prioritere features til eller fra.
 - Fik tilføjet mine egne features/funktioner til appen: såsom popup-box, når artikel gemmes eller slettes og notifikations tæller.
  
 #### Det jeg gerne vil blive bedre til:
