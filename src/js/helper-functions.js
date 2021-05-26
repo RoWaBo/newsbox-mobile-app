@@ -1,6 +1,6 @@
 
-function syncWithLS(itemNameLS, defaultValue) {
-    const valueLS = JSON.parse(localStorage.getItem(itemNameLS))
+function syncWithLS(keyNameLS, defaultValue) {
+    const valueLS = JSON.parse(localStorage.getItem(keyNameLS))
     const valueFinal = valueLS ? valueLS : defaultValue
     return valueFinal
 }
