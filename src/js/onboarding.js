@@ -95,6 +95,7 @@ function onboardingTheme() {
             onboardingBox.classList.add('fade-out')
             themeBtn.classList.remove('step9-pointer-animation')
             onboardingBox.classList.add('fade-out')
+            localStorage.removeItem("savedArticles")
             window.location.pathname = "/"            
         }
 
@@ -112,6 +113,7 @@ function onboardingTheme() {
         themeBtn.addEventListener('click', themeBtnStep9, { once: true })
         function themeBtnStep9() {
             toggleAllPointerEvents()
+            localStorage.removeItem("savedArticles")
             themeBtn.classList.remove('step9-pointer-animation')
             overlay.style.backgroundColor = "unset"
             description.innerHTML = `<span class="text-highlight">Dark mode is on!<span> <br> Take a second to look at it.`
@@ -428,7 +430,9 @@ function onboardingArchive() {
         prevBtn.addEventListener('click', prevBtnStep3, { once: true })
         function prevBtnStep3() {
             topHeader.style.position = ""
-            archiveIcon.classList.remove('nav-pointer-animation') 
+            archiveIcon.classList.remove('nav-pointer-animation')
+            localStorage.removeItem("savedArticles") 
+            notificationCounter()
 
             nextBtn.removeEventListener('click', nextBtnStep3)
             archiveBtn.removeEventListener('click', archiveIconStep3)
@@ -458,7 +462,7 @@ function onboardingSaveArticle() {
     let cardContent;
     let saveBtns;
     let swipeIcon;
-    setTimeout(() => fetchCategory(cardSection), 200)
+    setTimeout(() => fetchCategory(cardSection), 300)
     queryTextElmnts()
 
     // MAKES CARDSECTION MOVE ABOVE OVERLAY
