@@ -27,9 +27,9 @@ Jeg bruger koden til at ændre rækkefølgen af kategorier på settings siden. N
 #### ANIMATE.STYLE
 Animate.style er en samling af færdiglavede css keyframe animationer, som giver mulighed for hurtigt og nemt at tilføje animationer til elementer via classes. Jeg bruger animationerne på side skift, visning af artikler og ikke mindst til at fade elementer ind og ud i onboarding. link: https://animate.style/
 #### FONTAWESOME
-Fontawesome er et bibliotek af ikoner, som kan tilføjes til elementer via classes. Jeg bruger ikonerne på alle appens sider. De bruges som symboler, ikoner og knapper.
+Fontawesome er et bibliotek af ikoner, som kan tilføjes til elementer via classes. Jeg bruger ikonerne på alle appens sider. De bruges som symboler, ikoner og knapper. Link: https://fontawesome.com/
 #### GOOGLE FONTS
-En kæmpe samling af skrifttyper. Jeg henter to forskellige fonttyper i dette projekt. 
+En kæmpe samling af skrifttyper. Jeg henter to forskellige fonttyper i dette projekt. Link: https://fonts.google.com/ 
 #### GULP PAKKER
 * Connect: Udgiver appen på localhost:3000, så den kan vises i en browser, når der udvikles.
 * Rename: Bruges til at omdøbe html filer og mapper, så vores app får pretty url's! 
@@ -78,7 +78,7 @@ Jeg har tænkt over brugervenlighed i forhold til onboarding. Jeg har tilføjet 
 ## En beskrivelse af særlige punkter til bedømmelse
 
 ### **Swiper button icon animation and deadzone variable**
-Jeg har omskrevet swiperen og tilføjet ekstra funktioner: bl.a. har jeg lavet en funktion som scalerer ikonet større eller mindre når der swipes. Bemærk også at jeg har angivet en deadzoneX, som gør swiping på en mobil mere stabil.  
+Jeg har omskrevet swiperen og tilføjet ekstra funktioner: bl.a. har jeg lavet en funktion som scalerer ikonet større eller mindre når der swipes. Bemærk også at jeg har angivet en deadzoneX, som gør swiping på en mobil mere stabil. Swiping begynder først at bevæge sig, når den overstiger deadzoneX værdien.   
 ```js
 // SWIPER VARIABLES
 swipeElmnt = e.target
@@ -166,7 +166,7 @@ function runOnboarding() {
     updateDotStatus(onboardingStepNum)
 } 
 ```
-#### **SCSS mixins**
+### **SCSS mixins**
 I mit forsøg på at skabe moduler, benytter jeg mixin til at definere nogle generelle regler som nemt kan bruges mange forskellige steder i appen.
 ```css
 /* Knap tekst styling */
@@ -189,7 +189,7 @@ I mit forsøg på at skabe moduler, benytter jeg mixin til at definere nogle gen
     border-bottom: solid 2px $cBorder;
 }
 ```
-#### **Hand pointer animations**
+### **Hand pointer animations**
 Jeg bruger CSS pseudo elementer til at lave hånd animationerne i onboarding. Jeg kan nemt tilføje eller fjerne hånden med en class. 
 ```css
 /* Selve hånden laves */
