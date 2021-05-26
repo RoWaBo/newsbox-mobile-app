@@ -495,6 +495,7 @@ function onboardingSaveArticle() {
         const category = cardSection.id
 
         articleLS.save(category, cardContent)
+        notificationCounter()
 
         prevBtn.removeEventListener('click', prevBtnStep2)
     }
