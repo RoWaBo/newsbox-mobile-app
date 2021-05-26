@@ -32,7 +32,6 @@
     overflow: hidden;
     width: 100%;
     box-shadow: 0 2px 10px $cFossil;
-    user-select: none;
 
     & > :last-child {
         border-bottom: none;    
@@ -49,14 +48,16 @@
     &__handlebar {
         color: $cSage;
         padding: 1.2rem $spaceS;
-        opacity: .5;
-        font-size: 1.2rem; 
+        opacity: .6;
+        font-size: 1.3rem;
+        cursor: move; 
     }
     &__title {
         @include cardTitle;
         text-transform: uppercase;
         pointer-events: none;
         margin-right: auto;
+        user-select: none;
     }
     &__switch {
         margin-right: $spaceS;
@@ -76,6 +77,7 @@
     @include btnLabel;
     display: block;
     margin: $spaceM auto $spaceM;
+    min-width: 180px;
     transition: 200ms;
 }
 

@@ -1,0 +1,30 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css");
+
+/* ==== ANIMATION CLASSES ==== */
+.animate {
+    transition: 150ms;
+}
+.animate-slow {
+    transition: 400ms;
+}
+.slide-in-left {
+    animation: slideInLeft 400ms;
+}
+.slide-in-right {
+    animation: slideInRight 400ms;
+}
+.fade-in-up {
+    animation: fadeInUp 400ms;    
+}
+.fade-in {
+    animation: fadeIn 600ms;    
+}
+.fade-out-down {
+    animation: fadeOut 350ms;    
+}
+.fade-out {
+    animation: fadeOut 500ms forwards;    
+}
+.notice-me {
+    animation: heartBeat 4s infinite;    
+}

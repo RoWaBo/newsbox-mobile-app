@@ -3,7 +3,17 @@ if (window.location.pathname === "/settings/") {
 
     let toggleSwitches = document.querySelectorAll('.switch__check');
     const themeBtn = document.querySelector('.toggle-theme-button');
-    
+    const wrapper = document.querySelector('.wrapper');
+
+    // WRAPPER ANIMATION
+    if (localStorage.getItem("onboardingCompleted")) {
+        wrapper.classList.add('slide-in-right')
+        setTimeout(() => {
+            wrapper.classList.remove('slide-in-right')
+            document.querySelector('body').style.overflowX = "hidden" 
+        }, 500)    
+    } 
+
     addCategoriesToHTML()
 
     enableDragableCategories()
@@ -14,8 +24,9 @@ if (window.location.pathname === "/settings/") {
 
         toggleSwitches.forEach(toggleSwitch => {
             const categoryName = toggleSwitch.id.replace('toggle', '').toLowerCase()
-            if (deletedCategories.includes(categoryName)) toggleSwitch.checked = false    
-        })    
+            const isDeleted = deletedCategories.includes(categoryName)
+            toggleSwitch.checked = !isDeleted
+        })
     }
 
     // TOGGLE THEME BUTTON
@@ -38,7 +49,7 @@ if (window.location.pathname === "/settings/") {
 
         toggleSwitches.forEach(toggleSwitch => {
             const categoryName = toggleSwitch.id.replace('toggle', '').toLowerCase()
-            categoryNames.push(categoryName)    
+            categoryNames.push(categoryName)
         })
         categoryOrder.add(categoryNames)
     }
@@ -56,8 +67,8 @@ if (window.location.pathname === "/settings/") {
                 <input type="checkbox" name="toggle${categoryName}" class="switch__check" checked="true" id="toggle${categoryName}"> 
                 <span class="switch__slider switch__slider_round"></span>
             </label>       
-            ` 
-            categoryContainer.append(category)             
+            `
+            categoryContainer.append(category)
         })
 
         syncSwitchStateWithLS()
@@ -76,18 +87,26 @@ if (window.location.pathname === "/settings/") {
             e.target.parentNode.insertBefore(e.target, e.detail.insertBefore);
             e.target.classList.remove("category-content_active");
             saveCategoryOrderToLS()
+
+            if (!localStorage.getItem("onboardingCompleted") && localStorage.getItem("onboardingStepNum") == 8) {
+                toggleAllPointerEvents()
+                setTimeout(() => {
+                    changeStepNum('+1')
+                    runOnboarding()
+                    toggleAllPointerEvents()
+                }, 500)
+            }
         });
         handlebars.forEach(handlebar => {
             handlebar.addEventListener('slip:beforewait', function (e) {
                 console.log('slip:beforewait');
                 e.preventDefault()
                 e.target.parentElement.classList.add("category-content_active");
-            });            
+            });
         })
         categoryContainer.addEventListener('slip:beforeswipe', function (e) {
             console.log('slip:beforeswipe');
             e.preventDefault();
-        });        
+        });
     }
-
 }

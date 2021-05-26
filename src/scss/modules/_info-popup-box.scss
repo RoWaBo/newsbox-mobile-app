@@ -2,11 +2,12 @@
 .info-popup {
     background-color: $cBackground;
     padding: 1rem;
-    min-width: 300px;
+    width: fit-content;
+    min-width: 195px;
     border-radius: 5px;
     box-shadow: 0 2px 15px $cFossil;
     position: fixed;
-    bottom: 10%;
+    bottom: 15%;
     left: 50%;
     // centers the box
     transform: translate(-50%, -50%);
@@ -27,7 +28,6 @@
         text-align: center;    
     }
 }
-
 @keyframes fadePulse {
     0% {opacity: 0;}
     10% {opacity: 1;}

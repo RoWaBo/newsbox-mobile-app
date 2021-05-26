@@ -1,6 +1,7 @@
 @import "./variables";
 @import "./mixins";
 @import "./base";
+@import "./modules/animations";
 @import "./helper-classes";
 @import "./modules/top-header";
 @import "./modules/search-box";
@@ -9,3 +10,6 @@
 @import "./modules/toggleswitch";
 @import "./modules/create-swipe-buttons";
 @import "./modules/info-popup-box";
+@import "./modules/onboarding";
+@import "./modules/notification";
+@import "./modules/pointerhand";
